@@ -17,7 +17,7 @@ export default function ActiveLink({
 	return (
 		<Link
 			href={href}
-			className={`${isActive ? "text-primary font-bold" : "text-white"} hover:text-primary  hidden lg:block xl:block`}
+			className={`${isActive ? "text-secondry font-bold" : "text-white"} hover:text-secondry  hidden lg:block xl:block`}
 		>
 			{children}
 		</Link>

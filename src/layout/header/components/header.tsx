@@ -5,7 +5,7 @@ import MobileMenu from "./mobileMenu";
 function Header() {
 	return (
 		<header className="relative z-99999">
-			<div className="bg-none h-70 w-full absolute">
+			<div className="bg-none h-70 w-full absolute ">
 				<div className="top flex justify-between items-center pt-1 pb-1 sm:px-2 lg:px-4 xl:px-6 mx-auto container">
 					<div className="top-right ">
 						<p className="text-white   font-vazir font-bold text-xl hidden lg:block  xl:block">
@@ -39,7 +39,7 @@ function Header() {
 				<div className="middle">
 					<hr className="text-3xl text-white" />
 				</div>
-				<div className="bottom pt-1 sm:px-2 lg:px-4 xl:px-6 mx-auto container flex items-center justify-between">
+				<div className="bottom  flex items-center justify-between pt-1 sm:pl-2 lg:pl-4 xl:pl-6   mx-auto  container">
 					<div className="bottom-right flex items-center justify-center gap-8">
 						<MobileMenu />
 						<img

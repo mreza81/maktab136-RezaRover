@@ -2,6 +2,7 @@
 
 * {
 	direction: rtl;
+	font-family: "Vazir";
 }
 
 :root {
@@ -30,6 +31,7 @@ body {
 }
 @theme {
 	--color-primary: #7c00a0;
+	--color-secondry: #8f57dc;
 }
 
 @font-face {
@@ -47,6 +49,7 @@ body {
 	font-style: normal;
 	font-display: swap;
 }
-* {
-	font-family: "Vazir";
+
+.hevebg {
+	background-image: url("../../public/assets/images/chalenjer.jpg");
 }
