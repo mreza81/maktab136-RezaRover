@@ -4,8 +4,8 @@ import MobileMenu from "./mobileMenu";
 
 function Header() {
 	return (
-		<div>
-			<div className="bg-black h-70 w-full absolute">
+		<header className="relative z-99999">
+			<div className="bg-none h-70 w-full absolute">
 				<div className="top flex justify-between items-center pt-1 pb-1 sm:px-2 lg:px-4 xl:px-6 mx-auto container">
 					<div className="top-right ">
 						<p className="text-white   font-vazir font-bold text-xl hidden lg:block  xl:block">
@@ -68,7 +68,7 @@ function Header() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 }
 

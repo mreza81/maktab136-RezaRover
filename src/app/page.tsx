@@ -1,7 +1,12 @@
+import HomeComponent from "@/components/home/components/HomeComponent";
 import React from "react";
 
 function page() {
-	return <div></div>;
+	return (
+		<div>
+			<HomeComponent />
+		</div>
+	);
 }
 
 export default page;
