@@ -53,3 +53,7 @@ body {
 .hevebg {
 	background-image: url("../../public/assets/images/chalenjer.jpg");
 }
+html,
+body {
+	overflow-x: hidden;
+}
