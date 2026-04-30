@@ -1,4 +1,4 @@
-import HomeComponent from "@/components/home/components/HomeComponent";
+import HomeComponent from "@/components/site/home/components/HomeComponent";
 import React from "react";
 
 function page() {
