@@ -1,7 +1,7 @@
 import React from "react";
 
 function page() {
-	return <div>about-us</div>;
+	return <div>getb products</div>;
 }
 
 export default page;
