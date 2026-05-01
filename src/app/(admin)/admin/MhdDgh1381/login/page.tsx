@@ -1,4 +1,5 @@
-import AdminLoginComponent from "@/components/admin/auth/components/adminLogin";
+import AdminLoginComponent from "@/components/admin/login/components/adminLogin";
+
 function AdminLogin() {
 	return (
 		<div>
