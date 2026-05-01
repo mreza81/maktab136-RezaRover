@@ -7,7 +7,7 @@ function HomeBrands() {
 			<div className="text-primary text-2xl md:text-4xl lg:text-5xl font-bold">
 				برندهای ما
 			</div>
-			<div className="grid grid-cols-2 gap-x-7  md:grid-cols-9  xl:gap-x-14  bg-yellow-300 p-2">
+			<div className="grid grid-cols-2 gap-x-7  md:grid-cols-9  xl:gap-x-14  p-2">
 				<Image
 					src="/assets/images/BMW_logo_gray.svg.png"
 					alt="Bmw"

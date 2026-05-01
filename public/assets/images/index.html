@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#0b0b14" />
+    <title>For You — One Last Try</title>
+    <style>
+      /* ---------- Base ---------- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      :root {
+        --bg-0: #0b0b14;
+        --bg-1: #11111d;
+        --surface: rgba(255, 255, 255, 0.06);
+        --surface-strong: rgba(255, 255, 255, 0.1);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: #f3f3f7;
+        --muted: #a8a8b8;
+        --accent: #ff6b9a;
+        --accent-2: #b388ff;
+        --accent-3: #7ee0c8;
+        --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        --radius-lg: 24px;
+        --radius-md: 14px;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(
+            1200px 800px at 80% -10%,
+            #1a1430 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            1000px 700px at -10% 110%,
+            #2a1030 0%,
+            transparent 55%
+          ),
+          linear-gradient(180deg, var(--bg-0), var(--bg-1));
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+      }
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+      /* orbs */
+      .bg-orbs {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.55;
+        animation: float 14s ease-in-out infinite;
+      }
+      .orb-1 {
+        width: 380px;
+        height: 380px;
+        background: #ff6b9a;
+        top: -80px;
+        left: -80px;
+      }
+      .orb-2 {
+        width: 420px;
+        height: 420px;
+        background: #7c4dff;
+        bottom: -120px;
+        right: -100px;
+        animation-delay: -5s;
+      }
+      .orb-3 {
+        width: 280px;
+        height: 280px;
+        background: #7ee0c8;
+        top: 40%;
+        left: 55%;
+        opacity: 0.25;
+        animation-delay: -9s;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(30px, -20px) scale(1.05);
+        }
+      }
+      /* stage */
+      .stage {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        width: 100%;
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 32px 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card {
+        width: 100%;
+        background: var(--surface);
+        backdrop-filter: blur(24px) saturate(160%);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transform-origin: center;
+        animation: cardIn 0.7s var(--ease) both;
+      }
+      .card-inner {
+        padding: 32px 28px;
+      }
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .hidden {
+        display: none !important;
+      }
+      /* typography */
+      .eyebrow {
+        margin: 0 0 10px;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .title {
+        margin: 0 0 18px;
+        font-size: clamp(24px, 5.2vw, 32px);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+      }
+      .accent {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .subtitle {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      .letter p {
+        margin: 0 0 14px;
+        color: #d8d8e4;
+        line-height: 1.65;
+        font-size: 15.5px;
+      }
+      .letter em {
+        color: var(--accent);
+        font-style: normal;
+        font-weight: 600;
+      }
+      /* slider */
+      .slider-wrap {
+        margin-top: 28px;
+      }
+      .slider-track {
+        position: relative;
+        height: 60px;
+        border-radius: 999px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid var(--border);
+        overflow: hidden;
+        user-select: none;
+        touch-action: none;
+      }
+      .slider-hint {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .slider-thumb {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        cursor: grab;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 10px 30px rgba(255, 107, 154, 0.35);
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.25s ease;
+      }
+      .slider-thumb:active {
+        cursor: grabbing;
+        transform: scale(1.05);
+      }
+      .slider-track.complete .slider-thumb {
+        background: linear-gradient(135deg, var(--accent-3), var(--accent-2));
+      }
+      /* buttons */
+      .actions {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .btn {
+        position: relative;
+        appearance: none;
+        border: 1px solid var(--border);
+        background: var(--surface-strong);
+        color: var(--text);
+        padding: 16px 22px;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        flex: 1 1 auto;
+        min-width: 140px;
+        transition:
+          transform 0.2s var(--ease),
+          box-shadow 0.25s ease,
+          background 0.25s ease,
+          border-color 0.25s ease;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn:active {
+        transform: translateY(0) scale(0.98);
+      }
+      .btn-yes {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 12px 30px rgba(255, 107, 154, 0.35);
+      }
+      .btn-yes .btn-glow {
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        filter: blur(18px);
+        opacity: 0.55;
+        z-index: -1;
+      }
+      .btn-yes:hover {
+        box-shadow: 0 16px 40px rgba(255, 107, 154, 0.5);
+      }
+      .btn-no {
+        color: #ddd;
+      }
+      .btn-no.dodging {
+        /* positions swapped via flex order */
+      }
+      .actions.swapped .btn-yes {
+        order: 2;
+      }
+      .actions.swapped .btn-no {
+        order: 1;
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--border);
+        margin-top: 18px;
+      }
+      .hint {
+        min-height: 20px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 13.5px;
+        text-align: center;
+      }
+      /* result code */
+      .code-box {
+        margin: 8px 0 6px;
+        padding: 16px 18px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px dashed var(--border);
+      }
+      .code-label {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .code-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .code-row code {
+        flex: 1 1 auto;
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 18px;
+        letter-spacing: 0.06em;
+        color: var(--accent-3);
+        word-break: break-all;
+      }
+      .copy-btn {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: var(--surface-strong);
+        color: var(--text);
+        padding: 8px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .copy-btn.copied {
+        color: var(--accent-3);
+      }
+      /* footer */
+      .foot {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        padding: 16px 12px 22px;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+      /* mobile */
+      @media (max-width: 480px) {
+        .stage {
+          padding: 18px 14px;
+        }
+        .card-inner {
+          padding: 24px 20px;
+        }
+        .title {
+          font-size: 22px;
+        }
+        .letter p {
+          font-size: 15px;
+        }
+        .btn {
+          padding: 14px 18px;
+          font-size: 15px;
+        }
+        .slider-track {
+          height: 56px;
+        }
+        .slider-thumb {
+          width: 48px;
+          height: 48px;
+        }
+        .orb {
+          filter: blur(60px);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-orbs" aria-hidden="true">
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+      <span class="orb orb-3"></span>
+    </div>
+
+    <main class="stage">
+      <!-- STEP 1: Letter + slide-to-continue -->
+      <section
+        class="card letter-card"
+        id="step1"
+        aria-labelledby="letter-title"
+      >
+        <div class="card-inner">
+          <p class="eyebrow">a quiet message, just for you</p>
+          <h1 id="letter-title" class="title">
+            Hi, I’m willing to forgive.<br />
+            <span class="accent">Let’s try, one more time.</span>
+          </h1>
+
+          <div class="letter">
+            <p>
+              I’ve been thinking about us — really thinking. Not the noise, not
+              the goodbye. Us.
+            </p>
+            <p>
+              I believe in second chances. I believe in the version of
+              <em>us</em> that learns, listens, and grows. Whatever was broken,
+              I’m ready to fix it — together, with patience and with care.
+            </p>
+            <p>
+              No pressure. No script. Just my heart, on a page, asking gently.
+            </p>
+          </div>
+
+          <div class="slider-wrap" role="group" aria-label="Slide to continue">
+            <div class="slider-track" id="sliderTrack">
+              <span class="slider-hint" id="sliderHint"
+                >slide to keep reading →</span
+              >
+              <button
+                class="slider-thumb"
+                id="sliderThumb"
+                aria-label="Slide to continue"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="22"
+                  height="22"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: Question with Yes / No -->
+      <section
+        class="card question-card hidden"
+        id="step2"
+        aria-labelledby="question-title"
+      >
+        <div class="card-inner">
+          <p class="eyebrow">one honest question</p>
+          <h2 id="question-title" class="title">
+            Are you also willing to forgive and fix this —<br />
+            <span class="accent">and grow, together?</span>
+          </h2>
+          <p class="subtitle">
+            Take your time. Whatever you choose, I’ll respect it.
+          </p>
+
+          <div class="actions" id="actions">
+            <button class="btn btn-yes" id="btnYes" type="button">
+              <span class="btn-glow"></span>
+              <span class="btn-label">Yes, I’m willing</span>
+            </button>
+            <button class="btn btn-no" id="btnNo" type="button">
+              <span class="btn-label">No</span>
+            </button>
+          </div>
+
+          <p class="hint" id="noHint" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- STEP 3: Result -->
+      <section
+        class="card result-card hidden"
+        id="step3"
+        aria-labelledby="result-title"
+      >
+        <div class="card-inner">
+          <p class="eyebrow" id="resultEyebrow">your answer</p>
+          <h2 id="result-title" class="title" id="resultTitle"></h2>
+          <p class="subtitle" id="resultText"></p>
+
+          <div class="code-box">
+            <span class="code-label">share this code with me</span>
+            <div class="code-row">
+              <code id="resultCode">—</code>
+              <button
+                class="copy-btn"
+                id="copyBtn"
+                type="button"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-ghost" id="restartBtn" type="button">
+            Start over
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">made with care by Ashkan · just for you Shadi</footer>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const CODES = {
+          YES_FIRST: "FOREVER-WITH-YOU-2026",
+          NO_THEN_YES: "STILL-MAYBE-US-2026",
+          NO_FINAL: "GOODBYE-AFTER-11-2026",
+        };
+
+        const state = { firstChoice: null, noCount: 0, finished: false };
+
+        // ---------- Slider ----------
+        const track = document.getElementById("sliderTrack");
+        const thumb = document.getElementById("sliderThumb");
+        const hint = document.getElementById("sliderHint");
+
+        let dragging = false,
+          startX = 0,
+          currentX = 0,
+          maxX = 0;
+
+        const recalcMax = () => {
+          maxX = track.clientWidth - thumb.offsetWidth - 8;
+        };
+        recalcMax();
+        window.addEventListener("resize", recalcMax);
+
+        const setThumb = (x) => {
+          const c = Math.max(0, Math.min(maxX, x));
+          thumb.style.transform = `translateX(${c}px)`;
+          hint.style.opacity = String(1 - c / maxX);
+          return c;
+        };
+
+        thumb.addEventListener("pointerdown", (e) => {
+          dragging = true;
+          thumb.setPointerCapture?.(e.pointerId);
+          startX = (e.clientX ?? e.touches?.[0]?.clientX) - currentX;
+          thumb.style.transition = "none";
+        });
+        window.addEventListener("pointermove", (e) => {
+          if (!dragging) return;
+          const cx = e.clientX ?? e.touches?.[0]?.clientX;
+          if (cx == null) return;
+          currentX = setThumb(cx - startX);
+          e.preventDefault?.();
+        });
+        const onUp = () => {
+          if (!dragging) return;
+          dragging = false;
+          thumb.style.transition = "";
+          if (currentX >= maxX - 4) {
+            track.classList.add("complete");
+            currentX = setThumb(maxX);
+            setTimeout(goToStep2, 280);
+          } else {
+            currentX = 0;
+            thumb.style.transform = "translateX(0)";
+            hint.style.opacity = "1";
+          }
+        };
+        window.addEventListener("pointerup", onUp);
+        window.addEventListener("pointercancel", onUp);
+
+        // ---------- Steps ----------
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+
+        function goToStep2() {
+          step1.classList.add("hidden");
+          step2.classList.remove("hidden");
+        }
+
+        function goToStep3({ title, eyebrow, text, code }) {
+          state.finished = true;
+          document.getElementById("resultEyebrow").textContent = eyebrow;
+          document.getElementById("result-title").innerHTML = title;
+          document.getElementById("resultText").textContent = text;
+          document.getElementById("resultCode").textContent = code;
+          step2.classList.add("hidden");
+          step3.classList.remove("hidden");
+        }
+
+        // ---------- Yes / No ----------
+        const btnYes = document.getElementById("btnYes");
+        const btnNo = document.getElementById("btnNo");
+        const actions = document.getElementById("actions");
+        const noHint = document.getElementById("noHint");
+
+        btnYes.addEventListener("click", () => {
+          if (state.finished) return;
+          if (state.noCount === 0) {
+            state.firstChoice = "yes";
+            goToStep3({
+              eyebrow: "a beautiful answer",
+              title: 'You said <span class="accent">yes</span>. ✨',
+              text: "You picked us — without hesitation. Send me this code so I know it's really you, and that you mean it just like I do.",
+              code: CODES.YES_FIRST,
+            });
+          } else {
+            const times =
+              state.noCount === 1 ? "once" : `${state.noCount} times`;
+            goToStep3({
+              eyebrow: "a hopeful answer",
+              title: 'You came back to <span class="accent">yes</span>.',
+              text: `You said no ${times} before choosing us — and that's okay. Doubt is human. The fact that you chose us in the end means everything. Send me this code.`,
+              code: `STILL-MAYBE-US-${state.noCount}x-2026`,
+            });
+          }
+        });
+
+        btnNo.addEventListener("click", () => {
+          if (state.finished) return;
+          state.noCount += 1;
+
+          if (state.noCount >= 11) {
+            goToStep3({
+              eyebrow: "i hear you",
+              title: 'You chose <span class="accent">no</span>.',
+              text: "Eleven times — I heard you, gently. I won't hold on where I'm not wanted. Send me this code so I know, and I'll let us be a kind memory.",
+              code: CODES.NO_FINAL,
+            });
+            return;
+          }
+
+          const hints = [
+            "that's your call.",
+            "noted.",
+            "still a valid choice.",
+            "you can always change your mind.",
+            "no pressure either way.",
+            "the yes button isn't going anywhere.",
+            "okay.",
+            "your answer, your terms.",
+            "alright then.",
+            "last time I'll ask.",
+          ];
+          noHint.textContent =
+            hints[Math.min(state.noCount - 1, hints.length - 1)];
+
+          if (state.noCount >= 10) makeNoDodgy();
+        });
+
+        function makeNoDodgy() {
+          if (btnNo.classList.contains("dodging")) return;
+          btnNo.classList.add("dodging");
+          actions.classList.add("swapped");
+        }
+
+        // ---------- Copy code ----------
+        document
+          .getElementById("copyBtn")
+          .addEventListener("click", async () => {
+            const code = document
+              .getElementById("resultCode")
+              .textContent.trim();
+            const btn = document.getElementById("copyBtn");
+            try {
+              await navigator.clipboard.writeText(code);
+              btn.textContent = "Copied ✓";
+              btn.classList.add("copied");
+              setTimeout(() => {
+                btn.textContent = "Copy";
+                btn.classList.remove("copied");
+              }, 1600);
+            } catch {
+              const r = document.createRange();
+              r.selectNode(document.getElementById("resultCode"));
+              const sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(r);
+            }
+          });
+
+        // ---------- Restart ----------
+        document.getElementById("restartBtn").addEventListener("click", () => {
+          state.firstChoice = null;
+          state.noCount = 0;
+          state.finished = false;
+          btnNo.classList.remove("dodging");
+          btnNo.style.cssText = "";
+          actions.style.cssText = "";
+          actions.classList.remove("swapped");
+          noHint.textContent = "";
+          track.classList.remove("complete");
+          currentX = 0;
+          thumb.style.transform = "translateX(0)";
+          hint.style.opacity = "1";
+          step3.classList.add("hidden");
+          step2.classList.add("hidden");
+          step1.classList.remove("hidden");
+          recalcMax();
+        });
+      })();
+    </script>
+  </body>
+</html>
