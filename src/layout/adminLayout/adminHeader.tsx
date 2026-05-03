@@ -40,6 +40,7 @@ function AdminHeader() {
 						alt="Admin Logo"
 						width={80}
 						height={40}
+						className="hidden"
 					/>
 					<div className="text-xl hidden md:block">
 						{" "}
