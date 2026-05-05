@@ -3,7 +3,7 @@ import Image from "next/image";
 function AdminHeader() {
 	return (
 		<div className="bg-white h-20 px-5 ">
-			<div className="flex items-center justify-between ">
+			<div className="flex items-center justify-between mt-2 ">
 				<div className="right flex justify-center items-center gap-2 ">
 					<Image
 						src="/assets/images/4ec01bfd-933e-4e66-ba3c-b740a304d6c1.png"
@@ -42,7 +42,7 @@ function AdminHeader() {
 						height={40}
 						className="hidden"
 					/>
-					<div className="text-xl hidden md:block">
+					<div className="text-2xl hidden md:block">
 						{" "}
 						به پنل مدیریت رضاروور خوش آمدید
 					</div>

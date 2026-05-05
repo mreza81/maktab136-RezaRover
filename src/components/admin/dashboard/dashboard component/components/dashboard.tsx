@@ -1,61 +1,72 @@
 "use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
-import Cookies from "js-cookie";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-function Dashboard() {
-	// 	const router = useRouter();
+// function Dashboard() {
+// 	const router = useRouter();
 
-	// 	useEffect(() => {
-	// 		const token = Cookies.get("access-token");
+// 	useEffect(() => {
+// 		const token = Cookies.get("access-token");
 
-	// 		if (!token) {
-	// 			router.replace("/admin/MhdDgh1381/login");
-	// 		}
-	// 	}, []);
+// 		if (!token) {
+// 			router.replace("/admin/MhdDgh1381/login");
+// 		}
+// 	}, []);
+
+const Dashboard = () => {
+	// لیست آمار برای راحتی مدیریت
+	const stats = [
+		{ title: "آمار فروش سالانه", value: "4,503,200$" },
+		{ title: "تعداد خودرو فروخته شده", value: "268" },
+		{ title: "سود خالص", value: "2,000,000$" },
+		{ title: "کاربران فعال", value: "1,240" },
+		{ title: "سفارشات در انتظار", value: "45" },
+		{ title: "بازدید امروز", value: "8,920" },
+	];
 
 	return (
-		<div className="w-full bg-secondry pt-10 pb-10  min-h-[calc(100vh-80px)] flex gap-12 ">
+		<div className="w-full bg-secondry min-h-[calc(100vh-80px)] flex gap-4 p-6">
 			<Sidebar />
-			<div className="charts-div  h-[80vh] w-full mx-6 -mr-6 overflow-x-scroll ">
-				<div className="div-top ">
-					<div className="flex flex-col justify-center items-center gap-4 md:flex-row md:justify-between">
-						<div className="w-50 xl:min-w-70 h-36 bg-slate-800 text-white rounded-xl flex flex-col justify-center gap-2 items-center shadow-lg">
-							<p className="text-sm mb-2">آمار فروش سالانه</p>
-							<span className="text-3xl font-bold">4503200$</span>
-						</div>
 
-						<div className="w-50 xl:min-w-70 h-36 bg-slate-800 text-white rounded-xl flex flex-col justify-center gap-2 items-center shadow-lg">
-							<p className="text-sm mb-2">تعداد خودروی فروخته شده</p>
-							<span className="text-3xl font-bold">268</span>
+			{/* محتوای اصلی */}
+			<div className="flex-1 flex flex-col gap-8 overflow-hidden">
+				{/* بخش کارت‌ها - Grid ریسپانسیو */}
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+					{stats.map((item, index) => (
+						<div
+							key={index}
+							className="h-32 bg-slate-800 text-white rounded-2xl flex flex-col justify-center items-center shadow-md hover:shadow-xl transition-all border border-slate-700"
+						>
+							<p className="text-sm opacity-80 mb-1">{item.title}</p>
+							<span className="text-2xl font-bold tracking-wider">
+								{item.value}
+							</span>
 						</div>
-						<div className="w-50 xl:min-w-70 h-36 bg-slate-800 text-white rounded-xl flex flex-col justify-center gap-2 items-center shadow-lg">
-							<p className="text-sm mb-2">سود خالص</p>
-							<span className="text-3xl font-bold">2000000$</span>
-						</div>
-					</div>
+					))}
 				</div>
-				<div className="div-btm mt-40 flex flex-col justify-center items-center gap-4 xl:flex-row md:justify-between ">
-					<Image
-						src="/assets/images/chart.png"
-						alt="chart"
-						width={300}
-						height={300}
-						className="lg:w-130 xl:w-145"
-					/>
-					<Image
-						src="/assets/images/chart2.png"
-						alt="chart"
-						width={300}
-						height={300}
-						className=""
-					/>
+
+				{/* بخش تصاویر */}
+				<div className="flex flex-col xl:flex-row gap-6 mt-4">
+					<div className="flex-1 relative min-h-64 xl:h-110">
+						<Image
+							src="/assets/images/nody--1661326214.jpg"
+							alt="chart"
+							fill
+							className="rounded-xl object-cover shadow-lg border border-slate-700"
+						/>
+					</div>
+					<div className="flex-1 relative min-h-64 xl:h-110">
+						<Image
+							src="/assets/images/nody--1661326220.png"
+							alt="chart"
+							fill
+							className="rounded-xl object-cover shadow-lg border border-slate-700"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
 export default Dashboard;
