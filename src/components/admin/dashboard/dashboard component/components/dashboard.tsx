@@ -1,7 +1,21 @@
+"use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
+import Cookies from "js-cookie";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 function Dashboard() {
+	// 	const router = useRouter();
+
+	// 	useEffect(() => {
+	// 		const token = Cookies.get("access-token");
+
+	// 		if (!token) {
+	// 			router.replace("/admin/MhdDgh1381/login");
+	// 		}
+	// 	}, []);
+
 	return (
 		<div className="w-full bg-secondry pt-10 pb-10  min-h-[calc(100vh-80px)] flex gap-12 ">
 			<Sidebar />

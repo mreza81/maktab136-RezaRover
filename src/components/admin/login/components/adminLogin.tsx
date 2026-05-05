@@ -19,13 +19,13 @@ function AdminLoginComponent() {
 			if (res.success) {
 				toast.success("ورود ادمین با موفقیت انجام شد 🎉 ");
 				console.log(res);
-				router.push("/admin/8194/dashboard");
+				router.push("/admin/MhdDgh1381/dashboard");
 			}
 		} catch {}
 	};
 	return (
 		<div className="login-bg min-h-screen flex justify-center items-center  p-4">
-			<form className="  bg-white/50 backdrop-blur-md border border-white/20 w-full md:w-1/2 xl:w-1/3 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
+			<form className="  bg-white/30 backdrop-blur-lg border border-white/20 w-full md:w-1/2 xl:w-1/3 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
 				<div className="mx-auto flex flex-col items-center justify-center gap-0">
 					<img
 						src={"/assets/images/935d21a7-0654-4363-a829-60c639fa0ce9.png"}
