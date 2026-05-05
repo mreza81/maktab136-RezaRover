@@ -53,6 +53,11 @@ body {
 .hevebg {
 	background-image: url("../../public/assets/images/chalenjer.jpg");
 }
+.login-bg {
+	background-image: url("/assets/images/nody-دانلود-عکس-مرسدس-بنز-با-بهترین-کیفیت-1721250146.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 
 body {
 	overflow-x: hidden;
