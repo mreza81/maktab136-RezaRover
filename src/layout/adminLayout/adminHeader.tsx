@@ -16,7 +16,7 @@ function AdminHeader() {
 						alt="menu"
 						width={50}
 						height={50}
-						className="lg:hidden "
+						className="xl:hidden "
 						onClick={() => setOpen(true)}
 					/>
 					<Image
@@ -24,7 +24,7 @@ function AdminHeader() {
 						alt="home"
 						width={70}
 						height={70}
-						className="hidden lg:block hover:corsor-pointer"
+						className="hidden xl:block hover:corsor-pointer"
 					/>
 
 					{open && (

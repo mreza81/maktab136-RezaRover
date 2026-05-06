@@ -63,3 +63,26 @@ body {
 body {
 	overflow-x: hidden;
 }
+.vertical-scroll-rtl {
+	direction: rtl;
+}
+
+.vertical-scroll-rtl > * {
+	direction: ltr;
+}
+.vertical-scroll-rtl::-webkit-scrollbar {
+	width: 8px;
+}
+
+.vertical-scroll-rtl::-webkit-scrollbar-track {
+	background: #1f2937;
+}
+
+.vertical-scroll-rtl::-webkit-scrollbar-thumb {
+	background: #4b5563;
+	border-radius: 8px;
+}
+
+.vertical-scroll-rtl::-webkit-scrollbar-thumb:hover {
+	background: #6b7280;
+}
