@@ -26,7 +26,7 @@ function MobileMenu() {
 
 			{/* Menu */}
 			<div
-				className={`fixed top-0 right-0 w-[50%] h-screen bg-[#8f57dc] z-70 shadow-xl 
+				className={`fixed top-0 right-0 w-[50%] h-screen bg-secondry z-70 shadow-xl 
           transition-transform duration-300
           ${open ? "translate-x-0" : "translate-x-full"}
         `}

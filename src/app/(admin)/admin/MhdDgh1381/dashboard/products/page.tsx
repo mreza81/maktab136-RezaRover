@@ -1,7 +1,11 @@
-import React from "react";
+import DashboardProducts from "@/components/admin/dashboard/get products/components/DashboardProducts";
 
 function page() {
-	return <div>getb products</div>;
+	return (
+		<div>
+			<DashboardProducts />
+		</div>
+	);
 }
 
 export default page;

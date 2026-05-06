@@ -4,7 +4,7 @@ import ActiveLink from "../siteLayout/header/components/ActiveLink";
 function Sidebar() {
 	return (
 		<div>
-			<div className="hidden h-[80vh] lg:block bg-black  w-50 pt-2 xl:w-70 xl:pt-4   mr-6 rounded-xl">
+			<div className="hidden h-[80vh] lg:block bg-slate-800  w-50 pt-2 xl:w-70 xl:pt-4    rounded-xl mt-5">
 				<div className=" flex  flex-col items-center justify-center lg:flex-row-reverse lg:justify-between  px-2">
 					<Image
 						src="/assets/images/252d1554-ffae-497b-a581-d544a859c373 (1).png"
@@ -39,7 +39,9 @@ function Sidebar() {
 							height={40}
 							className=""
 						/>
-						<ActiveLink href="/admin/MhdDgh1381/products">محصولات</ActiveLink>
+						<ActiveLink href="/admin/MhdDgh1381/dashboard/products">
+							محصولات
+						</ActiveLink>
 					</div>
 					<div className="flex justify-start items-center gap-1">
 						<Image
@@ -49,7 +51,9 @@ function Sidebar() {
 							height={40}
 							className=""
 						/>
-						<ActiveLink href="/admin/MhdDgh1381/inventory">موجودی</ActiveLink>
+						<ActiveLink href="/admin/MhdDgh1381/dashboard/inventory">
+							موجودی
+						</ActiveLink>
 					</div>
 					<div className="flex justify-start items-center gap-1">
 						<Image
@@ -59,7 +63,9 @@ function Sidebar() {
 							height={40}
 							className=""
 						/>
-						<ActiveLink href="/admin/MhdDgh1381/orders">سفارشات</ActiveLink>
+						<ActiveLink href="/admin/MhdDgh1381/dashboard/orders">
+							سفارشات
+						</ActiveLink>
 					</div>
 				</div>
 			</div>

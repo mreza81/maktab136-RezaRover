@@ -14,7 +14,6 @@ import Image from "next/image";
 // 	}, []);
 
 const Dashboard = () => {
-	// لیست آمار برای راحتی مدیریت
 	const stats = [
 		{ title: "آمار فروش سالانه", value: "4,503,200$" },
 		{ title: "تعداد خودرو فروخته شده", value: "268" },
@@ -25,12 +24,10 @@ const Dashboard = () => {
 	];
 
 	return (
-		<div className="w-full bg-secondry min-h-[calc(100vh-80px)] flex gap-4 p-6">
+		<div className="  w-full  min-h-[calc(100vh-80px)] flex flex-col md:flex-row  gap-4 p-6 ">
 			<Sidebar />
 
-			{/* محتوای اصلی */}
-			<div className="flex-1 flex flex-col gap-8 overflow-hidden">
-				{/* بخش کارت‌ها - Grid ریسپانسیو */}
+			<div className="flex-1 flex flex-col gap-8 overflow-hidden pt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 					{stats.map((item, index) => (
 						<div
@@ -45,7 +42,6 @@ const Dashboard = () => {
 					))}
 				</div>
 
-				{/* بخش تصاویر */}
 				<div className="flex flex-col xl:flex-row gap-6 mt-4">
 					<div className="flex-1 relative min-h-64 xl:h-110">
 						<Image
