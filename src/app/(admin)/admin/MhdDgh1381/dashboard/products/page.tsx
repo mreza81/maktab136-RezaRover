@@ -2,7 +2,7 @@ import DashboardProducts from "@/components/admin/dashboard/get products/compone
 
 function page() {
 	return (
-		<div>
+		<div className="">
 			<DashboardProducts />
 		</div>
 	);

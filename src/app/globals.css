@@ -32,6 +32,7 @@ body {
 @theme {
 	--color-primary: #7c00a0;
 	--color-secondry: #8f57dc;
+	--color-tertialy: #314158;
 }
 
 @font-face {

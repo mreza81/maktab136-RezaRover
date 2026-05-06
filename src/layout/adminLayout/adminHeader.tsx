@@ -35,76 +35,78 @@ function AdminHeader() {
 					)}
 
 					{/* Menu */}
-					<div
-						className={`fixed top-0 right-0 w-[50%] h-screen bg-slate-800 z-70 shadow-xl 
+					{open && (
+						<div
+							className={`fixed top-0 right-0 w-[50%] h-screen bg-slate-800 z-70 shadow-xl 
           transition-transform duration-300
           ${open ? "translate-x-0" : "translate-x-full"}
         `}
-					>
-						<div className="mh-top flex flex-col items-center justify-center pb-2">
-							<img
-								src="../../assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
-								alt="RezaRover"
-								className="w-20 h-20"
-							/>
-							<div className=" text-xl text-white mr-2 ">نام ادمین</div>
-						</div>
-						<div className="middle">
-							<hr className="text-3xl text-white pb-2" />
-						</div>
-						<div>
-							<div className="bottom mt-3 mr-2 flex flex-col items-start justify-center gap-3">
-								<div className="flex justify-start items-center gap-1">
-									<Image
-										src="/assets/images/whiteHome"
-										alt="Admin Logo"
-										width={40}
-										height={40}
-										className=""
-									/>
-									<ActiveLink href="/admin/MhdDgh1381/dashboard">
-										صفحه اصلی
-									</ActiveLink>
-								</div>
-								<div className="flex justify-center items-center gap-1">
-									<Image
-										src="/assets/images/carwhite2.png"
-										alt="Admin Logo"
-										width={40}
-										height={40}
-										className=""
-									/>
-									<ActiveLink href="/admin/MhdDgh1381/dashboard/products">
-										محصولات
-									</ActiveLink>
-								</div>
-								<div className="flex justify-start items-center gap-1">
-									<Image
-										src="/assets/images/anbar.png"
-										alt="Admin Logo"
-										width={40}
-										height={40}
-										className=""
-									/>
-									<ActiveLink href="/admin/MhdDgh1381/dashboard/inventory">
-										موجودی
-									</ActiveLink>
-								</div>
-								<div className="flex justify-start items-center gap-1">
-									<Image
-										src="/assets/images/inventory2.png"
-										alt="Admin Logo"
-										width={40}
-										height={40}
-										className=""
-									/>
-									<ActiveLink href="/admin/MhdDgh1381/dashboard/orders">
-										سفارشات
-									</ActiveLink>
+						>
+							<div className="mh-top flex flex-col items-center justify-center pb-2">
+								<img
+									src="../../assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
+									alt="RezaRover"
+									className="w-20 h-20"
+								/>
+								<div className=" text-xl text-white mr-2 ">نام ادمین</div>
+							</div>
+							<div className="middle">
+								<hr className="text-3xl text-white pb-2" />
+							</div>
+							<div>
+								<div className="bottom mt-3 mr-2 flex flex-col items-start justify-center gap-3">
+									<div className="flex justify-start items-center gap-1">
+										<Image
+											src="/assets/images/whiteHome"
+											alt="Admin Logo"
+											width={40}
+											height={40}
+											className=""
+										/>
+										<ActiveLink href="/admin/MhdDgh1381/dashboard">
+											صفحه اصلی
+										</ActiveLink>
+									</div>
+									<div className="flex justify-center items-center gap-1">
+										<Image
+											src="/assets/images/carwhite2.png"
+											alt="Admin Logo"
+											width={40}
+											height={40}
+											className=""
+										/>
+										<ActiveLink href="/admin/MhdDgh1381/dashboard/products">
+											محصولات
+										</ActiveLink>
+									</div>
+									<div className="flex justify-start items-center gap-1">
+										<Image
+											src="/assets/images/anbar.png"
+											alt="Admin Logo"
+											width={40}
+											height={40}
+											className=""
+										/>
+										<ActiveLink href="/admin/MhdDgh1381/dashboard/inventory">
+											موجودی
+										</ActiveLink>
+									</div>
+									<div className="flex justify-start items-center gap-1">
+										<Image
+											src="/assets/images/inventory2.png"
+											alt="Admin Logo"
+											width={40}
+											height={40}
+											className=""
+										/>
+										<ActiveLink href="/admin/MhdDgh1381/dashboard/orders">
+											سفارشات
+										</ActiveLink>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					)}
 
 					{/* <Image
 						src="/assets/images/ws-black.png"
