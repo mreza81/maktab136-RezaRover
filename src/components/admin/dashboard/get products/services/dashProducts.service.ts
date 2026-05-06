@@ -9,5 +9,8 @@ export async function getProducts(page: number, limit: number, search: string) {
 		const data = (await res).data;
 		console.log(data);
 		return data;
-	} catch {}
+	} catch (error) {
+		console.error("getProducts error:", error);
+		throw error;
+	}
 }
