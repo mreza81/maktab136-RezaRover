@@ -9,7 +9,7 @@ function AdminHeader() {
 
 	return (
 		<div className="bg-slate-800 h-20 px-7 ">
-			<div className="flex items-center justify-between pt-2 ">
+			<div className="flex items-center justify-between  pt-2 ">
 				<div className="right flex justify-center items-center ">
 					<Image
 						src="/assets/images/menu.png"
@@ -26,6 +26,10 @@ function AdminHeader() {
 						height={70}
 						className="hidden xl:block hover:corsor-pointer"
 					/>
+					{/* <div className="text-2xl hidden md:block text-white">
+						{" "}
+						به پنل مدیریت رضاروور خوش آمدید
+					</div> */}
 
 					{open && (
 						<div
@@ -107,28 +111,6 @@ function AdminHeader() {
 							</div>
 						</div>
 					)}
-
-					{/* <Image
-						src="/assets/images/ws-black.png"
-						alt="whatsapp"
-						width={55}
-						height={55}
-						className="hidden lg:block"
-					/>
-					<Image
-						src="/assets/images/0f810f5b-6a9a-4485-878d-11411a1c500b.png"
-						alt="twitter"
-						width={50}
-						height={50}
-						className="hidden lg:block"
-					/>
-					<Image
-						src="/assets/images/3dc87494-38d2-4584-97ed-0ebf7ea5da7c.png"
-						alt="insta"
-						width={50}
-						height={50}
-						className="hidden md:block"
-					/> */}
 				</div>
 				<div className="center flex justify-center items-center gap-5">
 					<Image
@@ -139,9 +121,15 @@ function AdminHeader() {
 						className="hidden"
 					/>
 					<div className="text-2xl hidden md:block text-white">
-						{" "}
 						به پنل مدیریت رضاروور خوش آمدید
 					</div>
+					<Image
+						src={"/assets/images/252d1554-ffae-497b-a581-d544a859c373 (1).png"}
+						width={65}
+						height={65}
+						alt={"site icon"}
+						className="md:hidden"
+					/>
 				</div>
 				<div className="">
 					<Image

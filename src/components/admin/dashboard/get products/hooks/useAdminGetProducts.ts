@@ -6,11 +6,11 @@ import { getProducts } from "../services/dashProducts.service";
 export function useAdminGetProducts(
 	page: number,
 	limit: number,
-	search: string,
+	debouncedSearch: string,
 ) {
 	const { data, error, isLoading } = useQuery({
-		queryKey: ["products", page, limit, search],
-		queryFn: () => getProducts(page, limit, search),
+		queryKey: ["products", page, limit, debouncedSearch],
+		queryFn: () => getProducts(page, limit, debouncedSearch),
 	});
 
 	return { data, error, isLoading };

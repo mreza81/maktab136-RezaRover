@@ -1,16 +1,16 @@
 "use client";
-import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
 import Loading from "@/shared/loading";
-import { ProductType } from "@/types/productType";
+import { Orders } from "@/types/productTypeAndOrders";
 import { useState } from "react";
 interface ProductTableProps {
 	error: any;
 	isLoading: boolean;
 	data: any;
-	products: any;
+
+	orders: Orders[];
 }
 
-function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
+function OrdersTable({ error, isLoading, data, orders }: ProductTableProps) {
 	const [openEditModal, setOpenEditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -48,18 +48,20 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 					<thead className="sticky top-0 bg-[#1F2A40] z-20">
 						<tr>
 							<th className="p-4 text-white font-bold">ردیف</th>
-							<th className="p-4 text-white font-bold">عکس محصول</th>
-							<th className="p-4 text-white font-bold">برند</th>
-							<th className="p-4 text-white font-bold">مدل</th>
-							<th className="p-4 text-white font-bold">کلاس بدنه</th>
-							<th className="p-4 text-white font-bold">تاریخ اضافه شدن</th>
+							<th className="p-4 text-white font-bold">نام مشتری</th>
+							<th className="p-4 text-white font-bold">محصول</th>
 							<th className="p-4 text-white font-bold">تعداد</th>
+							<th className="p-4 text-white font-bold">آدرس</th>
+							<th className="p-4 text-white font-bold">تاریخ اضافه شدن</th>
+
+							<th className="p-4 text-white font-bold">وضعیت سفارش</th>
+
 							<th className="p-4 text-white font-bold min-w-30">عملیات</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						{products.map((item: ProductType, index: number) => (
+						{orders.map((item, index: number) => (
 							<tr
 								key={item._id}
 								className="bg-[#2A3B55] hover:bg-[#32466A] transition-colors group"
@@ -69,49 +71,29 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 								</td>
 
 								<td className="p-4">
-									<div className="flex justify-center">
-										<img
-											src={`${BASE_URL}${item.images?.[0]}`}
-											alt="عکس"
-											className="w-16 h-16 object-cover rounded-lg shadow-md"
-										/>
+									<div className="flex justify-center text-white">
+										{item.user.name}
 									</div>
 								</td>
 
 								<td className="p-4 text-white whitespace-nowrap">
-									{item.brand}
+									{item.orderItems[0]?.name}
 								</td>
 								<td className="p-4 text-white whitespace-nowrap">
-									{item.name}
+									{item.orderItems[0]?.quantity}
 								</td>
 								<td className="p-4 text-white whitespace-nowrap">
-									{item.category}
+									{item.shippingAddress.address}
 								</td>
 								<td className="p-4 text-white whitespace-nowrap">
-									{new Date(item.createdAt).toLocaleDateString("fa-IR")}
+									{new Date(item.updatedAt).toLocaleDateString("fa-IR")}
 								</td>
-								<td className="p-4 text-white font-mono">{item.stock}</td>
+								<td className="p-4 text-white font-mono">{item.status}</td>
+								<td className="p-4  font-mono text-secondry hover:cursor-pointer ">
+									جزعیات سفارش
+								</td>
 
-								<td className="p-4 text-white rounded-l-xl min-w-30">
-									<div className="bg-blue-600/20 py-2 rounded-lg flex justify-center items-center gap-4">
-										<img
-											src="/assets/images/pen3.png"
-											alt="ادیت"
-											className="w-8 h-8 object-contain hover:cursor-pointer"
-											onClick={() => {
-												setOpenEditModal(true);
-											}}
-										/>
-										<img
-											src="/assets/images/trash.png"
-											alt="حذف"
-											className="w-8 h-8 object-contain hover:cursor-pointer"
-											onClick={() => {
-												setOpenDeleteModal(true);
-											}}
-										/>
-									</div>
-								</td>
+								{/* <td className="p-4 text-white rounded-l-xl min-w-30"></td> */}
 							</tr>
 						))}
 					</tbody>
@@ -122,4 +104,4 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	);
 }
 
-export default ProductTable;
+export default OrdersTable;

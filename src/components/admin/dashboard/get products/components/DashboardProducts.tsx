@@ -1,17 +1,22 @@
 "use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
-
+import { useDebounce } from "use-debounce";
 import { useState } from "react";
 import { useAdminGetProducts } from "../hooks/useAdminGetProducts";
 import ProductTable from "./productTable";
 
 function DashboardProducts() {
 	const [page, setPage] = useState(1);
-	const [limit, setLimit] = useState(100);
+	const [limit, setLimit] = useState(10);
 	const [search, setSearch] = useState("");
+	const [debouncedSearch] = useDebounce(search, 700);
 	const [openEditModal, setOpenEditModal] = useState(false);
-	const { data, error, isLoading } = useAdminGetProducts(page, limit, search);
+	const { data, error, isLoading } = useAdminGetProducts(
+		page,
+		limit,
+		debouncedSearch,
+	);
 	const products = data?.data || [];
 	const total = data?.total || 0;
 	const totalPages = Math.ceil(total / limit);

@@ -2,24 +2,24 @@
 import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
 import { useState } from "react";
-import { useAdminGetProducts } from "../../get products/hooks/useAdminGetProducts";
-import InventoryTable from "./inventoryTable";
 import { useDebounce } from "use-debounce";
+import { useAdminGetOrders } from "../hooks/useAdminGetOrders";
+import OrdersTable from "./ordersTable";
+import type { Orders } from "@/types/productTypeAndOrders";
 
-function Inventory() {
+function Orders() {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
 	const [search, setSearch] = useState("");
 	const [debouncedSearch] = useDebounce(search, 700);
-	const { data, error, isLoading } = useAdminGetProducts(
+	const { data, error, isLoading } = useAdminGetOrders(
 		page,
 		limit,
 		debouncedSearch,
 	);
-	const products = data?.data || [];
+	const orders: Orders[] = data?.data || [];
 	const total = data?.total || 0;
 	const totalPages = Math.ceil(total / limit);
-
 	return (
 		<div className="  w-full bg-white min-h-[calc(100vh-80px)] lg:flex  lg:flex-row  gap-4 p-6 mx-auto">
 			<Sidebar />
@@ -52,17 +52,17 @@ function Inventory() {
 
 					<div className="add-btn flex justify-center items-center w-17 h-12 rounded-xl text-white bg-tertialy  hover:text-white  px-3 lg:w-55 md:w-40 md:gap-5 lg:gap-10 xl:justify-between xl:w-74 xl:h-15 xl:rounded-t-xl lg:justify-center lg:items-center ">
 						<div className="text-md font-semibold hidden md:block">
-							موجودی کل
+							سفارشات کل
 						</div>
 						<div className="text-2xl font-semibold  hidden xl:block">|</div>
 						<div className="text-2xl font-semibold  ">{total}</div>
 					</div>
 				</div>
-				<InventoryTable
+				<OrdersTable
 					error={error}
 					isLoading={isLoading}
 					data={data}
-					products={products}
+					orders={orders}
 				/>
 
 				<div className="w-full mt-4 py-3 flex justify-center bg-tertialy rounded-b-xl">
@@ -129,4 +129,4 @@ function Inventory() {
 	);
 }
 
-export default Inventory;
+export default Orders;
