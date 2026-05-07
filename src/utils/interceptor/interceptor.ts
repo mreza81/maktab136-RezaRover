@@ -2,8 +2,6 @@ import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { toast } from "react-toastify";
-
 const axiosInstance = axios.create({
 	baseURL: BASE_URL,
 });

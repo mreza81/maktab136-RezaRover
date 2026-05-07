@@ -1,19 +1,21 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { User } from "@/types/adminLoginType";
-import { handleAdminLogin } from "../services/auth.services";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import { handleAdminLogin } from "../services/auth.services";
 
 function AdminLoginComponent() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const user: User = {
-		email,
-		password,
-	};
+
 	const router = useRouter();
-	const submit = async () => {
+	const submit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const user: User = {
+			email,
+			password,
+		};
 		try {
 			const res = await handleAdminLogin(user);
 			if (res.success) {
@@ -21,11 +23,16 @@ function AdminLoginComponent() {
 				console.log(res);
 				router.push("/admin/MhdDgh1381/dashboard");
 			}
-		} catch {}
+		} catch (error: any) {
+			toast.error(error.message);
+		}
 	};
 	return (
 		<div className="login-bg min-h-screen flex justify-center items-center  p-4">
-			<form className="  bg-white/30 backdrop-blur-lg border border-white/20 w-full md:w-1/2 xl:w-1/3 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
+			<form
+				className=" bg-white/30 backdrop-blur-lg border border-white/20 w-full md:w-1/2 xl:w-1/3 rounded-2xl shadow-xl p-8 flex flex-col gap-6"
+				onSubmit={submit}
+			>
 				<div className="mx-auto flex flex-col items-center justify-center gap-0">
 					<img
 						src={"/assets/images/935d21a7-0654-4363-a829-60c639fa0ce9.png"}
@@ -38,6 +45,7 @@ function AdminLoginComponent() {
 
 				<input
 					type="email"
+					value={email}
 					placeholder="ایمیل"
 					onChange={(e) => {
 						setEmail(e.target.value);
@@ -48,6 +56,7 @@ function AdminLoginComponent() {
 				<input
 					type="password"
 					placeholder="رمز عبور"
+					value={password}
 					onChange={(e) => {
 						setPassword(e.target.value);
 					}}
@@ -55,11 +64,8 @@ function AdminLoginComponent() {
 				/>
 
 				<button
+					type="submit"
 					className="w-full h-12 bg-primary text-white rounded-xl text-lg font-medium hover:bg-primary/80 transition"
-					onClick={(e) => {
-						e.preventDefault();
-						submit();
-					}}
 				>
 					ورود
 				</button>

@@ -6,18 +6,26 @@ import Cookies from "js-cookie";
 
 export async function handleAdminLogin(user: User) {
 	try {
-		const res = await axiosInstance.post(`${BASE_URL}/api/auth/login`, user);
+		const res = await axiosInstance.post(`/api/auth/login`, user);
 
 		const data = res.data;
 
-		Cookies.set("access-token", data.data.token);
-		Cookies.set("refresh-token", data.data.refreshToken);
+		Cookies.set("access-token", data.data.token, {
+			expires: 1,
+			secure: true,
+			sameSite: "Strict",
+		});
+		Cookies.set("refresh-token", data.data.refreshToken, {
+			expires: 7,
+			secure: true,
+			sameSite: "Strict",
+		});
 		return res.data;
 	} catch (error: any) {
 		if (error.response) {
-			console.log(error.response.data.message); // پیام خطای بک‌اند
+			throw new Error(error.response.data.message); // پیام خطای بک‌اند
 		} else {
-			console.log("مشکل در ارتباط با سرور");
+			throw new Error("مشکل در ارتباط با سرور");
 		}
 	}
 }
