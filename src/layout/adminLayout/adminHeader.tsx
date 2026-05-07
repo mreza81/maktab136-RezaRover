@@ -88,7 +88,7 @@ function AdminHeader() {
 											className=""
 										/>
 										<ActiveLink href="/admin/MhdDgh1381/dashboard/inventory">
-											موجودی
+											موجودی و قیمت
 										</ActiveLink>
 									</div>
 									<div className="flex justify-start items-center gap-1">

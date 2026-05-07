@@ -1,16 +1,14 @@
 "use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
-
 import { useState } from "react";
-import { useAdminGetProducts } from "../hooks/useAdminGetProducts";
-import ProductTable from "./productTable";
+import { useAdminGetProducts } from "../../get products/hooks/useAdminGetProducts";
+import InventoryTable from "./inventoryTable";
 
-function DashboardProducts() {
+function Inventory() {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(100);
 	const [search, setSearch] = useState("");
-	const [openEditModal, setOpenEditModal] = useState(false);
 	const { data, error, isLoading } = useAdminGetProducts(page, limit, search);
 	const products = data?.data || [];
 	const total = data?.total || 0;
@@ -20,7 +18,7 @@ function DashboardProducts() {
 		<div className="  w-full bg-white min-h-[calc(100vh-80px)] lg:flex  lg:flex-row  gap-4 p-6 mx-auto">
 			<Sidebar />
 
-			<div className=" h-[80vh] w-full mt-5 flex flex-col justify-start items-start">
+			<div className=" h-screen md:h-[80vh] w-full mt-5 flex flex-col justify-start items-start">
 				<div className="add-and-search-buttons flex justify-between items-center w-full ">
 					<div className="search-btn p-2 flex justify-center items-center w-17 h-12 rounded-xl bg-tertialy md:hidden">
 						<Image
@@ -31,7 +29,7 @@ function DashboardProducts() {
 							className="rounded-xl object-cover shadow-lg border  "
 						/>
 					</div>
-					<div className="hidden md:flex  bg-tertialy w-82 h-12 rounded-xl  md:justify-start md:items-center gap-4 focus-within:border-3 border-secondry   xl:h-15 xl:w-88 px-3">
+					<div className="hidden md:flex  bg-tertialy w-82 h-12 rounded-xl  md:justify-start md:items-center gap-4 focus-within:border-3 border-secondry   xl:h-15 xl:w-85 px-3">
 						<input
 							className="  p-2 text-white w-65 h-12 rounded-r-xl outline-none"
 							placeholder="محصول مورد نظر را جست و جو کنید"
@@ -45,23 +43,22 @@ function DashboardProducts() {
 							className="rounded-xl object-cover shadow-lg border hover:cursor-pointer "
 						/>
 					</div>
-					{/* <div className="text-tertialy text-2xl">صفحه محصولات</div> */}
 
-					<div className="add-btn flex justify-center items-center w-17 h-12 rounded-xl  text-white bg-tertialy hover:bg-secondry hover:text-white hover:cursor-pointer px-3 xl:justify-between xl:w-74 xl:h-15  lg:justify-center lg:items-center ">
-						<div className="text-md font-semibold hidden xl:block">
-							اضافه کردن محصول
+					<div className="add-btn flex justify-center items-center w-17 h-12 rounded-xl text-white bg-tertialy  hover:text-white  px-3 lg:w-55 md:w-40 md:gap-5 lg:gap-10 xl:justify-between xl:w-74 xl:h-15 xl:rounded-t-xl lg:justify-center lg:items-center ">
+						<div className="text-md font-semibold hidden md:block">
+							موجودی کل
 						</div>
 						<div className="text-2xl font-semibold  hidden xl:block">|</div>
-						<div className="text-2xl font-semibold  ">+</div>
+						<div className="text-2xl font-semibold  ">{total}</div>
 					</div>
 				</div>
-
-				<ProductTable
+				<InventoryTable
 					error={error}
 					isLoading={isLoading}
 					data={data}
 					products={products}
 				/>
+
 				<div className="w-full mt-4 py-3 flex justify-center bg-tertialy rounded-b-xl">
 					<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 flex-wrap">
 						<div className="flex items-center gap-2 text-sm">
@@ -126,4 +123,4 @@ function DashboardProducts() {
 	);
 }
 
-export default DashboardProducts;
+export default Inventory;

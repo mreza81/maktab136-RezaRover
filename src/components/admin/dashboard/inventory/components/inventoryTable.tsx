@@ -10,14 +10,16 @@ interface ProductTableProps {
 	products: any;
 }
 
-function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
-	const [openEditModal, setOpenEditModal] = useState(false);
-	const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
+function InventoryTable({
+	error,
+	isLoading,
+	data,
+	products,
+}: ProductTableProps) {
 	return (
 		<div
 			className={`table-div mt-4  w-full h-full max-h-full  bg-tertialy px-3   overflow-y-auto lg:overflow-x-hidden   ${error && "flex justify-center items-center bg-tertialy/70"} ${isLoading && "bg-tertialy/30 flex justify-center items-center"} vertical-scroll-rtl width-scroll
-    `}
+		`}
 		>
 			{error && (
 				<div className=" flex flex-col items-center justify-center gap-8 ">
@@ -52,9 +54,8 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 							<th className="p-4 text-white font-bold">برند</th>
 							<th className="p-4 text-white font-bold">مدل</th>
 							<th className="p-4 text-white font-bold">کلاس بدنه</th>
-							<th className="p-4 text-white font-bold">تاریخ اضافه شدن</th>
+							<th className="p-4 text-white font-bold">قیمت</th>
 							<th className="p-4 text-white font-bold">تعداد</th>
-							<th className="p-4 text-white font-bold min-w-30">عملیات</th>
 						</tr>
 					</thead>
 
@@ -88,30 +89,9 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 									{item.category}
 								</td>
 								<td className="p-4 text-white whitespace-nowrap">
-									{new Date(item.createdAt).toLocaleDateString("fa-IR")}
+									{item.price}
 								</td>
 								<td className="p-4 text-white font-mono">{item.stock}</td>
-
-								<td className="p-4 text-white rounded-l-xl min-w-30">
-									<div className="bg-blue-600/20 py-2 rounded-lg flex justify-center items-center gap-4">
-										<img
-											src="/assets/images/pen3.png"
-											alt="ادیت"
-											className="w-10 h-10 object-contain hover:cursor-pointer"
-											onClick={() => {
-												setOpenEditModal(true);
-											}}
-										/>
-										<img
-											src="/assets/images/trash.png"
-											alt="حذف"
-											className="w-10 h-10 object-contain hover:cursor-pointer"
-											onClick={() => {
-												setOpenDeleteModal(true);
-											}}
-										/>
-									</div>
-								</td>
 							</tr>
 						))}
 					</tbody>
@@ -122,4 +102,4 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	);
 }
 
-export default ProductTable;
+export default InventoryTable;
