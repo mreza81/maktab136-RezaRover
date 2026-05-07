@@ -12,12 +12,16 @@ function DashboardProducts() {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(100);
 	const [search, setSearch] = useState("");
+
 	const { data, error, isLoading } = useAdminGetProducts(page, limit, search);
 	const products = data?.data || [];
+	const total = data?.total || 0;
+	const totalPages = Math.ceil(total / limit);
 
 	return (
 		<div className="  w-full bg-white min-h-[calc(100vh-80px)] lg:flex  lg:flex-row  gap-4 p-6 mx-auto">
 			<Sidebar />
+
 			<div className=" h-[80vh] w-full mt-5 flex flex-col justify-start items-start">
 				<div className="add-and-search-buttons flex justify-between items-center w-full ">
 					<div className="search-btn p-2 flex justify-center items-center w-17 h-12 rounded-xl bg-tertialy md:hidden">
@@ -33,6 +37,7 @@ function DashboardProducts() {
 						<input
 							className="  p-2 text-white w-65 h-12 rounded-r-xl outline-none"
 							placeholder="محصول مورد نظر را جست و جو کنید"
+							onChange={(e) => setSearch(e.target.value)}
 						/>
 						<Image
 							src="/assets/images/search.png"
@@ -40,6 +45,7 @@ function DashboardProducts() {
 							width={40}
 							height={35}
 							className="rounded-xl object-cover shadow-lg border hover:cursor-pointer "
+							// onClick={() => setSearch(searchValue)}
 						/>
 					</div>
 					<div className="add-btn flex justify-center items-center w-17 h-12 rounded-xl text-white bg-tertialy hover:bg-secondry hover:text-white hover:cursor-pointer px-3 xl:justify-between xl:w-74 xl:h-15 lg:justify-center lg:items-center ">
@@ -52,7 +58,7 @@ function DashboardProducts() {
 				</div>
 
 				<div
-					className={`table-div mt-10  w-full h-full max-h-full  bg-tertialy px-3  overflow-y-auto lg:overflow-x-hidden   ${error && "flex justify-center items-center bg-tertialy/70"} ${isLoading && "bg-tertialy/30 flex justify-center items-center"}vertical-scroll-rtl
+					className={`table-div mt-10  w-full h-full max-h-full  bg-tertialy px-3   overflow-y-auto lg:overflow-x-hidden   ${error && "flex justify-center items-center bg-tertialy/70"} ${isLoading && "bg-tertialy/30 flex justify-center items-center"} vertical-scroll-rtl
     `}
 				>
 					{error && (
@@ -145,8 +151,73 @@ function DashboardProducts() {
 									</tr>
 								))}
 							</tbody>
+							<tfoot></tfoot>
 						</table>
 					)}
+				</div>
+				<div className="w-full mt-4 py-3 flex justify-center bg-tertialy">
+					<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 flex-wrap">
+						{/* limit selector */}
+						<div className="flex items-center gap-2 text-sm">
+							{/* <span className="hidden sm:inline text-white">تعداد:</span> */}
+							<select
+								value={limit}
+								onChange={(e) => {
+									setLimit(Number(e.target.value));
+									setPage(1);
+								}}
+								className="border rounded border-white text-white px-2 py-1 text-sm outline-none"
+							>
+								<option className="text-black" value={10}>
+									10
+								</option>
+								<option className="text-black" value={20}>
+									20
+								</option>
+								<option className="text-black" value={50}>
+									50
+								</option>
+								<option className="text-black" value={100}>
+									100
+								</option>
+							</select>
+						</div>
+
+						{/* prev */}
+						<button
+							disabled={page === 1}
+							onClick={() => setPage((p) => p - 1)}
+							className="px-3 py-1 text-sm bg-gray-300 text-tertialy rounded disabled:opacity-40 hover:bg-secondry hover:text-white transition"
+						>
+							قبلی
+						</button>
+
+						{/* pages */}
+						<div className="flex gap-1 flex-wrap justify-center max-w-full overflow-x-auto">
+							{Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+								<button
+									key={p}
+									onClick={() => setPage(p)}
+									className={`px-3 py-1 text-sm rounded whitespace-nowrap ${
+										page === p
+											? "bg-secondry text-white"
+											: "bg-gray-300 text-black"
+									}`}
+								>
+									{p}
+								</button>
+							))}
+						</div>
+
+						{/* next */}
+						<button
+							disabled={page === totalPages}
+							onClick={() => setPage((p) => p + 1)}
+							className="px-3 py-1 text-sm  bg-gray-300 text-tertialy hover:bg-secondry hover:text-white transition rounded disabled:opacity-40"
+						>
+							بعدی
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -63,13 +63,13 @@ body {
 body {
 	overflow-x: hidden;
 }
-.vertical-scroll-rtl {
+/* .vertical-scroll-rtl {
 	direction: rtl;
-}
+} */
 
-.vertical-scroll-rtl > * {
+/* .vertical-scroll-rtl > * {
 	direction: ltr;
-}
+} */
 .vertical-scroll-rtl::-webkit-scrollbar {
 	width: 8px;
 }
