@@ -1,6 +1,7 @@
 "use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
+import ChartsBox from "./charts";
 
 // function Dashboard() {
 // 	const router = useRouter();
@@ -44,20 +45,15 @@ const Dashboard = () => {
 
 				<div className="flex flex-col xl:flex-row gap-6 mt-4">
 					<div className="flex-1 relative min-h-64 xl:h-110">
-						<Image
-							src="/assets/images/nody--1661326214.jpg"
-							alt="chart"
-							fill
-							className="rounded-xl object-cover shadow-lg border border-slate-700"
-						/>
+						<div className="absolute inset-0 rounded-xl shadow-lg border border-slate-700 bg-white overflow-hidden">
+							<ChartsBox type="line" />
+						</div>
 					</div>
+
 					<div className="flex-1 relative min-h-64 xl:h-110">
-						<Image
-							src="/assets/images/nody--1661326220.png"
-							alt="chart"
-							fill
-							className="rounded-xl object-cover shadow-lg border border-slate-700"
-						/>
+						<div className="absolute inset-0 rounded-xl shadow-lg border border-slate-700 bg-white overflow-hidden">
+							<ChartsBox type="pie" />
+						</div>
 					</div>
 				</div>
 			</div>
