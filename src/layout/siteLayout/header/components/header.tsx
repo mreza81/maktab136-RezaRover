@@ -19,17 +19,17 @@ function Header() {
 
 					<div className="top-left flex justify-center items-center ">
 						<img
-							src="../../assets/images/instagram.png"
+							src="/assets/images/instagram.png"
 							alt="instagram"
 							className="w-10 h-10 "
 						/>
 						<img
-							src="../../assets/images/twitter-circle.png"
+							src="/assets/images/twitter-circle.png"
 							alt="twitter"
 							className="w-10 h-10"
 						/>
 						<img
-							src="../../assets/images/whats-app.png"
+							src="/assets/images/whats-app.png"
 							alt="whatsapp"
 							className="w-10 h-10"
 						/>
@@ -42,11 +42,11 @@ function Header() {
 					<div className="bottom-right flex items-center justify-center gap-8">
 						<MobileMenu />
 						<img
-							src="../../assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
+							src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
 							alt="رضاروور"
 							className="hidden text-white w-20 h-20 lg:block xl:block"
 						/>
-						<nav className="flex items-center justify-center gap-8 ">
+						<nav className="items-center justify-center gap-8 hidden lg:flex">
 							<ActiveLink href="/">صفحه اصلی</ActiveLink>
 							<ActiveLink href="/cart">لیست سفارشات</ActiveLink>
 							<ActiveLink href="/about-us">درباره ما</ActiveLink>

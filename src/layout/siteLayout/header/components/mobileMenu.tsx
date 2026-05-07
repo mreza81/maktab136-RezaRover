@@ -10,7 +10,7 @@ function MobileMenu() {
 		<div>
 			{/* دکمه منو */}
 			<img
-				src="../../assets/images/menu.png"
+				src="/assets/images/menu.png"
 				alt="menu"
 				className="w-10 h-10 lg:hidden xl:hidden"
 				onClick={() => setOpen(true)}
@@ -33,7 +33,7 @@ function MobileMenu() {
 			>
 				<div className="mh-top flex items-center justify-center pb-2">
 					<img
-						src="../../assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
+						src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
 						alt="RezaRover"
 						className="w-20 h-20"
 					/>

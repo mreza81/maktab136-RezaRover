@@ -44,7 +44,7 @@ function AdminHeader() {
 						>
 							<div className="mh-top flex flex-col items-center justify-center pb-2">
 								<img
-									src="../../assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
+									src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
 									alt="RezaRover"
 									className="w-20 h-20"
 								/>
