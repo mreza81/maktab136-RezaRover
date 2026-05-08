@@ -12,14 +12,11 @@ export async function handleAdminLogin(user: User) {
 
 		Cookies.set("access-token", data.data.token, {
 			expires: 1,
-			secure: true,
-			sameSite: "Strict",
 		});
 		Cookies.set("refresh-token", data.data.refreshToken, {
 			expires: 7,
-			secure: true,
-			sameSite: "Strict",
 		});
+		Cookies.set("role", data.data.user.role);
 		return res.data;
 	} catch (error: any) {
 		if (error.response) {

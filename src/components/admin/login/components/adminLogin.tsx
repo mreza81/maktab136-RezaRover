@@ -18,9 +18,9 @@ function AdminLoginComponent() {
 		};
 		try {
 			const res = await handleAdminLogin(user);
-			if (res.success) {
+			if (res) {
 				toast.success("ورود ادمین با موفقیت انجام شد 🎉 ");
-				console.log(res);
+
 				router.push("/admin/MhdDgh1381/dashboard");
 			}
 		} catch (error: any) {
