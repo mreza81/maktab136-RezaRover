@@ -10,7 +10,7 @@ function HomeHead() {
 				text-center
 				
         mx-auto
-        max-w-[500px]
+        max-w-125
 				
       
 				md:text-right
