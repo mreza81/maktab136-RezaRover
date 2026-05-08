@@ -69,28 +69,6 @@ axiosInstance.interceptors.response.use(
 				return Promise.reject(err);
 			}
 		}
-
-		// // // ---------------- 400 ----------------
-		// // if (status === 400) {
-		// // 	toast.error(error.response.data.message || "درخواست نامعتبر است");
-		// // }
-
-		// // ---------------- 403 ----------------
-		// if (status === 403) {
-		// 	toast.error("شما دسترسی لازم را ندارید");
-		// }
-
-		// // ---------------- 404 ----------------
-		// if (status === 404) {
-		// 	toast.error("منبع مورد نظر پیدا نشد");
-		// }
-
-		// // ---------------- 500 ----------------
-		// if (status === 500) {
-		// 	toast.error("خطای سرور رخ داده است");
-		// }
-
-		// return Promise.reject(error);
 	},
 );
 
