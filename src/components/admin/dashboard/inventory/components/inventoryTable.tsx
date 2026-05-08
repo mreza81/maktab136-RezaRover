@@ -1,7 +1,8 @@
 "use client";
 import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
 import Loading from "@/shared/loading";
-import { ProductType } from "@/types/productType";
+import { ProductType } from "@/types/productTypeAndOrders";
+
 import { useState } from "react";
 interface ProductTableProps {
 	error: any;
