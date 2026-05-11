@@ -6,15 +6,6 @@ import ActiveLink from "./ActiveLink";
 function MobileMenu() {
 	const [open, setOpen] = useState(false);
 
-	// جلوگیری از اسکرول صفحه وقتی منو باز است
-	useEffect(() => {
-		if (open) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	}, [open]);
-
 	return (
 		<div className="lg:hidden">
 			<img
@@ -32,7 +23,7 @@ function MobileMenu() {
 			></div>
 
 			<div
-				className={`fixed top-0 right-0 w-[80%] max-w-87.5 h-screen bg-linear-to-b from-secondry to-black 
+				className={`fixed top-0 right-0 w-[50%] max-w-62.5 h-screen bg-linear-to-b from-secondry to-black 
         z-50 shadow-2xl transition-transform duration-500 ease-out
         ${open ? "translate-x-0" : "translate-x-full"}`}
 			>

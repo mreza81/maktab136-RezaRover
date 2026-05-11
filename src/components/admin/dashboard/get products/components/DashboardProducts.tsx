@@ -14,7 +14,6 @@ function DashboardProducts() {
 	const [search, setSearch] = useState("");
 	const [debouncedSearch] = useDebounce(search, 700);
 	const [openAddModal, setOpenAddModal] = useState(false);
-	const [openEdditModal, setOpenEdditModal] = useState(false);
 
 	const { data, error, isLoading } = useAdminGetProducts(
 		page,

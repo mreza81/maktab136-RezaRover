@@ -60,19 +60,28 @@ body {
 	background-size: cover;
 }
 
+@keyframes spinY {
+	from {
+		transform: rotateY(0deg);
+	}
+	to {
+		transform: rotateY(360deg);
+	}
+}
+
+.spin-y {
+	animation: spinY 8s linear infinite;
+	transition: transform 0.5s ease;
+}
+.spin-y:hover {
+	animation: none;
+	transform: rotateY(0deg);
+}
+
 body {
 	overflow-x: hidden;
 }
-/* * {
-	outline: 1px solid red;
-} */
-/* .vertical-scroll-rtl {
-	direction: rtl;
-} */
 
-/* .vertical-scroll-rtl > * {
-	direction: ltr;
-} */
 .vertical-scroll-rtl::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;

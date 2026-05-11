@@ -18,7 +18,7 @@ function Homeinfo() {
 					</div>
 				</div>
 				<div className="hc-bottom mt-15 grid grid-cols-1 lg:grid-cols-2 gap-y-5 ">
-					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:min-w-[500px] xl:w-[600px]  mx-auto">
+					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:min-w-125 xl:w-165  mx-auto">
 						{/* icon placeholder */}
 						<div className="w-17 h-14 mx-auto mb-4  rounded-lg ">
 							<Image
@@ -39,7 +39,7 @@ function Homeinfo() {
 							خریداری کنند.
 						</p>
 					</div>
-					<div className=" rounded-xl bg-white shadow-md p-8 text-center w-1/2 md:w-[500px] xl:w-[600px]  mx-auto">
+					<div className=" rounded-xl bg-white shadow-md p-8 text-center w-1/2 md:w-125 xl:w-165  mx-auto">
 						{/* icon placeholder */}
 						<div className="w-17 h-10 mx-auto mb-4  rounded-lg flex items-center justify-center">
 							<Image
@@ -60,7 +60,7 @@ function Homeinfo() {
 							راحت لذت ببرید.
 						</p>
 					</div>
-					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-[500px] xl:w-[600px]  mx-auto">
+					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-125 xl:w-165  mx-auto">
 						{/* icon placeholder */}
 						<div className="w-17 h-14 mx-auto mb-4  rounded-lg flex items-center justify-center">
 							<Image
@@ -80,7 +80,7 @@ function Homeinfo() {
 							خود را بدون واسطه به مشتریان عرضه می‌کند.
 						</p>
 					</div>
-					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-[500px] xl:w-[600px]  mx-auto">
+					<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-125 xl:w-165  mx-auto">
 						{/* icon placeholder */}
 						<div className="w-17 h-14 mx-auto mb-4  rounded-lg flex items-center justify-center">
 							<Image
