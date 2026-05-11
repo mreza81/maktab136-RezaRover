@@ -7,13 +7,13 @@ function HomeBrands() {
 			<div className="text-primary text-2xl md:text-4xl lg:text-5xl font-bold">
 				برندهای ما
 			</div>
-			<div className="grid grid-cols-2 gap-x-7  md:grid-cols-9  xl:gap-x-14  p-2">
+			<div className="grid grid-cols-2  gap-x-7  md:grid-cols-4 lg:grid-cols-9  xl:gap-x-22  p-2">
 				<Image
 					src="/assets/images/BMW_logo_gray.svg.png"
 					alt="Bmw"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer "
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 
 				<Image
@@ -21,35 +21,35 @@ function HomeBrands() {
 					alt="Porsche"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/Maserati512x512-min-300x300.png"
 					alt="maserati"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/هیوندا.png"
 					alt="hyundai"
 					width={90}
 					height={110}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/560x560.webp"
 					alt="nissan"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/kia.png"
 					alt="kia"
 					width={100}
 					height={110}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 
 				<Image
@@ -57,21 +57,21 @@ function HomeBrands() {
 					alt="toyota"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/lexus.png"
 					alt="lexus"
 					width={80}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/Mercedes-logo.svg.png"
 					alt="Benz"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 			</div>
 		</div>

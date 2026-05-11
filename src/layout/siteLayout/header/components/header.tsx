@@ -3,7 +3,7 @@ import MobileMenu from "./mobileMenu";
 
 function Header() {
 	return (
-		<header className="relative z-50 w-full">
+		<header className="relative z-50 max-w-full md:mx-10 lg:mx-10 xl:mx-27">
 			<div className="absolute top-0 left-0 right-0 h-24 ">
 				<div className="w-full flex items-center justify-between pt-3 px-4 sm:px-6 lg:px-12 xl:px-16  ">
 					<div className="flex items-center gap-6 lg:gap-6 xl:gap-8 ">
