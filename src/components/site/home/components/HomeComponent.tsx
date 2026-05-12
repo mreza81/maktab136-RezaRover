@@ -1,6 +1,7 @@
 import HomeBrands from "./HomeBrands";
 import HomeHead from "./HomeHead";
 import Homeinfo from "./Homeinfo";
+import HomeSwiperBenz from "./HomeSwiperBenz";
 
 function HomeComponent() {
 	return (
@@ -8,6 +9,7 @@ function HomeComponent() {
 			<HomeHead />
 			<Homeinfo />
 			<HomeBrands />
+			<HomeSwiperBenz />
 		</div>
 	);
 }
