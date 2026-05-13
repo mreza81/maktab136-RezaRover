@@ -2,6 +2,7 @@ import HomeBrands from "./HomeBrands";
 import HomeHead from "./HomeHead";
 import Homeinfo from "./Homeinfo";
 import HomeSwiperBenz from "./HomeSwiperBenz";
+import HomeSwiperBmw from "./HomeSwiperBmw";
 
 function HomeComponent() {
 	return (
@@ -10,6 +11,7 @@ function HomeComponent() {
 			<Homeinfo />
 			<HomeBrands />
 			<HomeSwiperBenz />
+			<HomeSwiperBmw />
 		</div>
 	);
 }

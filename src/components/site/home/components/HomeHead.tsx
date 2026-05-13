@@ -32,7 +32,7 @@ function HomeHead() {
 							بزرگترین وارد کننده خودروهای خارجی
 						</p>
 
-						<p className="mb-6 text-base lg:text-lg xl:text-xl opacity-90">
+						<p className="mb-6 mt-4 text-base lg:text-lg xl:text-xl opacity-90">
 							بعد از ۷ سال برای اولین بار در ایران
 						</p>
 
