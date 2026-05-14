@@ -6,13 +6,13 @@ import HomeSwiperBmw from "./HomeSwiperBmw";
 
 function HomeComponent() {
 	return (
-		<div>
+		<>
 			<HomeHead />
 			<Homeinfo />
 			<HomeBrands />
 			<HomeSwiperBenz />
 			<HomeSwiperBmw />
-		</div>
+		</>
 	);
 }
 

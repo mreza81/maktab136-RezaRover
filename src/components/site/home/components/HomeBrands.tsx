@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function HomeBrands() {
 	return (
-		<div className="flex flex-col items-center justify-center gap-16 my-10 ">
+		<div className="flex flex-col items-center justify-center gap-16 my-10 px-5">
 			<div className="text-primary text-2xl md:text-4xl lg:text-5xl font-bold">
 				برندهای ما
 			</div>

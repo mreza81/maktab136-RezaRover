@@ -11,7 +11,7 @@ function MobileMenu() {
 			<img
 				src="/assets/images/menu.png"
 				alt="menu"
-				className="w-10 h-10 cursor-pointer hover:scale-110 transition"
+				className="w-10 h-10 cursor-pointer hover:scale-110 transition lg:hidden"
 				onClick={() => setOpen(true)}
 			/>
 

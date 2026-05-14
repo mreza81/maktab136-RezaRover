@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use(
 			try {
 				const refreshToken = Cookies.get("refresh-token");
 
-				const res = await axios.post(`${BASE_URL}/api/auth/refresh`, {
+				const res = await axios.post(`${BASE_URL}/api/auth/refresh-token`, {
 					refreshToken,
 				});
 
@@ -60,11 +60,13 @@ axiosInstance.interceptors.response.use(
 				Cookies.remove("access-token");
 				Cookies.remove("refresh-token");
 				const currentPath = window.location.pathname;
-				if (currentPath.startsWith("/admin")) {
-					window.location.href = "/admin/MhdDgh1381/login";
-				} else {
-					window.location.href = "/login";
-				}
+
+				// if (currentPath.startsWith("/admin")) {
+				// 	console.log("jjjj");
+				// 	window.location.href = "/admin/MhdDgh1381/login";
+				// } else {
+				// 	window.location.href = "/login";
+				// }
 
 				return Promise.reject(err);
 			}
