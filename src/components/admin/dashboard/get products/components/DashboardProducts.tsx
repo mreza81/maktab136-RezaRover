@@ -1,12 +1,11 @@
 "use client";
 import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
-import { useDebounce } from "use-debounce";
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 import { useAdminGetProducts } from "../hooks/useAdminGetProducts";
-import ProductTable from "./productTable";
 import AddProductModalUI from "./AddProductModal";
-import EditProductPage from "./EditProductModal";
+import ProductTable from "./productTable";
 
 function DashboardProducts() {
 	const [page, setPage] = useState(1);
@@ -74,72 +73,73 @@ function DashboardProducts() {
 							<div className="text-2xl font-semibold  ">+</div>
 						</div>
 					</div>
+					<div className="w-full flex flex-col rounded-xl overflow-hidden">
+						<ProductTable
+							error={error}
+							isLoading={isLoading}
+							data={data}
+							products={products}
+						/>
+						<div className="w-full mt-4 py-3 flex justify-center bg-tertialy rounded-b-xl">
+							<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 flex-wrap">
+								<div className="flex items-center gap-2 text-sm">
+									<select
+										value={limit}
+										onChange={(e) => {
+											setLimit(Number(e.target.value));
+											setPage(1);
+										}}
+										className="border rounded border-white text-white px-2 py-1 text-sm outline-none"
+									>
+										<option className="text-black" value={10}>
+											10
+										</option>
+										<option className="text-black" value={20}>
+											20
+										</option>
+										<option className="text-black" value={50}>
+											50
+										</option>
+										<option className="text-black" value={100}>
+											100
+										</option>
+									</select>
+								</div>
 
-					<ProductTable
-						error={error}
-						isLoading={isLoading}
-						data={data}
-						products={products}
-					/>
-					<div className="w-full mt-4 py-3 flex justify-center bg-tertialy rounded-b-xl">
-						<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 flex-wrap">
-							<div className="flex items-center gap-2 text-sm">
-								<select
-									value={limit}
-									onChange={(e) => {
-										setLimit(Number(e.target.value));
-										setPage(1);
-									}}
-									className="border rounded border-white text-white px-2 py-1 text-sm outline-none"
+								<button
+									disabled={page === 1}
+									onClick={() => setPage((p) => p - 1)}
+									className="px-3 py-1 text-sm bg-gray-300 text-tertialy rounded disabled:opacity-40 hover:bg-secondry hover:text-white transition"
 								>
-									<option className="text-black" value={10}>
-										10
-									</option>
-									<option className="text-black" value={20}>
-										20
-									</option>
-									<option className="text-black" value={50}>
-										50
-									</option>
-									<option className="text-black" value={100}>
-										100
-									</option>
-								</select>
+									قبلی
+								</button>
+
+								<div className="flex gap-1 flex-wrap justify-center max-w-full overflow-x-auto">
+									{Array.from({ length: totalPages }, (_, i) => i + 1).map(
+										(p) => (
+											<button
+												key={p}
+												onClick={() => setPage(p)}
+												className={`px-3 py-1 text-sm rounded whitespace-nowrap ${
+													page === p
+														? "bg-secondry text-white"
+														: "bg-gray-300 text-black"
+												}`}
+											>
+												{p}
+											</button>
+										),
+									)}
+								</div>
+
+								<button
+									disabled={page === totalPages}
+									onClick={() => setPage((p) => p + 1)}
+									className="px-3 py-1 text-sm  bg-gray-300 text-tertialy hover:bg-secondry hover:text-white transition rounded disabled:opacity-40"
+								>
+									بعدی
+								</button>
 							</div>
-
-							<button
-								disabled={page === 1}
-								onClick={() => setPage((p) => p - 1)}
-								className="px-3 py-1 text-sm bg-gray-300 text-tertialy rounded disabled:opacity-40 hover:bg-secondry hover:text-white transition"
-							>
-								قبلی
-							</button>
-
-							<div className="flex gap-1 flex-wrap justify-center max-w-full overflow-x-auto">
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map(
-									(p) => (
-										<button
-											key={p}
-											onClick={() => setPage(p)}
-											className={`px-3 py-1 text-sm rounded whitespace-nowrap ${
-												page === p
-													? "bg-secondry text-white"
-													: "bg-gray-300 text-black"
-											}`}
-										>
-											{p}
-										</button>
-									),
-								)}
-							</div>
-
-							<button
-								disabled={page === totalPages}
-								onClick={() => setPage((p) => p + 1)}
-								className="px-3 py-1 text-sm  bg-gray-300 text-tertialy hover:bg-secondry hover:text-white transition rounded disabled:opacity-40"
-							>
-								بعدی
-							</button>
 						</div>
 					</div>
 				</div>

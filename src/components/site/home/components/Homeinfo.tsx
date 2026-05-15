@@ -101,7 +101,7 @@ function Homeinfo() {
 								سفارشی آن را فراهم می‌کنیم.
 							</p>
 						</div>
-						<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-125 lg:w-105 xl:w-auto mx-auto ">
+						<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-125 lg:w-115 xl:w-auto mx-auto ">
 							{/* icon placeholder */}
 							<div className="w-17 h-14 mx-auto mb-4  rounded-lg flex items-center justify-center">
 								<Image

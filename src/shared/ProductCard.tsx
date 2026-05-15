@@ -12,7 +12,7 @@ function ProductCard({ item, type }: ProductCartType) {
 				<img
 					src={`${BASE_URL}${item.images?.[0]}`}
 					alt={item.name}
-					className="w-60 h-45 md:w-100 md:h-60 lg:w-full lg:h-60  xl:h-70 object-fill rounded-2xl bg-gray-100 p-3 shadow-sm"
+					className="w-60 h-45 md:w-100 md:h-60 lg:w-full lg:h-60  xl:h-70 object-cover rounded-2xl bg-gray-100 p-3 shadow-sm"
 				/>
 			</div>
 
@@ -37,7 +37,7 @@ function ProductCard({ item, type }: ProductCartType) {
 					<span className="text-gray-500 text-sm">قیمت</span>
 
 					<span className="font-black text-violet-700 text-base lg:text-xl">
-						{item.price}$
+						{item.price.toLocaleString("fa-ir")}$
 					</span>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ function Header() {
 
 						<nav className="hidden lg:flex items-center lg:gap-4  xl:gap-10 text-[18px] font-semibold text-white">
 							<ActiveLink href="/">صفحه اصلی</ActiveLink>
-							<ActiveLink href="/cart">لیست سفارشات</ActiveLink>
+							<ActiveLink href="/cart">صفحه محصولات</ActiveLink>
 							<ActiveLink href="/about-us">درباره ما</ActiveLink>
 							<ActiveLink href="/contact-us">ارتباط با ما</ActiveLink>
 						</nav>
@@ -37,6 +37,14 @@ function Header() {
 								className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 opacity-90"
 							/>
 						</div>
+					</div>
+
+					<div className="flex items-center mr-6">
+						<img
+							src="/assets/images/shopping-cart.svg"
+							alt="shop"
+							className="hidden lg:block lg:w-10 lg:h-10 xl:w-12 xl:h-12 cursor-pointer hover:scale-110 transition duration-300"
+						/>
 					</div>
 
 					<div className="flex items-center mr-6">
