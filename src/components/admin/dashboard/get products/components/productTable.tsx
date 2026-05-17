@@ -90,7 +90,7 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 											<img
 												src={`${BASE_URL}${item.images?.[0]}`}
 												alt="عکس"
-												className="w-16 h-16 object-cover rounded-lg shadow-md"
+												className="w-23 h-20 object-cover rounded-lg shadow-md"
 											/>
 										</div>
 									</td>

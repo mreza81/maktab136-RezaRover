@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { addProductScheema, AddProductScheemaType } from "@/scheema/addProduct";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { handleAddProduct } from "../services/addProduct.service";
+import { toast } from "react-toastify";
 
 export default function AddProductModalUI({
 	openAddModal,
@@ -9,6 +13,24 @@ export default function AddProductModalUI({
 	openAddModal: boolean;
 	setOpenAddModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+	const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm<AddProductScheemaType>({
+		resolver: zodResolver(addProductScheema),
+	});
+	const submit = async (data: AddProductScheemaType) => {
+		try {
+			const res = await handleAddProduct(data);
+			if (res) {
+				toast.success("محصول با موفقیت اضافه شد");
+			}
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	};
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
 			<div className="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-lg bg-[#0d1b2a] p-6 shadow-xl text-white">
@@ -98,7 +120,10 @@ export default function AddProductModalUI({
 						انصراف
 					</button>
 
-					<button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md">
+					<button
+						className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md"
+						onClick={handleSubmit(submit)}
+					>
 						افزودن محصول
 					</button>
 				</div>

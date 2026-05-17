@@ -12,9 +12,6 @@ import {
 } from "@/scheema/adminLogin";
 
 function AdminLoginComponent() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-
 	const router = useRouter();
 	const {
 		register,

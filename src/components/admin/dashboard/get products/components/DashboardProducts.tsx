@@ -70,7 +70,7 @@ function DashboardProducts() {
 								اضافه کردن محصول
 							</div>
 							<div className="text-2xl font-semibold  hidden xl:block">|</div>
-							<div className="text-2xl font-semibold  ">+</div>
+							<div className="text-2xl font-semibold mt-1  ">+</div>
 						</div>
 					</div>
 					<div className="w-full flex flex-col rounded-xl overflow-hidden">
