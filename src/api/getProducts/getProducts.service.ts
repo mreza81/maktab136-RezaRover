@@ -14,7 +14,7 @@ export async function getProducts(
 			`${BASE_URL}/api/products?brand=${brand}&page=${page}&limit=${limit}&category=${category}&search=${search}`,
 		);
 		const data = res.data;
-		console.log(data.data);
+
 		return data;
 	} catch (error) {
 		throw error;

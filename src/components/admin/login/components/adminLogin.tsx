@@ -43,6 +43,7 @@ function AdminLoginComponent() {
 					<img
 						src={"/assets/images/935d21a7-0654-4363-a829-60c639fa0ce9.png"}
 						className="w-30 "
+						alt="rezarover"
 					/>
 				</div>
 				<h1 className="text-2xl font-semibold text-white text-center">

@@ -1,10 +1,11 @@
 "use client";
 
 import { addProductScheema, AddProductScheemaType } from "@/scheema/addProduct";
+import ProductEditor from "@/shared/TextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { handleAddProduct } from "../services/addProduct.service";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { handleAddProduct } from "../services/addProduct.service";
 
 export default function AddProductModalUI({
 	openAddModal,
@@ -20,6 +21,15 @@ export default function AddProductModalUI({
 		formState: { errors },
 	} = useForm<AddProductScheemaType>({
 		resolver: zodResolver(addProductScheema),
+		defaultValues: {
+			name: "",
+			description: "",
+			price: 0,
+			stock: 0,
+			category: "",
+			brand: "",
+			images: [],
+		},
 	});
 	const submit = async (data: AddProductScheemaType) => {
 		try {
@@ -38,42 +48,49 @@ export default function AddProductModalUI({
 					افزودن محصول جدید
 				</h2>
 
-				<div className="space-y-4">
+				<div className="space-y-7">
 					<div>
 						<label className="block mb-1 text-sm">نام محصول</label>
 						<input
-							type="text"
+							type="name"
+							{...register("name")}
 							className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 							placeholder="نام محصول"
 						/>
-					</div>
-
-					<div>
-						<label className="block mb-1 text-sm">توضیحات</label>
-						<textarea
-							rows={3}
-							className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-							placeholder="توضیحات محصول"
-						/>
+						{errors.name && (
+							<p className="text-red-400 text-xs mt-1">{errors.name.message}</p>
+						)}
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label className="block mb-1 text-sm">قیمت</label>
 							<input
-								type="text"
+								type="number"
+								{...register("price", { valueAsNumber: true })}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="قیمت"
 							/>
+							{errors.price && (
+								<p className="text-red-400 text-xs mt-1">
+									{errors.price.message}
+								</p>
+							)}
 						</div>
 
 						<div>
 							<label className="block mb-1 text-sm">موجودی</label>
 							<input
-								type="text"
+								type="number"
+								{...register("stock", { valueAsNumber: true })}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="موجودی"
 							/>
+							{errors.stock && (
+								<p className="text-red-400 text-xs mt-1">
+									{errors.stock.message}
+								</p>
+							)}
 						</div>
 					</div>
 
@@ -81,20 +98,61 @@ export default function AddProductModalUI({
 						<div>
 							<label className="block mb-1 text-sm">برند</label>
 							<input
-								type="text"
+								type="brand"
+								{...register("brand")}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="برند"
 							/>
+							{errors.brand && (
+								<p className="text-red-400 text-xs mt-1">
+									{errors.brand.message}
+								</p>
+							)}
 						</div>
 
 						<div>
 							<label className="block mb-1 text-sm">دسته بندی</label>
-							<input
-								type="text"
+
+							<select
+								{...register("category")}
+								defaultValue="" // پیشفرض خالی
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-								placeholder="دسته بندی"
-							/>
+							>
+								<option value="" disabled>
+									یک دسته‌بندی انتخاب کنید
+								</option>
+								<option value="sedan">سدان</option>
+								<option value="convertible">کانورتیبل</option>
+								<option value="coupe">کوپه</option>
+								<option value="suv">شاسی بلند</option>
+							</select>
+
+							{errors.category && (
+								<p className="text-red-400 text-xs mt-1">
+									{errors.category.message}
+								</p>
+							)}
 						</div>
+					</div>
+
+					<div>
+						<label className="block mb-1 text-sm">توضیحات</label>
+
+						<Controller
+							name="description"
+							control={control}
+							render={({ field }) => (
+								<ProductEditor
+									value={field.value || ""}
+									onChange={field.onChange}
+								/>
+							)}
+						/>
+						{errors.description && (
+							<p className="text-red-400 text-xs mt-1">
+								{errors.description.message}
+							</p>
+						)}
 					</div>
 
 					<div>

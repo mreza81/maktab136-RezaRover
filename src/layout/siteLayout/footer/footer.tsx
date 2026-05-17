@@ -4,11 +4,6 @@ function Footer() {
 			<div className="w-full max-w-7xl flex flex-col gap-14">
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 					<div className="flex flex-col gap-2 max-w-md">
-						{/* <img
-							src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
-							alt="logo"
-							className="w-15 object-contain"
-						/> */}
 						<h3 className="text-white text-xl font-semibold">رضاروور</h3>
 
 						<p className="text-white/80 leading-7 text-sm md:text-base">
@@ -25,21 +20,33 @@ function Footer() {
 						</h3>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تهران، سعادت آباد، میدان کاج، برج پایدار، واحد 702
 							</p>
 						</div>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تبریز، ولیعصر، فلکه همافر، جنب داروخانه سیب
 							</p>
 						</div>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تهران، خیابان اندرزگو، نبش میدان اندرزگو
 							</p>
