@@ -3,11 +3,11 @@
 import { addProductScheema, AddProductScheemaType } from "@/scheema/addProduct";
 import ProductEditor from "@/shared/TextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { handleAddProduct } from "../services/addProduct.service";
-import { useQueryClient } from "@tanstack/react-query";
 
 export default function AddProductModalUI({
 	openAddModal,
@@ -21,6 +21,7 @@ export default function AddProductModalUI({
 		handleSubmit,
 		control,
 		setValue,
+		getValues,
 		formState: { errors },
 	} = useForm<AddProductScheemaType>({
 		resolver: zodResolver(addProductScheema),
@@ -79,15 +80,25 @@ export default function AddProductModalUI({
 		const files = e.target.files;
 		if (!files) return;
 
-		const filesArray = Array.from(files);
+		const newFilesArray = Array.from(files); // عکس‌های جدیدی که کاربر انتخاب کرده
 
-		const imageUrls = filesArray.map((file) => URL.createObjectURL(file));
+		// 1. دریافت لیست عکس‌های قبلی که قبلاً در فرم ذخیره شده بودند
+		const previousFiles = getValues("images") || []; // استفاده از getValues برای خواندن مقادیر فعلی فرم
 
-		setUploadedImages((prev) => [...prev, ...imageUrls]);
+		// 2. ترکیب لیست قبلی با لیست جدید
+		const updatedFiles = [...previousFiles, ...newFilesArray];
 
-		setValue("images", filesArray, {
+		// 3. ذخیره لیست کامل (قبلی + جدید) در فرم
+		setValue("images", updatedFiles, {
 			shouldValidate: true,
 		});
+
+		// 4. آپدیت کردن پیش‌نمایش‌ها (که این قسمت در کد شما درست است)
+		const imageUrls = newFilesArray.map((file) => URL.createObjectURL(file));
+		setUploadedImages((prev) => [...prev, ...imageUrls]);
+
+		// 5. پاک کردن مقدار input file برای اینکه کاربر بتواند دوباره همین فایل‌ها را انتخاب کند (اگر لازم بود)
+		e.target.value = "";
 	};
 
 	const handleRemoveImage = (index: number) => {

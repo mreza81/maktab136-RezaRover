@@ -1,14 +1,37 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { deleteProduct } from "../services/deleteProduct.service";
+
 export default function DeleteProductModal({
 	openDeleteModal,
 	setOpenDeleteModal,
-	onConfirm,
+	productId,
+	setProductId,
 }: {
 	openDeleteModal: boolean;
 	setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-	onConfirm?: () => void;
+
+	productId: string;
+	setProductId: React.Dispatch<React.SetStateAction<string>>;
 }) {
+	const queryClient = useQueryClient();
+	const handleDeleteProduct = async (productId: string) => {
+		try {
+			const res = await deleteProduct(productId);
+			if (res) {
+				toast.success("محصول با موفقیت حذف شد");
+				queryClient.invalidateQueries({ queryKey: ["products"] });
+
+				setOpenDeleteModal(false);
+			}
+		} catch (error: any) {
+			toast.error("خطا در حذف محصول");
+			setOpenDeleteModal(false);
+		}
+	};
+
 	if (!openDeleteModal) return null;
 
 	return (
@@ -28,7 +51,14 @@ export default function DeleteProductModal({
 						انصراف
 					</button>
 
-					<button className="px-4 py-2 bg-red-600 rounded-md">حذف محصول</button>
+					<button
+						className="px-4 py-2 bg-red-600 rounded-md"
+						onClick={() => {
+							handleDeleteProduct(productId);
+						}}
+					>
+						حذف محصول
+					</button>
 				</div>
 			</div>
 		</div>

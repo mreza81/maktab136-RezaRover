@@ -6,7 +6,7 @@ export async function handleAddProduct(data: FormData) {
 	try {
 		const res = await axiosInstance.post("/api/products", data);
 		const resData = res.data;
-		console.log(data);
+
 		return resData;
 	} catch (error: any) {
 		throw new Error(error.response.data.message); // پیام خطای بک‌اند

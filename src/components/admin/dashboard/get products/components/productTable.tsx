@@ -3,7 +3,7 @@ import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
 import Loading from "@/shared/loading";
 import { ProductType } from "@/types/productTypeAndOrders";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditProductPage from "./EditProductModal";
 import DeleteProductModal from "./DeleteModal";
 interface ProductTableProps {
@@ -16,6 +16,10 @@ interface ProductTableProps {
 function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	const [openEdditModal, setOpenEdditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [productId, setProductId] = useState("");
+	// useEffect(() => {
+	// 	console.log("آیدی جدید ذخیره شد:", productId);
+	// }, [productId]);
 
 	return (
 		<>
@@ -30,6 +34,8 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 				<DeleteProductModal
 					openDeleteModal={openDeleteModal}
 					setOpenDeleteModal={setOpenDeleteModal}
+					productId={productId}
+					setProductId={setProductId}
 				/>
 			)}
 			<div
@@ -125,6 +131,7 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 												className="w-8 h-8 object-contain hover:cursor-pointer"
 												onClick={() => {
 													setOpenDeleteModal(true);
+													setProductId(item._id);
 												}}
 											/>
 										</div>
