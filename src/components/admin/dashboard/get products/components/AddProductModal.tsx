@@ -3,9 +3,11 @@
 import { addProductScheema, AddProductScheemaType } from "@/scheema/addProduct";
 import ProductEditor from "@/shared/TextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { handleAddProduct } from "../services/addProduct.service";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function AddProductModalUI({
 	openAddModal,
@@ -18,6 +20,7 @@ export default function AddProductModalUI({
 		register,
 		handleSubmit,
 		control,
+		setValue,
 		formState: { errors },
 	} = useForm<AddProductScheemaType>({
 		resolver: zodResolver(addProductScheema),
@@ -31,16 +34,81 @@ export default function AddProductModalUI({
 			images: [],
 		},
 	});
+
+	const queryClient = useQueryClient();
+
 	const submit = async (data: AddProductScheemaType) => {
 		try {
-			const res = await handleAddProduct(data);
+			// ایجاد شیء FormData برای ارسال فایل و متن با هم
+			const formData = new FormData();
+
+			// اضافه کردن فیلدهای متنی
+			formData.append("name", data.name);
+			formData.append("description", data.description);
+			formData.append("price", String(data.price));
+			formData.append("stock", String(data.stock));
+			formData.append("category", data.category);
+			formData.append("brand", data.brand);
+
+			// اضافه کردن عکس‌ها
+			if (data.images && data.images.length > 0) {
+				data.images.forEach((file) => {
+					formData.append("images", file); // مطمئن شو بک‌انر هم همین نام images را می‌خواند
+				});
+			}
+
+			// ارسال formData به جای data
+			const res = await handleAddProduct(formData);
+
 			if (res) {
 				toast.success("محصول با موفقیت اضافه شد");
+				queryClient.invalidateQueries({ queryKey: ["products"] });
+				setOpenAddModal(false); // بستن مودال بعد از موفقیت
 			}
 		} catch (error: any) {
-			toast.error(error.message);
+			// حل مشکل خطای Cannot read properties of undefined (reading 'data')
+			const message =
+				error.response?.data?.message || error.message || "خطایی رخ داد";
+			toast.error(message);
 		}
 	};
+	const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+	const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+		if (!files) return;
+
+		const filesArray = Array.from(files);
+
+		const imageUrls = filesArray.map((file) => URL.createObjectURL(file));
+
+		setUploadedImages((prev) => [...prev, ...imageUrls]);
+
+		setValue("images", filesArray, {
+			shouldValidate: true,
+		});
+	};
+
+	const handleRemoveImage = (index: number) => {
+		if (!fileInputRef.current) return;
+
+		const files = Array.from(fileInputRef.current.files || []);
+
+		const updatedFiles = files.filter((_, i) => i !== index);
+
+		const dataTransfer = new DataTransfer();
+		updatedFiles.forEach((file) => dataTransfer.items.add(file));
+
+		fileInputRef.current.files = dataTransfer.files;
+
+		setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+
+		setValue("images", updatedFiles, {
+			shouldValidate: true,
+		});
+	};
+
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
 			<div className="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-lg bg-[#0d1b2a] p-6 shadow-xl text-white">
@@ -48,8 +116,8 @@ export default function AddProductModalUI({
 					افزودن محصول جدید
 				</h2>
 
-				<div className="space-y-7">
-					<div>
+				<div className="space-y-10">
+					<div className="relative">
 						<label className="block mb-1 text-sm">نام محصول</label>
 						<input
 							type="name"
@@ -58,36 +126,50 @@ export default function AddProductModalUI({
 							placeholder="نام محصول"
 						/>
 						{errors.name && (
-							<p className="text-red-400 text-xs mt-1">{errors.name.message}</p>
+							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								{errors.name.message}
+							</p>
 						)}
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
+						<div className="relative">
 							<label className="block mb-1 text-sm">قیمت</label>
 							<input
 								type="number"
 								{...register("price", { valueAsNumber: true })}
-								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500 "
 								placeholder="قیمت"
+								onInput={(e: React.FormEvent<HTMLInputElement>) => {
+									const input = e.currentTarget; // استفاده از currentTarget به جای target
+									if (input.value.length > 1 && input.value.startsWith("0")) {
+										input.value = input.value.replace(/^0+/, "");
+									}
+								}}
 							/>
 							{errors.price && (
-								<p className="text-red-400 text-xs mt-1">
+								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
 									{errors.price.message}
 								</p>
 							)}
 						</div>
 
-						<div>
+						<div className="relative">
 							<label className="block mb-1 text-sm">موجودی</label>
 							<input
 								type="number"
 								{...register("stock", { valueAsNumber: true })}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="موجودی"
+								onInput={(e: React.FormEvent<HTMLInputElement>) => {
+									const input = e.currentTarget; // استفاده از currentTarget به جای target
+									if (input.value.length > 1 && input.value.startsWith("0")) {
+										input.value = input.value.replace(/^0+/, "");
+									}
+								}}
 							/>
 							{errors.stock && (
-								<p className="text-red-400 text-xs mt-1">
+								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
 									{errors.stock.message}
 								</p>
 							)}
@@ -95,7 +177,7 @@ export default function AddProductModalUI({
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
+						<div className="relative">
 							<label className="block mb-1 text-sm">برند</label>
 							<input
 								type="brand"
@@ -104,13 +186,13 @@ export default function AddProductModalUI({
 								placeholder="برند"
 							/>
 							{errors.brand && (
-								<p className="text-red-400 text-xs mt-1">
+								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
 									{errors.brand.message}
 								</p>
 							)}
 						</div>
 
-						<div>
+						<div className="relative">
 							<label className="block mb-1 text-sm">دسته بندی</label>
 
 							<select
@@ -121,21 +203,21 @@ export default function AddProductModalUI({
 								<option value="" disabled>
 									یک دسته‌بندی انتخاب کنید
 								</option>
-								<option value="sedan">سدان</option>
-								<option value="convertible">کانورتیبل</option>
-								<option value="coupe">کوپه</option>
-								<option value="suv">شاسی بلند</option>
+								<option value="سدان">سدان</option>
+								<option value="کانورتیبل">کانورتیبل</option>
+								<option value="کوپه">کوپه</option>
+								<option value="شاسی بلند">شاسی بلند</option>
 							</select>
 
 							{errors.category && (
-								<p className="text-red-400 text-xs mt-1">
+								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
 									{errors.category.message}
 								</p>
 							)}
 						</div>
 					</div>
 
-					<div>
+					<div className="relative">
 						<label className="block mb-1 text-sm">توضیحات</label>
 
 						<Controller
@@ -144,28 +226,75 @@ export default function AddProductModalUI({
 							render={({ field }) => (
 								<ProductEditor
 									value={field.value || ""}
-									onChange={field.onChange}
+									onChange={(value) => {
+										setValue("description", value, {
+											shouldValidate: true,
+											shouldDirty: true,
+										});
+									}}
 								/>
 							)}
 						/>
 						{errors.description && (
-							<p className="text-red-400 text-xs mt-1">
+							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
 								{errors.description.message}
 							</p>
 						)}
 					</div>
 
 					<div>
-						<label className="block mb-1 text-sm">تصاویر محصول</label>
+						<div className="relative">
+							<input
+								type="file"
+								multiple
+								ref={fileInputRef}
+								onChange={handleImageChange}
+								className=" w-full
+    text-sm
+    text-gray-300
+    bg-[#1b263b]
+    border border-gray-600
+    rounded-lg
+    cursor-pointer
+    file:mr-4
+    file:py-2
+    file:px-4
+    file:rounded-md
+    file:border-0
+    file:text-sm
+    file:font-medium
+    file:bg-blue-600
+    file:text-white
+    hover:file:bg-blue-700"
+							/>
 
-						<div className="border border-dashed border-gray-500 bg-[#1b263b] rounded-md p-6 text-center text-gray-400 cursor-pointer">
-							انتخاب تصاویر
+							{errors.images && (
+								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									{errors.images.message}
+								</p>
+							)}
 						</div>
 
-						<div className="flex gap-2 mt-3">
-							<div className="w-14 h-14 bg-[#1b263b] rounded"></div>
-							<div className="w-14 h-14 bg-[#1b263b] rounded"></div>
-							<div className="w-14 h-14 bg-[#1b263b] rounded"></div>
+						<div className="flex flex-wrap gap-3 mt-3">
+							{uploadedImages.map((img, index) => (
+								<div
+									key={index}
+									className="w-20 h-20 rounded-md overflow-hidden border border-gray-600 relative"
+								>
+									<img
+										src={img}
+										alt="preview"
+										className="w-full h-full object-cover"
+									/>
+									<button
+										type="button"
+										onClick={() => handleRemoveImage(index)}
+										className="absolute top-0 right-0 bg-red-600 text-white text-xs px-1 rounded-bl"
+									>
+										✕
+									</button>
+								</div>
+							))}
 						</div>
 					</div>
 				</div>
