@@ -28,7 +28,7 @@ function Header() {
 							<input
 								type="text"
 								placeholder="جستجو در خودروها..."
-								className="w-full h-12 lg:h-14 pr-12 pl-5 text-sm sm:text-base lg:text-lg rounded-2xl border border-white/40 bg-transparent text-white placeholder-white/70 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/30 transition-all duration-300"
+								className="w-full h-12 lg:h-13 pr-12 pl-5 text-sm sm:text-base lg:text-lg rounded-2xl border border-white/40 bg-transparent text-white placeholder-white/70 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/30 transition-all duration-300"
 							/>
 
 							<img
@@ -43,7 +43,7 @@ function Header() {
 						<img
 							src="/assets/images/shopping-cart.svg"
 							alt="shop"
-							className="hidden lg:block lg:w-10 lg:h-10 xl:w-12 xl:h-12 cursor-pointer hover:scale-110 transition duration-300"
+							className="hidden lg:block lg:w-10 lg:h-10 xl:w-11 xl:h-11 cursor-pointer hover:scale-110 transition duration-300"
 						/>
 					</div>
 
@@ -51,7 +51,7 @@ function Header() {
 						<img
 							src="/assets/images/account-user-person-round (1).png"
 							alt="account"
-							className="w-12 h-12 xl:w-15 xl:h-15 cursor-pointer hover:scale-110 transition duration-300"
+							className="w-12 h-12 xl:w-14 xl:h-14 cursor-pointer hover:scale-110 transition duration-300"
 						/>
 					</div>
 				</div>

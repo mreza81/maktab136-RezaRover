@@ -17,7 +17,9 @@ export async function handleAdminLogin(user: User) {
 		Cookies.set("refresh-token", data.data.refreshToken, {
 			expires: 7,
 		});
-		Cookies.set("role", data.data.user.role);
+		Cookies.set("role", data.data.user.role, {
+			expires: 7,
+		});
 		return res.data;
 	} catch (error: any) {
 		if (error.response) {

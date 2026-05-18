@@ -25,9 +25,11 @@ export default function DeleteProductModal({
 				queryClient.invalidateQueries({ queryKey: ["products"] });
 
 				setOpenDeleteModal(false);
+				setProductId("");
 			}
 		} catch (error: any) {
 			toast.error("خطا در حذف محصول");
+
 			setOpenDeleteModal(false);
 		}
 	};

@@ -27,6 +27,8 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 				<EditProductPage
 					openEdditModal={openEdditModal}
 					setOpenEdditModal={setOpenEdditModal}
+					productId={productId}
+					setProductId={setProductId}
 				/>
 			)}
 
@@ -120,9 +122,10 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 											<img
 												src="/assets/images/pen3.png"
 												alt="ادیت"
-												className="w-8 h-8 object-contain hover:cursor-pointer"
+												className="w-8 h-8 object-contain hover:cursor-pointer mt-1"
 												onClick={() => {
 													setOpenEdditModal(true);
+													setProductId(item._id);
 												}}
 											/>
 											<img
