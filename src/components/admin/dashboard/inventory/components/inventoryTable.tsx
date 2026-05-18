@@ -4,6 +4,7 @@ import Loading from "@/shared/loading";
 import { ProductType } from "@/types/productTypeAndOrders";
 
 import { useState } from "react";
+import EditModal from "./editPriceAndStockModal";
 interface ProductTableProps {
 	error: any;
 	isLoading: boolean;
@@ -17,6 +18,9 @@ function InventoryTable({
 	data,
 	products,
 }: ProductTableProps) {
+	const [openEdditModal, setOpenEdditModal] = useState(false);
+	const [productId, setProductId] = useState("");
+
 	return (
 		<div
 			className={`table-div mt-4  w-full h-full max-h-full  bg-tertialy px-3   overflow-y-auto lg:overflow-x-hidden   ${error && "flex justify-center items-center bg-tertialy/70"} ${isLoading && "bg-tertialy/30 flex justify-center items-center"} vertical-scroll-rtl width-scroll
@@ -65,6 +69,10 @@ function InventoryTable({
 							<tr
 								key={item._id}
 								className="bg-[#2A3B55] hover:bg-[#32466A] transition-colors group"
+								onDoubleClick={() => {
+									setProductId(item._id);
+									setOpenEdditModal(true);
+								}}
 							>
 								<td className="p-4 text-white rounded-r-xl whitespace-nowrap">
 									{index + 1}
@@ -98,6 +106,14 @@ function InventoryTable({
 					</tbody>
 					<tfoot></tfoot>
 				</table>
+			)}
+			{openEdditModal && (
+				<EditModal
+					openEdditModal={openEdditModal}
+					setOpenEdditModal={setOpenEdditModal}
+					productId={productId}
+					setProductId={setProductId}
+				/>
 			)}
 		</div>
 	);
