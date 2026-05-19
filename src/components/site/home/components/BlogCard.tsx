@@ -8,7 +8,7 @@ function BlogCard({
 	href: string;
 }) {
 	return (
-		<div className="bg-[#f5eaff] rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 ">
+		<div className="bg-[#f5eaff] rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300  flex flex-col justify-center items-center">
 			<div className="mb-4">
 				<img
 					src={image}
@@ -23,7 +23,7 @@ function BlogCard({
 
 			<div className="text-right">
 				<a href={href}>
-					<button className="bg-[#6b21a8] hover:bg-purple-800 text-white text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-lg transition">
+					<button className="bg-[#6b21a8] hover:bg-white text-white hover:text-secondry transition-colors hover:cursor-pointer duration-300 text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-lg ">
 						ادامه مطلب
 					</button>
 				</a>

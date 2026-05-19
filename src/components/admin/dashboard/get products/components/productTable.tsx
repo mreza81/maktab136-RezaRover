@@ -17,9 +17,6 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	const [openEdditModal, setOpenEdditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [productId, setProductId] = useState("");
-	// useEffect(() => {
-	// 	console.log("آیدی جدید ذخیره شد:", productId);
-	// }, [productId]);
 
 	return (
 		<>

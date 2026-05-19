@@ -98,7 +98,7 @@ function InventoryTable({
 									{item.category}
 								</td>
 								<td className="p-4 text-white whitespace-nowrap">
-									{item.price}
+									$ {item.price}
 								</td>
 								<td className="p-4 text-white font-mono">{item.stock}</td>
 							</tr>

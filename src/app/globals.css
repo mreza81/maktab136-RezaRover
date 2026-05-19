@@ -61,7 +61,7 @@ body {
 .login-bg {
 	background-image: url("/assets/images/nody-دانلود-عکس-مرسدس-بنز-با-بهترین-کیفیت-1721250146.webp");
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 }
 .bg-baner {
 	background-image: url("/assets/images/products/عکس-تویوتا-gr-supra.webp");

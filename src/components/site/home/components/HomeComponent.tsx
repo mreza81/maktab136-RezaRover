@@ -11,10 +11,11 @@ function HomeComponent() {
 		<>
 			<HomeHead />
 			<Homeinfo />
-			<Homebaner />
+
 			<HomeBrands />
 			<HomeSwiperBenz />
 			<HomeSwiperBmw />
+			<Homebaner />
 			<HomeSwiperWeblog />
 		</>
 	);
