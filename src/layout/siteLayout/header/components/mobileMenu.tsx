@@ -44,6 +44,7 @@ function MobileMenu() {
 
 				<nav className="flex flex-col gap-8 mt-12 px-8 text-lg font-semibold">
 					<ActiveLink href="/">صفحه اصلی</ActiveLink>
+					<ActiveLink href="/products">محصولات</ActiveLink>
 
 					<ActiveLink href="/cart">لیست سفارشات</ActiveLink>
 

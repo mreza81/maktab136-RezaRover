@@ -17,7 +17,7 @@ function Header() {
 
 						<nav className="hidden lg:flex items-center lg:gap-4  xl:gap-10 text-[18px] font-semibold text-white">
 							<ActiveLink href="/">صفحه اصلی</ActiveLink>
-							<ActiveLink href="/cart">صفحه محصولات</ActiveLink>
+							<ActiveLink href="/products"> محصولات</ActiveLink>
 							<ActiveLink href="/about-us">درباره ما</ActiveLink>
 							<ActiveLink href="/contact-us">ارتباط با ما</ActiveLink>
 						</nav>

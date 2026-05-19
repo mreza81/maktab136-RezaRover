@@ -1,7 +1,12 @@
+import Products from "@/components/site/products/components/Products";
 import React from "react";
 
 function page() {
-	return <div>products</div>;
+	return (
+		<div>
+			<Products />
+		</div>
+	);
 }
 
 export default page;
