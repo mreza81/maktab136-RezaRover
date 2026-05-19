@@ -17,6 +17,12 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	const [openEdditModal, setOpenEdditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [productId, setProductId] = useState("");
+	const [name, setName] = useState("");
+	const [brand, setBrand] = useState("");
+	const [price, setPrice] = useState(0);
+	const [stock, setStock] = useState(0);
+	const [category, setCategory] = useState("");
+	const [description, setDescription] = useState("");
 
 	return (
 		<>
@@ -26,6 +32,12 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 					setOpenEdditModal={setOpenEdditModal}
 					productId={productId}
 					setProductId={setProductId}
+					name={name}
+					brand={brand}
+					price={price}
+					stock={stock}
+					category={category}
+					description={description}
 				/>
 			)}
 
@@ -123,6 +135,12 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 												onClick={() => {
 													setOpenEdditModal(true);
 													setProductId(item._id);
+													setName(item.name);
+													setBrand(item.brand);
+													setPrice(item.price);
+													setStock(item.stock);
+													setCategory(item.category);
+													setDescription(item.description);
 												}}
 											/>
 											<img

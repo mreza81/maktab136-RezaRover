@@ -6,7 +6,7 @@ import {
 } from "@/scheema/editProduct";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { editProduct } from "../../get products/services/editProduct.service";
@@ -16,11 +16,15 @@ export default function EditModal({
 	setOpenEdditModal,
 	productId,
 	setProductId,
+	price,
+	stock,
 }: {
 	openEdditModal: boolean;
 	setOpenEdditModal: React.Dispatch<React.SetStateAction<boolean>>;
 	productId: string;
 	setProductId: React.Dispatch<React.SetStateAction<string>>;
+	price: number;
+	stock: number;
 }) {
 	const [enabled, setEnabled] = useState({
 		price: false,
@@ -30,7 +34,7 @@ export default function EditModal({
 	const {
 		register,
 		handleSubmit,
-
+		reset,
 		setError,
 
 		formState: { errors },
@@ -79,6 +83,14 @@ export default function EditModal({
 
 	if (!openEdditModal) return null;
 
+	useEffect(() => {
+		if (openEdditModal) {
+			reset({
+				price,
+				stock,
+			});
+		}
+	}, [openEdditModal, price, stock, reset]);
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
 			<div className="w-full max-w-md rounded-2xl bg-[#0d1b2a] p-6 text-white shadow-xl">
@@ -112,7 +124,7 @@ export default function EditModal({
 							}}
 						/>
 						{errors.price && enabled.price && (
-							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 								{errors.price.message}
 							</p>
 						)}
@@ -143,7 +155,7 @@ export default function EditModal({
 							}}
 						/>
 						{errors.stock && enabled.stock && (
-							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 								{errors.stock.message}
 							</p>
 						)}

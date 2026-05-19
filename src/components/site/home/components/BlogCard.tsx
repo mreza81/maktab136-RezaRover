@@ -17,15 +17,18 @@ function BlogCard({
 				/>
 			</div>
 
-			<h3 className="text-right text-sm sm:text-base md:text-lg text-gray-800 font-bold mb-4 min-h-[48px] sm:min-h-[56px] leading-7">
+			<h3 className="text-right text-sm sm:text-base md:text-lg text-gray-800 font-bold mb-4  leading-7">
 				{title}
 			</h3>
 
 			<div className="text-right">
-				<a href={href}>
-					<button className="bg-[#6b21a8] hover:bg-white text-white hover:text-secondry transition-colors hover:cursor-pointer duration-300 text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-lg ">
-						ادامه مطلب
-					</button>
+				<a
+					href={href}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="bg-[#6b21a8] hover:bg-white text-white hover:text-secondry transition-colors duration-300 text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-lg block text-center"
+				>
+					ادامه مطلب
 				</a>
 			</div>
 		</div>

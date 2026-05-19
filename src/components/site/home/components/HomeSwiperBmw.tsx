@@ -156,7 +156,7 @@ function HomeSwiperBmw() {
 									))}
 								</Swiper>
 
-								<div className="flex justify-center items-center gap-4 mt-8 lg:mt-25 flex-wrap">
+								<div className="flex justify-center items-center gap-4 mt-8 lg:mt-15 flex-wrap">
 									<button
 										ref={nextRef}
 										className="bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-violet-700/20 min-w-27.5"

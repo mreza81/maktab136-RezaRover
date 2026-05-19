@@ -7,12 +7,12 @@ type ProductCartType = {
 
 function ProductCard({ item, type }: ProductCartType) {
 	return (
-		<div className="bg-white border border-black/5 rounded-3xl p-4 lg:p-4 xl:p-5 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col gap-4 w-full min-h-90 lg:min-h-115">
-			<div className="w-full flex justify-center">
+		<div className=" bg-white border border-black/5 rounded-3xl p-4 lg:p-4 xl:p-5 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col gap-4 w-full min-h-90 lg:min-h-115">
+			<div className="group w-full flex justify-center">
 				<img
 					src={`${BASE_URL}${item.images?.[0]}`}
 					alt={item.name}
-					className="w-60 h-45 md:w-100 md:h-60 lg:w-full lg:h-60  xl:h-70 object-cover rounded-2xl bg-gray-100 p-3 shadow-sm"
+					className="w-60 h-45 md:w-100 md:h-60 lg:w-full lg:h-60  xl:h-80 object-cover rounded-2xl bg-gray-100 p-3 shadow-sm transition-transform duration-500 ease-in-out group-hover:scale-105 hover:cursor-pointer"
 				/>
 			</div>
 
@@ -49,7 +49,7 @@ function ProductCard({ item, type }: ProductCartType) {
 					<span>موجود در انبار</span>
 				</div>
 
-				<button className="bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-violet-700/20 w-full sm:w-fit text-sm">
+				<button className="bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-violet-700/20 w-full sm:w-fit text-sm hover:cursor-pointer">
 					مشاهده جزئیات
 				</button>
 			</div>
