@@ -13,7 +13,7 @@ function HomeBrands() {
 					alt="Bmw"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 
 				<Image
@@ -21,14 +21,14 @@ function HomeBrands() {
 					alt="Porsche"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/Maserati512x512-min-300x300.webp"
 					alt="maserati"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/هیوندا.webp"
@@ -42,14 +42,14 @@ function HomeBrands() {
 					alt="nissan"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/kia.webp"
 					alt="kia"
 					width={100}
 					height={110}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 
 				<Image
@@ -57,21 +57,21 @@ function HomeBrands() {
 					alt="toyota"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/lexus.webp"
 					alt="lexus"
 					width={80}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 				<Image
 					src="/assets/images/Mercedes-Logo.webp"
 					alt="Benz"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
 				/>
 			</div>
 		</div>

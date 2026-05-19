@@ -61,27 +61,13 @@ body {
 .login-bg {
 	background-image: url("/assets/images/nody-دانلود-عکس-مرسدس-بنز-با-بهترین-کیفیت-1721250146.webp");
 	background-repeat: no-repeat;
+	background-size: contain;
+}
+.bg-baner {
+	background-image: url("/assets/images/products/عکس-تویوتا-gr-supra.webp");
+	background-repeat: no-repeat;
 	background-size: cover;
 }
-
-@keyframes spinY {
-	from {
-		transform: rotateY(0deg);
-	}
-	to {
-		transform: rotateY(360deg);
-	}
-}
-
-.spin-y {
-	animation: spinY 8s linear infinite;
-	transition: transform 0.5s ease;
-}
-.spin-y:hover {
-	animation: none;
-	transform: rotateY(0deg);
-}
-
 body {
 	overflow-x: hidden;
 }

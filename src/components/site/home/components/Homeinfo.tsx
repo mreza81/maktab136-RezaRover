@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 function Homeinfo() {
@@ -18,7 +20,16 @@ function Homeinfo() {
 					</div>
 				</div>
 				<div className="w-full flex justify-center items-center">
-					<div className="hc-bottom mt-15 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 w-400 gap-x-9  ">
+					<motion.div
+						initial={{ opacity: 0, y: 60 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, amount: 0.3 }}
+						transition={{
+							duration: 1.4,
+							ease: "easeOut",
+						}}
+						className="hc-bottom mt-15 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 w-400 gap-x-9  "
+					>
 						<div className="bg-white rounded-xl shadow-md p-8 text-center  w-1/2 md:w-125 lg:w-115 xl:w-auto  mx-auto  ">
 							{/* icon placeholder */}
 							<div className="max-w-17 h-14 mx-auto mb-4  rounded-lg ">
@@ -143,7 +154,7 @@ function Homeinfo() {
 								شامل یک سال گارانتی می باشند.
 							</p>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</div>
