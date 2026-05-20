@@ -12,7 +12,7 @@ export default function Breadcrumb() {
 	const pathname = usePathname() || "/";
 	const segments = pathname.split("/").filter(Boolean);
 
-	if (segments.length === 0) return <div className="text-sm mt-5">خانه</div>;
+	if (segments.length === 0) return <div className="text-sm">خانه</div>;
 
 	return (
 		<div className="flex gap-1 text-sm md:text-md lg:text-lg mt-5 text-gray-500 ">

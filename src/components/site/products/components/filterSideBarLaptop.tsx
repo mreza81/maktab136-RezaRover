@@ -29,9 +29,9 @@ export default function FilterSidebar() {
 	const [selectedPrice, setSelectedPrice] = useState("");
 
 	const [openSections, setOpenSections] = useState({
-		body: true,
-		brand: true,
-		price: true,
+		body: false,
+		brand: false,
+		price: false,
 	});
 
 	const toggleSection = (section: "body" | "brand" | "price") => {
@@ -48,7 +48,7 @@ export default function FilterSidebar() {
 	};
 
 	return (
-		<aside className="w-full max-w-72.5 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm my-10 hidden lg:block mr-5">
+		<aside className="w-full max-w-50 xl:max-w-72.5 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm my-10 hidden lg:block mr-5 h-screen overflow-y-scroll vertical-scroll-rtl vertical-scroll-rtl-2">
 			{/* Header */}
 			<div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3">
 				<div className="flex items-center gap-2">

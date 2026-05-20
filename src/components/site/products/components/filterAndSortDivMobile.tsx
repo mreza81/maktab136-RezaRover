@@ -2,7 +2,7 @@
 
 export default function FilterAndSortDivMobile() {
 	return (
-		<div className="w-full px-5 mt-10 flex flex-col gap-4 lg:hidden ">
+		<div className="w-full px-5 mt-5 flex flex-col gap-4 lg:hidden ">
 			{/* دکمه‌ها */}
 			<div className="flex justify-between items-center">
 				{/* فیلتر */}
@@ -31,7 +31,7 @@ export default function FilterAndSortDivMobile() {
 			</div>
 
 			{/* خط جداکننده زیر دکمه‌ها */}
-			<div className="border-b border-gray-200 mt-2"></div>
+			<div className="border-b-2 border-gray-200 mt-5 "></div>
 		</div>
 	);
 }

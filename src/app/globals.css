@@ -89,6 +89,11 @@ body {
 .vertical-scroll-rtl::-webkit-scrollbar-thumb:hover {
 	background: #6b7280;
 }
+
+.vertical-scroll-rtl-2::-webkit-scrollbar-track {
+	margin-top: 10px;
+	background: white;
+}
 .bmw-swiper .swiper,
 .bmw-swiper .swiper-wrapper {
 	direction: ltr !important;
