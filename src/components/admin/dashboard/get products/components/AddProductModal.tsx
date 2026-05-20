@@ -137,7 +137,7 @@ export default function AddProductModalUI({
 							placeholder="نام محصول"
 						/>
 						{errors.name && (
-							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 								{errors.name.message}
 							</p>
 						)}
@@ -159,7 +159,7 @@ export default function AddProductModalUI({
 								}}
 							/>
 							{errors.price && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.price.message}
 								</p>
 							)}
@@ -180,7 +180,7 @@ export default function AddProductModalUI({
 								}}
 							/>
 							{errors.stock && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.stock.message}
 								</p>
 							)}
@@ -197,7 +197,7 @@ export default function AddProductModalUI({
 								placeholder="برند"
 							/>
 							{errors.brand && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.brand.message}
 								</p>
 							)}
@@ -221,7 +221,7 @@ export default function AddProductModalUI({
 							</select>
 
 							{errors.category && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.category.message}
 								</p>
 							)}
@@ -247,7 +247,7 @@ export default function AddProductModalUI({
 							)}
 						/>
 						{errors.description && (
-							<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 								{errors.description.message}
 							</p>
 						)}
@@ -280,7 +280,7 @@ export default function AddProductModalUI({
 							/>
 
 							{errors.images && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.images.message}
 								</p>
 							)}

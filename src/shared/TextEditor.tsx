@@ -1,11 +1,12 @@
 "use client";
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
-import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
+import Underline from "@tiptap/extension-underline";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { useEffect } from "react";
 
 type Props = {
 	value: string;
@@ -28,7 +29,11 @@ function ProductEditor({ value, onChange }: Props) {
 			onChange(editor.getHTML());
 		},
 	});
-
+	useEffect(() => {
+		if (editor && value !== editor.getHTML()) {
+			editor.commands.setContent(value);
+		}
+	}, [value, editor]);
 	if (!editor) return null;
 
 	// 👉 handler برای افزودن لینک

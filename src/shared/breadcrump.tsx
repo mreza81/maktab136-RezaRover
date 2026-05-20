@@ -15,7 +15,7 @@ export default function Breadcrumb() {
 	if (segments.length === 0) return <div className="text-sm mt-5">خانه</div>;
 
 	return (
-		<div className="flex gap-1 text-sm md:text-md lg:text-lg xl:text-xl mt-5 text-gray-500 ">
+		<div className="flex gap-1 text-sm md:text-md lg:text-lg mt-5 text-gray-500 ">
 			<Link href="/">خانه</Link>
 
 			{segments.map((segment, index) => {

@@ -20,6 +20,8 @@ function InventoryTable({
 }: ProductTableProps) {
 	const [openEdditModal, setOpenEdditModal] = useState(false);
 	const [productId, setProductId] = useState("");
+	const [price, setPrice] = useState(0);
+	const [stock, setStock] = useState(0);
 
 	return (
 		<div
@@ -72,6 +74,8 @@ function InventoryTable({
 								onDoubleClick={() => {
 									setProductId(item._id);
 									setOpenEdditModal(true);
+									setPrice(item.price);
+									setStock(item.stock);
 								}}
 							>
 								<td className="p-4 text-white rounded-r-xl whitespace-nowrap">
@@ -113,6 +117,8 @@ function InventoryTable({
 					setOpenEdditModal={setOpenEdditModal}
 					productId={productId}
 					setProductId={setProductId}
+					price={price}
+					stock={stock}
 				/>
 			)}
 		</div>

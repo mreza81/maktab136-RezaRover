@@ -156,17 +156,17 @@ function HomeSwiperBenz() {
 								))}
 							</Swiper>
 
-							<div className="flex justify-center items-center gap-4 mt-8 lg:mt-25 xl:mt-25 flex-wrap">
+							<div className="flex justify-center items-center gap-4 mt-8 lg:mt-15  flex-wrap">
 								<button
 									ref={prevRef}
-									className="bg-black hover:bg-neutral-800 transition-all duration-300 text-white px-5 py-2.5 rounded-xl font-semibold min-w-27.5"
+									className="bg-black hover:bg-neutral-800 transition-all duration-300 text-white px-5 py-2.5 rounded-xl font-semibold min-w-27.5 hover:cursor-pointer"
 								>
 									قبلی
 								</button>
 
 								<button
 									ref={nextRef}
-									className="bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-violet-700/20 min-w-27.5"
+									className="bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-violet-700/20 min-w-27.5 hover:cursor-pointer"
 								>
 									بعدی
 								</button>

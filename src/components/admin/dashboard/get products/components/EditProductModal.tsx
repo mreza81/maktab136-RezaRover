@@ -6,7 +6,7 @@ import {
 import ProductEditor from "@/shared/TextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { editProduct } from "../services/editProduct.service";
@@ -16,11 +16,23 @@ export default function EditProductModal({
 	setOpenEdditModal,
 	productId,
 	setProductId,
+	name,
+	brand,
+	price,
+	stock,
+	description,
+	category,
 }: {
 	openEdditModal: boolean;
 	setOpenEdditModal: React.Dispatch<React.SetStateAction<boolean>>;
 	productId: string;
 	setProductId: React.Dispatch<React.SetStateAction<string>>;
+	name: string;
+	brand: string;
+	price: number;
+	stock: number;
+	description: string;
+	category: string;
 }) {
 	const [enabled, setEnabled] = useState({
 		name: false,
@@ -31,28 +43,70 @@ export default function EditProductModal({
 		category: false,
 	});
 
+	const getPlainText = (html?: string) => {
+		if (!html) return "";
+		return html
+			.replace(/<[^>]*>/g, "")
+			.replace(/&nbsp;/g, " ")
+			.trim();
+	};
+
+	const queryClient = useQueryClient();
+
 	const {
 		register,
 		handleSubmit,
 		control,
 		setError,
 		setValue,
+		reset,
 		formState: { errors },
+		// watch, // برای دیباگ اگر خواستی
 	} = useForm<EditProductScheemaType>({
 		resolver: zodResolver(editProductScheema),
-		defaultValues: {
-			name: "",
-			description: "",
-			price: 0,
-			stock: 0,
-			category: "",
-			brand: "",
-		},
+		mode: "onChange",
 	});
-	const queryClient = useQueryClient();
+
+	// 🔍 برای دیباگ: ببین props واقعا می‌رسند یا نه
+	useEffect(() => {
+		console.log("EDIT MODAL PROPS:", {
+			openEdditModal,
+			name,
+			brand,
+			price,
+			stock,
+			category,
+			description,
+		});
+	}, [openEdditModal, name, brand, price, stock, category, description]);
+
+	// ✅ وقتی مودال باز شد، فرم را با مقادیر محصول پر کن
+	useEffect(() => {
+		if (openEdditModal) {
+			reset({
+				name,
+				brand,
+				price,
+				stock,
+				category,
+				description,
+			});
+
+			// اگر می‌خواهی تیک‌ها هم خودکار فعال شوند، این را باز کن:
+			// setEnabled({
+			//   name: true,
+			//   brand: true,
+			//   price: true,
+			//   stock: true,
+			//   category: true,
+			//   description: true,
+			// });
+		}
+	}, [openEdditModal, name, brand, price, stock, category, description, reset]);
+
 	const submit = async (data: EditProductScheemaType) => {
 		let hasError = false;
-		// ۲. چک کردن دستی: اگر تیک خورده ولی خالی است، خطا بده
+
 		if (enabled.name && !data.name?.trim()) {
 			setError("name", { message: "نام محصول را وارد کنید" });
 			hasError = true;
@@ -73,12 +127,11 @@ export default function EditProductModal({
 			setError("stock", { message: "مقدار معتبر  وارد کنید" });
 			hasError = true;
 		}
-		if (enabled.description && !data.description) {
+		if (enabled.description && !getPlainText(data.description)) {
 			setError("description", { message: "توضیحات الزامی است" });
 			hasError = true;
 		}
 
-		// اگر خطایی وجود داشت، متوقف شو
 		if (hasError) return;
 
 		try {
@@ -100,13 +153,12 @@ export default function EditProductModal({
 				setOpenEdditModal(false);
 			}
 		} catch (error: any) {
-			// حل مشکل خطای Cannot read properties of undefined (reading 'data')
 			const message =
-				error.response?.data?.message || error.message || "خطایی رخ داد";
+				error?.response?.data?.message || error.message || "خطایی رخ داد";
 			toast.error(message);
 		}
 	};
-	// بررسی این که ایا فیلدی فعال است برای دکمه سابمیت
+
 	const isAnyEnabled = Object.values(enabled).some(Boolean);
 
 	if (!openEdditModal) return null;
@@ -115,6 +167,7 @@ export default function EditProductModal({
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
 			<div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0d1b2a] p-6 shadow-xl text-white">
 				<h1 className="text-center text-xl font-bold mb-6">ویرایش محصول</h1>
+
 				<form onSubmit={handleSubmit(submit)}>
 					<div className="space-y-10">
 						{/* name */}
@@ -123,7 +176,7 @@ export default function EditProductModal({
 								<input
 									type="checkbox"
 									onChange={(e) =>
-										setEnabled({ ...enabled, name: e.target.checked })
+										setEnabled((prev) => ({ ...prev, name: e.target.checked }))
 									}
 								/>
 								<label className="text-sm">نام</label>
@@ -131,12 +184,12 @@ export default function EditProductModal({
 
 							<input
 								disabled={!enabled.name}
-								type="name"
+								type="text"
 								{...register("name")}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md disabled:opacity-20"
 							/>
 							{errors.name && enabled.name && (
-								<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 									{errors.name.message}
 								</p>
 							)}
@@ -149,7 +202,10 @@ export default function EditProductModal({
 									<input
 										type="checkbox"
 										onChange={(e) =>
-											setEnabled({ ...enabled, price: e.target.checked })
+											setEnabled((prev) => ({
+												...prev,
+												price: e.target.checked,
+											}))
 										}
 									/>
 									<label className="text-sm">قیمت</label>
@@ -161,14 +217,14 @@ export default function EditProductModal({
 									type="number"
 									{...register("price", { valueAsNumber: true })}
 									onInput={(e: React.FormEvent<HTMLInputElement>) => {
-										const input = e.currentTarget; // استفاده از currentTarget به جای target
+										const input = e.currentTarget;
 										if (input.value.length > 1 && input.value.startsWith("0")) {
 											input.value = input.value.replace(/^0+/, "");
 										}
 									}}
 								/>
 								{errors.price && enabled.price && (
-									<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 										{errors.price.message}
 									</p>
 								)}
@@ -180,7 +236,10 @@ export default function EditProductModal({
 									<input
 										type="checkbox"
 										onChange={(e) =>
-											setEnabled({ ...enabled, brand: e.target.checked })
+											setEnabled((prev) => ({
+												...prev,
+												brand: e.target.checked,
+											}))
 										}
 									/>
 									<label className="text-sm">برند</label>
@@ -189,11 +248,11 @@ export default function EditProductModal({
 								<input
 									disabled={!enabled.brand}
 									className="w-full bg-[#1b263b] px-3 py-2 rounded-md disabled:opacity-20"
-									type="brand"
+									type="text"
 									{...register("brand")}
 								/>
 								{errors.brand && enabled.brand && (
-									<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 										{errors.brand.message}
 									</p>
 								)}
@@ -207,7 +266,10 @@ export default function EditProductModal({
 									<input
 										type="checkbox"
 										onChange={(e) =>
-											setEnabled({ ...enabled, stock: e.target.checked })
+											setEnabled((prev) => ({
+												...prev,
+												stock: e.target.checked,
+											}))
 										}
 									/>
 									<label className="text-sm">موجودی</label>
@@ -219,26 +281,29 @@ export default function EditProductModal({
 									type="number"
 									{...register("stock", { valueAsNumber: true })}
 									onInput={(e: React.FormEvent<HTMLInputElement>) => {
-										const input = e.currentTarget; // استفاده از currentTarget به جای target
+										const input = e.currentTarget;
 										if (input.value.length > 1 && input.value.startsWith("0")) {
 											input.value = input.value.replace(/^0+/, "");
 										}
 									}}
 								/>
 								{errors.stock && enabled.stock && (
-									<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 										{errors.stock.message}
 									</p>
 								)}
 							</div>
 
-							{/* brand */}
+							{/* category */}
 							<div className="relative">
 								<div className="flex items-center gap-2 mb-1">
 									<input
 										type="checkbox"
 										onChange={(e) =>
-											setEnabled({ ...enabled, category: e.target.checked })
+											setEnabled((prev) => ({
+												...prev,
+												category: e.target.checked,
+											}))
 										}
 									/>
 									<label className="text-sm">دسته‌بندی</label>
@@ -246,32 +311,33 @@ export default function EditProductModal({
 
 								<select
 									disabled={!enabled.category}
-									defaultValue=""
 									className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-20"
 									{...register("category")}
 								>
-									<option value="" disabled>
-										یک دسته‌بندی انتخاب کنید
-									</option>
+									<option value="">یک دسته‌بندی انتخاب کنید</option>
 									<option value="سدان">سدان</option>
 									<option value="کانورتیبل">کانورتیبل</option>
 									<option value="کوپه">کوپه</option>
 									<option value="شاسی بلند">شاسی بلند</option>
 								</select>
 								{errors.category && enabled.category && (
-									<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 										{errors.category.message}
 									</p>
 								)}
 							</div>
 						</div>
+
 						{/* description */}
 						<div>
 							<div className="flex items-center gap-2 mb-1">
 								<input
 									type="checkbox"
 									onChange={(e) =>
-										setEnabled({ ...enabled, description: e.target.checked })
+										setEnabled((prev) => ({
+											...prev,
+											description: e.target.checked,
+										}))
 									}
 								/>
 								<label className="text-sm">توضیحات</label>
@@ -287,18 +353,16 @@ export default function EditProductModal({
 									control={control}
 									render={({ field }) => (
 										<ProductEditor
+											key={productId}
 											value={field.value || ""}
-											onChange={(value) => {
-												setValue("description", value, {
-													shouldValidate: true,
-													shouldDirty: true,
-												});
+											onChange={(value: string) => {
+												field.onChange(value); // ✅ فقط همین؛ بقیه را خود RHF انجام می‌دهد
 											}}
 										/>
 									)}
 								/>
 								{errors.description && enabled.description && (
-									<p className="text-red-400 text-xs mt-1 absolute -bottom-[2]">
+									<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
 										{errors.description.message}
 									</p>
 								)}
@@ -307,6 +371,7 @@ export default function EditProductModal({
 
 						<div className="flex justify-between pt-5">
 							<button
+								type="button"
 								onClick={() => setOpenEdditModal(false)}
 								className="px-4 py-2 bg-gray-500 rounded-md"
 							>
