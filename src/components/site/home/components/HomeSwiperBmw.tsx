@@ -15,6 +15,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import ProductCard from "@/shared/ProductCard";
+import ErrorComponent from "@/shared/errorComponent";
+import LoadingComponent from "@/shared/loading";
+import { useFilter } from "../hooks/useFilter";
 
 function HomeSwiperBmw() {
 	const { data, isLoading, error } = useGetProducts("بی ام و", "", "", 1, 100);
@@ -23,6 +26,8 @@ function HomeSwiperBmw() {
 
 	const prevRef = useRef<HTMLButtonElement | null>(null);
 	const nextRef = useRef<HTMLButtonElement | null>(null);
+
+	const { handleFilter } = useFilter();
 
 	return (
 		<section className="w-full px-3 lg:px-6 mt-30 mb-24 overflow-hidden">
@@ -53,12 +58,12 @@ function HomeSwiperBmw() {
 								</p>
 							</div>
 
-							<Link
-								href=""
+							<button
 								className="w-fit bg-violet-600 hover:bg-violet-700 transition-all duration-300 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-violet-700/20"
+								onClick={() => handleFilter("brand", "بی ام و")}
 							>
 								مشاهده همه خودروها
-							</Link>
+							</button>
 						</div>
 					</div>
 
@@ -74,30 +79,9 @@ function HomeSwiperBmw() {
 				</div>
 
 				<div className="w-full lg:flex-1 bg-[#f7f7f9] rounded-3xl  p-4 sm:p-6 lg:p-6 overflow-hidden min-h-105 xl:h-180">
-					{isLoading && (
-						<div className="flex flex-col justify-center items-center h-full gap-5">
-							<p className="text-2xl font-bold text-violet-700">
-								در حال بارگذاری اطلاعات
-							</p>
+					{isLoading && <LoadingComponent />}
 
-							<Loading />
-						</div>
-					)}
-
-					{error && (
-						<div className="flex flex-col justify-center items-center h-full gap-6">
-							<p className="text-red-500 font-bold text-lg text-center">
-								متاسفانه مشکلی در دریافت اطلاعات به وجود آمده
-							</p>
-
-							<button
-								onClick={() => window.location.reload()}
-								className="bg-violet-600 hover:bg-violet-700 transition text-white px-5 py-2 rounded-xl"
-							>
-								تلاش دوباره
-							</button>
-						</div>
-					)}
+					{error && <ErrorComponent />}
 
 					{!isLoading && !error && (
 						<>

@@ -1,7 +1,9 @@
-`use client`;
+"use client";
 import Image from "next/image";
+import { useFilter } from "../hooks/useFilter";
 
 function HomeBrands() {
+	const { handleFilter } = useFilter();
 	return (
 		<div className="flex flex-col items-center justify-center gap-16 my-10 px-5">
 			<div className="text-primary text-2xl md:text-4xl lg:text-5xl font-bold">
@@ -14,6 +16,7 @@ function HomeBrands() {
 					width={80}
 					height={80}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "بی ام و")}
 				/>
 
 				<Image
@@ -22,6 +25,7 @@ function HomeBrands() {
 					width={90}
 					height={90}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "پورشه")}
 				/>
 				<Image
 					src="/assets/images/Maserati512x512-min-300x300.webp"
@@ -29,6 +33,7 @@ function HomeBrands() {
 					width={90}
 					height={90}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "مازراتی")}
 				/>
 				<Image
 					src="/assets/images/هیوندا.webp"
@@ -36,6 +41,7 @@ function HomeBrands() {
 					width={90}
 					height={110}
 					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "هیوندا")}
 				/>
 				<Image
 					src="/assets/images/560x560.webp"
@@ -43,6 +49,7 @@ function HomeBrands() {
 					width={90}
 					height={90}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "نیسان")}
 				/>
 				<Image
 					src="/assets/images/kia.webp"
@@ -50,6 +57,7 @@ function HomeBrands() {
 					width={100}
 					height={110}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "کیا")}
 				/>
 
 				<Image
@@ -58,6 +66,7 @@ function HomeBrands() {
 					width={90}
 					height={90}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "تویوتا")}
 				/>
 				<Image
 					src="/assets/images/lexus.webp"
@@ -65,6 +74,7 @@ function HomeBrands() {
 					width={80}
 					height={90}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "لکسوس")}
 				/>
 				<Image
 					src="/assets/images/Mercedes-Logo.webp"
@@ -72,6 +82,7 @@ function HomeBrands() {
 					width={80}
 					height={80}
 					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "بنز")}
 				/>
 			</div>
 		</div>

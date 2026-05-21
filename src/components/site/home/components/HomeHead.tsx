@@ -1,9 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 function HomeHead() {
+	const router = useRouter();
 	return (
-		<div className="w-screen h-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] hevebg bg-cover bg-center py-20">
+		<div className="w-screen h-screen relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] hevebg bg-cover bg-center py-20">
 			<div className="absolute inset-0 bg-[#1212409E] z-2"></div>
 
 			<div className="relative z-10 h-full flex items-center">
@@ -30,7 +32,10 @@ function HomeHead() {
 							بعد از ۷ سال برای اولین بار در ایران
 						</p>
 
-						<button className="bg-primary hover:bg-white hover:cursor-pointer hover:text-black transition px-6 py-3 rounded-lg xl:px-12">
+						<button
+							className="bg-primary hover:bg-white hover:cursor-pointer hover:text-black  transition-all duration-500 ease-in-out px-6 py-3 rounded-lg xl:px-12"
+							onClick={() => router.push("/products")}
+						>
 							مشاوره و خرید
 						</button>
 					</motion.div>

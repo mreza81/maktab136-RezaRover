@@ -63,7 +63,7 @@ function DashboardProducts() {
 						{/* <div className="text-tertialy text-2xl">صفحه محصولات</div> */}
 
 						<div
-							className="add-btn flex justify-center items-center w-17 h-12 rounded-xl  text-white bg-tertialy hover:bg-secondry hover:text-white hover:cursor-pointer px-3 xl:justify-between xl:w-74 xl:h-15  lg:justify-center lg:items-center "
+							className="add-btn flex justify-center items-center w-17 h-12 rounded-xl  text-white bg-tertialy hover:bg-secondry hover:text-white hover:cursor-pointer px-3 xl:justify-between xl:w-55 xl:h-15  lg:justify-center lg:items-center "
 							onClick={() => setOpenAddModal(true)}
 						>
 							<div className="text-md font-semibold hidden xl:block">

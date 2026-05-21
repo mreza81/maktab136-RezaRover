@@ -1,10 +1,17 @@
 import Products from "@/components/site/products/components/Products";
-import React from "react";
-
-function page() {
+type ProductsPageProps = {
+	searchParams: {
+		brand?: string;
+		search?: string;
+		category?: string;
+		limit?: number;
+		page?: number;
+	};
+};
+function page({ searchParams }: ProductsPageProps) {
 	return (
 		<div>
-			<Products />
+			<Products searchParams={searchParams} />
 		</div>
 	);
 }

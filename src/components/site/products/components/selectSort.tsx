@@ -33,15 +33,12 @@ export default function SortSelect() {
             duration-200
             focus:outline-none
             focus:ring-2
-            focus:ring-[#7c00a0]
-            focus:border-[#7c00a0]
-            hover:border-[#7c00a0]
+            focus:ring-primary
+            focus:border-primary
+            hover:border-primary
             cursor-pointer
           "
 				>
-					<option value="" disabled>
-						مرتب سازی
-					</option>
 					<option value="newest">جدیدترین</option>
 					<option value="available">کالاهای موجود</option>
 					<option value="expensive">گران‌ترین</option>

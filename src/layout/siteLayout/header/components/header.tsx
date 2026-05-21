@@ -1,5 +1,6 @@
 import ActiveLink from "./ActiveLink";
 import MobileMenu from "./mobileMenu";
+import Search from "./search";
 
 function Header() {
 	return (
@@ -24,7 +25,7 @@ function Header() {
 					</div>
 
 					<div className="flex-1 flex justify-center lg:justify-end mr-10 lg:mr-0">
-						<div className="relative w-56 sm:w-72 md:w-96 lg:w-56 xl:w-90 ">
+						{/* <div className="relative w-43 sm:w-72 md:w-96 lg:w-56 xl:w-90 ">
 							<input
 								type="text"
 								placeholder="جستجو در خودروها..."
@@ -36,7 +37,8 @@ function Header() {
 								alt="search"
 								className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 opacity-90"
 							/>
-						</div>
+						</div> */}
+						<Search />
 					</div>
 
 					<div className="flex items-center mr-6">
