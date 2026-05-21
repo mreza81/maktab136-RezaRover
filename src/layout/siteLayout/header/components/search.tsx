@@ -1,41 +1,46 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+import { useState, useEffect } from "react";
 
 function Search() {
-	const [search, setSearch] = useState("");
-	const [debouncedSearch] = useDebounce(search, 700);
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
 
-	useEffect(() => {
-		// ۱. فقط زمانی که debouncedSearch تغییر کرد، URL را آپدیت کن
+	const [search, setSearch] = useState(searchParams.get("search") || "");
+
+	const debounced = useDebouncedCallback((value: string) => {
 		const params = new URLSearchParams(searchParams.toString());
 
-		if (debouncedSearch) {
-			params.set("search", debouncedSearch);
+		if (value) {
+			params.set("search", value);
 		} else {
 			params.delete("search");
 		}
 
-		// ۲. برای جلوگیری از ری‌رندر اضافی، فقط در صورتی push کن که URL واقعاً تغییر کرده باشد
-		const newPath = `/products?${params.toString()}`;
-		if (window.location.search !== newPath) {
-			router.push(newPath);
-		}
+		router.replace(`/products?${params.toString()}`);
+	}, 700);
 
-		// ۳. searchParams را از لیست وابستگی‌ها حذف کردیم تا لوپ ایجاد نشود
-	}, [debouncedSearch, router]);
+	const handleSearch = (value: string) => {
+		setSearch(value);
+		debounced(value);
+	};
+
+	useEffect(() => {
+		if (pathname !== "/products") {
+			setSearch("");
+		}
+	}, [pathname]);
+
 	return (
-		<div className="relative w-43 sm:w-72 md:w-96 lg:w-56 xl:w-90 ">
+		<div className="relative w-43 sm:w-72 md:w-96 lg:w-56 xl:w-90">
 			<input
 				type="text"
+				value={search}
 				placeholder="جستجو در خودروها..."
 				className="w-full h-12 lg:h-13 pr-12 pl-5 text-sm sm:text-base lg:text-lg rounded-2xl border border-white/40 bg-transparent text-white placeholder-white/70 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/30 transition-all duration-300"
-				onChange={(e) => {
-					setSearch(e.target.value);
-				}}
+				onChange={(e) => handleSearch(e.target.value)}
 			/>
 
 			<img

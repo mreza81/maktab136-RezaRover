@@ -48,9 +48,9 @@ function MobileMenu() {
 
 					<ActiveLink href="/cart">لیست سفارشات</ActiveLink>
 
-					<ActiveLink href="/about-us">درباره ما</ActiveLink>
+					<ActiveLink href="/contact-us">درباره ما</ActiveLink>
 
-					<ActiveLink href="/contact-us">ارتباط با ما</ActiveLink>
+					<ActiveLink href="/about-us">ارتباط با ما</ActiveLink>
 				</nav>
 
 				<div className="absolute bottom-0 w-full bg-white py-4 flex justify-center items-center gap-3">

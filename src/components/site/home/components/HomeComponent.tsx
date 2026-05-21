@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Homebaner from "./homebaner";
 import HomeBrands from "./HomeBrands";
 import HomeHead from "./HomeHead";
@@ -11,11 +12,18 @@ function HomeComponent() {
 		<>
 			<HomeHead />
 			<Homeinfo />
-
-			<HomeBrands />
-			<HomeSwiperBenz />
-			<HomeSwiperBmw />
-			<Homebaner />
+			<Suspense fallback={null}>
+				<HomeBrands />
+			</Suspense>
+			<Suspense fallback={null}>
+				<HomeSwiperBenz />
+			</Suspense>
+			<Suspense fallback={null}>
+				<HomeSwiperBmw />
+			</Suspense>
+			<Suspense fallback={null}>
+				<Homebaner />
+			</Suspense>
 			<HomeSwiperWeblog />
 		</>
 	);
