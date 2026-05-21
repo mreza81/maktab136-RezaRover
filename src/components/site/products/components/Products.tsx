@@ -1,13 +1,13 @@
 import Breadcrumb from "@/shared/breadcrump";
 
+import { getProducts } from "@/api/getProducts/getProducts.service";
+import ProductCardSkeleton from "@/shared/ProductCardSkeleton";
+import { Suspense } from "react";
 import FilterAndSortDivMobile from "./filterAndSortDivMobile";
 import FilterSidebar from "./filterSideBarLaptop";
-import SortSelect from "./selectSort";
-import { Suspense } from "react";
-import ProductCardSkeleton from "@/shared/ProductCardSkeleton";
-import ProductList from "./productsDiv";
 import Pagination from "./pagination";
-import { getProducts } from "@/api/getProducts/getProducts.service";
+import ProductList from "./productsDiv";
+import SortSelect from "./selectSort";
 type ProductsPageProps = {
 	searchParams: {
 		brand?: string;
@@ -44,7 +44,9 @@ async function Products({ searchParams }: ProductsPageProps) {
 				</div>
 			</div>
 			<div className="flex flex-col lg:flex-row ">
-				<FilterAndSortDivMobile />
+				<Suspense fallback={null}>
+					<FilterAndSortDivMobile />
+				</Suspense>
 				<Suspense fallback={null}>
 					<FilterSidebar />
 				</Suspense>
@@ -60,7 +62,7 @@ async function Products({ searchParams }: ProductsPageProps) {
 					>
 						<ProductList searchParams={searchParams} />
 					</Suspense>
-					<div className="pagination-div w-full  bg-secondry ">
+					<div className="pagination-div w-full">
 						<Suspense fallback={null}>
 							<Pagination totalPages={totalPages} currentPage={currentPage} />
 						</Suspense>

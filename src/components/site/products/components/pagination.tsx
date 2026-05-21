@@ -53,7 +53,7 @@ export default function Pagination({
 				<span className="font-medium">نمایش در هر صفحه:</span>
 				<select
 					onChange={handleLimitChange}
-					defaultValue={searchParams.get("limit") || "30"}
+					defaultValue={searchParams.get("limit") || "10"}
 					className="border-violet-200 border rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-violet-500 transition"
 				>
 					<option value="10">۱۰</option>
