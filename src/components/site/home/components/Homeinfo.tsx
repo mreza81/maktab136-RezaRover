@@ -24,7 +24,7 @@ function Homeinfo() {
 						initial={{ opacity: 0, y: 60 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{
-							duration: 1.4,
+							duration: 2,
 							ease: "easeOut",
 						}}
 						className="hc-bottom mt-15 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 w-400 gap-x-9  "

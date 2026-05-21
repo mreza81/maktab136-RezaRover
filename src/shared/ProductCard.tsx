@@ -8,6 +8,7 @@ type ProductCartType = {
 function ProductCard({ item, type }: ProductCartType) {
 	const isSwiper = type === "swiper";
 	const lowItemStock = item.stock < 6;
+	const isOutStock = item.stock == 0;
 	return (
 		<div
 			className={` bg-white border border-black/5 rounded-3xl   shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col gap-4 
@@ -51,13 +52,15 @@ function ProductCard({ item, type }: ProductCartType) {
 				<div className="flex items-center gap-2 text-sm text-gray-500">
 					<div
 						className={`w-2 h-2 rounded-full
-						${lowItemStock ? "bg-red-600" : " bg-green-500"}`}
+						${isOutStock ? "bg-gray-400" : lowItemStock ? "bg-red-600" : " bg-green-500"}`}
 					/>
 
 					<span>
-						{lowItemStock
-							? `تنها ${item.stock} عدد باقی مانده است`
-							: `موجود در انبار`}
+						{isOutStock
+							? "اتمام موجودی"
+							: lowItemStock
+								? `تنها ${item.stock} عدد باقی مانده است`
+								: `موجود در انبار`}
 					</span>
 				</div>
 

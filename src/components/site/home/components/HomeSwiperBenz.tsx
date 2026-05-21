@@ -36,7 +36,7 @@ function HomeSwiperBenz() {
 
 					<div className="relative z-10 flex flex-col gap-8">
 						<Image
-							src="/assets/images/Mercedes-Logo.svg.png"
+							src="/assets/images/Mercedes-Logo.webp"
 							alt="Mercedes Logo"
 							width={90}
 							height={90}

@@ -12,7 +12,7 @@ export default async function ProductList({
 	const brand = params.brand || "";
 	const search = params.search || "";
 	const category = params.category || "";
-	const limit = Number(params.limit) || 100;
+	const limit = Number(params.limit) || 10;
 	const page = Number(params.page) || 1;
 
 	const res = await getProducts(brand, search, category, page, limit);
@@ -22,7 +22,7 @@ export default async function ProductList({
 	}
 
 	return (
-		<div className="products-parent w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div className="products-parent w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{products.map((item: ProductType) => (
 				<ProductCard key={item._id} type="productPage" item={item} />
 			))}

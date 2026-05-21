@@ -37,7 +37,7 @@ function HomeSwiperBmw() {
 
 					<div className="relative z-10 flex flex-col gap-8">
 						<Image
-							src="/assets/images/BMW_logo_gray.svg.png"
+							src="/assets/images/BMW_logo_gray.webp"
 							alt="Mercedes Logo"
 							width={90}
 							height={90}

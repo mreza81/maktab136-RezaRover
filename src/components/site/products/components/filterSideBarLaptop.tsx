@@ -83,7 +83,7 @@ export default function FilterSidebar() {
 	};
 
 	return (
-		<aside className="w-full max-w-50 xl:max-w-72.5 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm my-10 hidden lg:block mr-5 sticky top-5 self-start">
+		<aside className="w-full max-w-50 xl:max-w-72.5 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm my-10 hidden lg:block mr-5 sticky top-5  self-start">
 			{/* Header */}
 			<div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3">
 				<div className="flex items-center gap-2">
@@ -256,7 +256,7 @@ export default function FilterSidebar() {
 			</div> */}
 
 			{/* Footer */}
-			<div className="mt-4 border-t border-gray-100 pt-4"></div>
+			{/* <div className="mt-4 border-t border-gray-100 pt-4"></div> */}
 		</aside>
 	);
 }

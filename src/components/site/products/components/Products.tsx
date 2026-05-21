@@ -1,7 +1,4 @@
-import { getProducts } from "@/api/getProducts/getProducts.service";
 import Breadcrumb from "@/shared/breadcrump";
-import ProductCard from "@/shared/ProductCard";
-import { ProductType } from "@/types/productTypeAndOrders";
 
 import FilterAndSortDivMobile from "./filterAndSortDivMobile";
 import FilterSidebar from "./filterSideBarLaptop";
@@ -9,6 +6,8 @@ import SortSelect from "./selectSort";
 import { Suspense } from "react";
 import ProductCardSkeleton from "@/shared/ProductCardSkeleton";
 import ProductList from "./productsDiv";
+import Pagination from "./pagination";
+import { getProducts } from "@/api/getProducts/getProducts.service";
 type ProductsPageProps = {
 	searchParams: {
 		brand?: string;
@@ -20,6 +19,17 @@ type ProductsPageProps = {
 };
 
 async function Products({ searchParams }: ProductsPageProps) {
+	const params = await searchParams;
+	const brand = params.brand || "";
+	const search = params.search || "";
+	const category = params.category || "";
+	const limit = Number(params.limit) || 10;
+	const page = Number(params.page) || 1;
+	const res = await getProducts(brand, search, category, page, limit);
+	const total = res.total;
+	const currentPage = res.page;
+	const totalPages = Math.ceil(total / limit);
+
 	return (
 		<div className="w-full  ">
 			<div className="w-full h-20 lg:h-25 bg-secondry "></div>
@@ -50,7 +60,11 @@ async function Products({ searchParams }: ProductsPageProps) {
 					>
 						<ProductList searchParams={searchParams} />
 					</Suspense>
-					<div className="pagination-div w-full  bg-blue-400 "></div>
+					<div className="pagination-div w-full  bg-secondry ">
+						<Suspense fallback={null}>
+							<Pagination totalPages={totalPages} currentPage={currentPage} />
+						</Suspense>
+					</div>
 				</div>
 			</div>
 		</div>

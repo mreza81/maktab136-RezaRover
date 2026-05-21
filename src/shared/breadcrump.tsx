@@ -21,7 +21,9 @@ export default function Breadcrumb() {
 	const segments = pathname.split("/").filter(Boolean);
 
 	// گرفتن فیلترهای فعال
-	const filterEntries = Array.from(searchParams.entries());
+	const filterEntries = Array.from(searchParams.entries()).filter(
+		([key]) => key !== "page" && key !== "limit",
+	);
 
 	return (
 		<div className="flex flex-wrap gap-1 text-sm md:text-md lg:text-lg mt-5 text-gray-500">
