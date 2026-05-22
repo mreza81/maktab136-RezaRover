@@ -67,19 +67,6 @@ export default function EditProductModal({
 		mode: "onChange",
 	});
 
-	// 🔍 برای دیباگ: ببین props واقعا می‌رسند یا نه
-	useEffect(() => {
-		console.log("EDIT MODAL PROPS:", {
-			openEdditModal,
-			name,
-			brand,
-			price,
-			stock,
-			category,
-			description,
-		});
-	}, [openEdditModal, name, brand, price, stock, category, description]);
-
 	// ✅ وقتی مودال باز شد، فرم را با مقادیر محصول پر کن
 	useEffect(() => {
 		if (openEdditModal) {

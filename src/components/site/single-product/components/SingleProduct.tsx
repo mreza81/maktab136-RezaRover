@@ -55,7 +55,7 @@ async function SingleProduct({ params }: { params: { id: string } }) {
 						</div>
 
 						<div className="flex justify-between items-center py-3 border-b border-purple-100">
-							<span className="font-semibold">موتور</span>
+							<span className="font-semibold">موتور </span>
 							<span className="text-gray-700">۴۰۰۰ سی‌سی</span>
 						</div>
 
@@ -69,7 +69,7 @@ async function SingleProduct({ params }: { params: { id: string } }) {
 							<span className="text-gray-700">۲۰۲۳</span>
 						</div>
 
-						<div className="flex justify بین items-center py-3 border-b border-purple-100">
+						<div className="flex justify-between items-center py-3 border-b border-purple-100">
 							<span className="font-semibold">سیستم صوتی</span>
 							<span className="text-gray-700">هارمن کاردن</span>
 						</div>

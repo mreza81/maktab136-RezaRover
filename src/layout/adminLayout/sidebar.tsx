@@ -45,10 +45,10 @@ function Sidebar() {
 					</div>
 					<div className="flex justify-start items-center gap-1">
 						<Image
-							src="/assets/images/anbar.png"
+							src="/assets/images/code-sandbox.svg"
 							alt="Admin Logo"
-							width={40}
-							height={40}
+							width={35}
+							height={35}
 							className=""
 						/>
 						<ActiveLink href="/admin/MhdDgh1381/dashboard/inventory">

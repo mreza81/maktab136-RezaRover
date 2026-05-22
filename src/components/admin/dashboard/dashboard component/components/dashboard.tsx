@@ -3,17 +3,6 @@ import Sidebar from "@/layout/adminLayout/sidebar";
 import Image from "next/image";
 import ChartsBox from "./charts";
 
-// function Dashboard() {
-// 	const router = useRouter();
-
-// 	useEffect(() => {
-// 		const token = Cookies.get("access-token");
-
-// 		if (!token) {
-// 			router.replace("/admin/MhdDgh1381/login");
-// 		}
-// 	}, []);
-
 const Dashboard = () => {
 	const stats = [
 		{ title: "آمار فروش سالانه", value: "4,503,200$" },

@@ -25,11 +25,7 @@ function MobileMenu() {
 			<div
 				className={`fixed top-0 right-0 w-[50%] max-w-62.5 h-screen bg-linear-to-b from-secondry to-black 
         z-50 shadow-2xl transition-transform duration-500 ease-out
-<<<<<<< HEAD
         ${open ? "translate-x-0" : "translate-x-full"}`}
-=======
-        ${open ? "translate-x-0" : "translate-x-[100vw]"}`}
->>>>>>> feature/productDetail
 			>
 				<div className="flex items-center justify-between px-5 py-4 border-b border-white/20">
 					<img
