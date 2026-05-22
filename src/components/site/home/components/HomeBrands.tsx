@@ -1,77 +1,88 @@
-`use client`;
+"use client";
 import Image from "next/image";
+import { useFilter } from "../hooks/useFilter";
 
 function HomeBrands() {
+	const { handleFilter } = useFilter();
 	return (
-		<div className="flex flex-col items-center justify-center gap-16 my-10 ">
+		<div className="flex flex-col items-center justify-center gap-16 my-10 px-5">
 			<div className="text-primary text-2xl md:text-4xl lg:text-5xl font-bold">
 				برندهای ما
 			</div>
-			<div className="grid grid-cols-2 gap-x-7  md:grid-cols-9  xl:gap-x-14  p-2">
+			<div className="grid grid-cols-2  gap-x-7  md:grid-cols-4 lg:grid-cols-9  xl:gap-x-22  p-2">
 				<Image
-					src="/assets/images/BMW_logo_gray.svg.png"
+					src="/assets/images/BMW_logo_gray.webp"
 					alt="Bmw"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer "
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "بی ام و")}
 				/>
 
 				<Image
-					src="/assets/images/120756704.jpg"
+					src="/assets/images/120756704.webp"
 					alt="Porsche"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "پورشه")}
 				/>
 				<Image
-					src="/assets/images/Maserati512x512-min-300x300.png"
+					src="/assets/images/Maserati512x512-min-300x300.webp"
 					alt="maserati"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "مازراتی")}
 				/>
 				<Image
-					src="/assets/images/هیوندا.png"
+					src="/assets/images/هیوندا.webp"
 					alt="hyundai"
 					width={90}
 					height={110}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "هیوندا")}
 				/>
 				<Image
 					src="/assets/images/560x560.webp"
 					alt="nissan"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "نیسان")}
 				/>
 				<Image
-					src="/assets/images/kia.png"
+					src="/assets/images/kia.webp"
 					alt="kia"
 					width={100}
 					height={110}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "کیا")}
 				/>
 
 				<Image
-					src="/assets/images/toyota.png"
+					src="/assets/images/toyota.webp"
 					alt="toyota"
 					width={90}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "تویوتا")}
 				/>
 				<Image
-					src="/assets/images/lexus.png"
+					src="/assets/images/lexus.webp"
 					alt="lexus"
 					width={80}
 					height={90}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "لکسوس")}
 				/>
 				<Image
-					src="/assets/images/Mercedes-logo.svg.png"
+					src="/assets/images/Mercedes-Logo.webp"
 					alt="Benz"
 					width={80}
 					height={80}
-					className="transition-transform duration-300 hover:scale-125 hover:cursor-pointer"
+					className="transition-transform duration-600 hover:scale-125 hover:cursor-pointer spin-y"
+					onClick={() => handleFilter("brand", "بنز")}
 				/>
 			</div>
 		</div>

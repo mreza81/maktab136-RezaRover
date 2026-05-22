@@ -1,5 +1,6 @@
 import Footer from "@/layout/siteLayout/footer/footer";
 import Header from "@/layout/siteLayout/header/components/header";
+import { Suspense } from "react";
 
 export default function homeLayout({
 	children,
@@ -9,7 +10,9 @@ export default function homeLayout({
 	return (
 		<div>
 			<main>
-				<Header />
+				<Suspense fallback={null}>
+					<Header />
+				</Suspense>
 				{children}
 				<Footer />
 			</main>

@@ -3,7 +3,7 @@ import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
 import Loading from "@/shared/loading";
 import { ProductType } from "@/types/productTypeAndOrders";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditProductPage from "./EditProductModal";
 import DeleteProductModal from "./DeleteModal";
 interface ProductTableProps {
@@ -16,6 +16,13 @@ interface ProductTableProps {
 function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 	const [openEdditModal, setOpenEdditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [productId, setProductId] = useState("");
+	const [name, setName] = useState("");
+	const [brand, setBrand] = useState("");
+	const [price, setPrice] = useState(0);
+	const [stock, setStock] = useState(0);
+	const [category, setCategory] = useState("");
+	const [description, setDescription] = useState("");
 
 	return (
 		<>
@@ -23,6 +30,14 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 				<EditProductPage
 					openEdditModal={openEdditModal}
 					setOpenEdditModal={setOpenEdditModal}
+					productId={productId}
+					setProductId={setProductId}
+					name={name}
+					brand={brand}
+					price={price}
+					stock={stock}
+					category={category}
+					description={description}
 				/>
 			)}
 
@@ -30,6 +45,8 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 				<DeleteProductModal
 					openDeleteModal={openDeleteModal}
 					setOpenDeleteModal={setOpenDeleteModal}
+					productId={productId}
+					setProductId={setProductId}
 				/>
 			)}
 			<div
@@ -90,7 +107,7 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 											<img
 												src={`${BASE_URL}${item.images?.[0]}`}
 												alt="عکس"
-												className="w-16 h-16 object-cover rounded-lg shadow-md"
+												className="w-23 h-20 object-cover rounded-lg shadow-md"
 											/>
 										</div>
 									</td>
@@ -114,9 +131,16 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 											<img
 												src="/assets/images/pen3.png"
 												alt="ادیت"
-												className="w-8 h-8 object-contain hover:cursor-pointer"
+												className="w-8 h-8 object-contain hover:cursor-pointer mt-1"
 												onClick={() => {
 													setOpenEdditModal(true);
+													setProductId(item._id);
+													setName(item.name);
+													setBrand(item.brand);
+													setPrice(item.price);
+													setStock(item.stock);
+													setCategory(item.category);
+													setDescription(item.description);
 												}}
 											/>
 											<img
@@ -125,6 +149,7 @@ function ProductTable({ error, isLoading, data, products }: ProductTableProps) {
 												className="w-8 h-8 object-contain hover:cursor-pointer"
 												onClick={() => {
 													setOpenDeleteModal(true);
+													setProductId(item._id);
 												}}
 											/>
 										</div>

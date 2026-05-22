@@ -13,7 +13,7 @@ function Sidebar() {
 						height={40}
 						className=""
 					/>
-					<div className=" text-xl text-white mr-2 ">نام ادمین</div>
+					<div className=" text-xl text-white mr-2 ">پنل</div>
 				</div>
 				<div>
 					<hr className="text-white text-2xl mt-3" />

@@ -1,14 +1,9 @@
 function Footer() {
 	return (
-		<footer className="w-full bg-secondry px-6 md:px-16 lg:px-24 xl:px-32 pt-16 pb-10 flex justify-center">
+		<footer className="w-full bg-secondry px-6 md:px-16 lg:px-24 xl:px-32 pt-16 pb-10 flex justify-center bottom-0">
 			<div className="w-full max-w-7xl flex flex-col gap-14">
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 					<div className="flex flex-col gap-2 max-w-md">
-						{/* <img
-							src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
-							alt="logo"
-							className="w-15 object-contain"
-						/> */}
 						<h3 className="text-white text-xl font-semibold">رضاروور</h3>
 
 						<p className="text-white/80 leading-7 text-sm md:text-base">
@@ -25,21 +20,33 @@ function Footer() {
 						</h3>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تهران، سعادت آباد، میدان کاج، برج پایدار، واحد 702
 							</p>
 						</div>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تبریز، ولیعصر، فلکه همافر، جنب داروخانه سیب
 							</p>
 						</div>
 
 						<div className="flex gap-3 items-start">
-							<img src="/assets/images/location.png" className="w-5 h-5 mt-1" />
+							<img
+								src="/assets/images/location.png"
+								className="w-5 h-5 mt-1"
+								alt="location"
+							/>
 							<p className="text-white/80 text-sm md:text-base">
 								تهران، خیابان اندرزگو، نبش میدان اندرزگو
 							</p>
@@ -84,14 +91,14 @@ function Footer() {
 				</div>
 
 				<div className="w-full flex flex-wrap justify-center md:justify-start gap-6 pt-10 border-t border-white/10">
-					<div className="w-28 h-28 bg-white/10 rounded-xl flex items-center justify-center p-3">
+					<div className="w-20 h-20 bg-white/10 rounded-xl flex items-center justify-center p-3">
 						<img
 							src="/assets/images/252d1554-ffae-497b-a581-d544a859c373.png"
 							alt="ecunion"
 							className="max-w-full max-h-full object-contain"
 						/>
 					</div>
-					<div className="w-28 h-28 bg-white/10 rounded-xl flex items-center justify-center p-3">
+					<div className="w-20 h-20 bg-white/10 rounded-xl flex items-center justify-center p-3">
 						<img
 							src="/assets/images/instagram.png"
 							alt="enamad"
@@ -99,7 +106,7 @@ function Footer() {
 						/>
 					</div>
 
-					<div className="w-28 h-28 bg-white/10 rounded-xl flex items-center justify-center p-3">
+					<div className="w-20 h-20 bg-white/10 rounded-xl flex items-center justify-center p-3">
 						<img
 							src="/assets/images/twitter-circle.png"
 							alt="samandehi"
@@ -107,7 +114,7 @@ function Footer() {
 						/>
 					</div>
 
-					<div className="w-28 h-28 bg-white/10 rounded-xl flex items-center justify-center p-3">
+					<div className="w-20 h-20 bg-white/10 rounded-xl flex items-center justify-center p-3">
 						<img
 							src="/assets/images/whats-app.png"
 							alt="ecunion"

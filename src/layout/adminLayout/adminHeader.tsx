@@ -3,9 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import ActiveLink from "../siteLayout/header/components/ActiveLink";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 function AdminHeader() {
 	const [open, setOpen] = useState(false);
+	const [openLogOutModal, setOpenLogOutModal] = useState(false);
+	const router = useRouter();
+	const handleLogOut = () => {
+		Cookies.remove("access-token");
+		Cookies.remove("refresh-token");
+		Cookies.remove("role");
+		toast.success("خروج از حساب ادمین با موفقیت انجام شد");
+		router.replace("/");
+	};
 
 	return (
 		<div className="bg-slate-800 h-20 px-7 ">
@@ -25,11 +37,8 @@ function AdminHeader() {
 						width={70}
 						height={70}
 						className="hidden xl:block hover:corsor-pointer"
+						onClick={() => router.replace("/")}
 					/>
-					{/* <div className="text-2xl hidden md:block text-white">
-						{" "}
-						به پنل مدیریت رضاروور خوش آمدید
-					</div> */}
 
 					{open && (
 						<div
@@ -137,9 +146,40 @@ function AdminHeader() {
 						alt="Admin Logo"
 						width={55}
 						height={55}
+						onClick={() => setOpenLogOutModal(true)}
 					/>
 				</div>
 			</div>
+			{openLogOutModal && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+					<div className="w-full max-w-md rounded-2xl bg-[#0d1b2a] p-6 shadow-xl text-white">
+						<h1 className="text-center text-xl font-bold mb-4">
+							{" "}
+							خروج از پنل مدیریت
+						</h1>
+
+						<p className="text-center text-gray-300 mb-6">
+							آیا میخواهید از حساب خود خارج شوید؟
+						</p>
+
+						<div className="flex justify-between">
+							<button
+								onClick={() => setOpenLogOutModal(false)}
+								className="px-4 py-2 bg-gray-500 rounded-md"
+							>
+								انصراف
+							</button>
+
+							<button
+								className="px-4 py-2 bg-red-600 rounded-md"
+								onClick={handleLogOut}
+							>
+								خروج از حساب
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
