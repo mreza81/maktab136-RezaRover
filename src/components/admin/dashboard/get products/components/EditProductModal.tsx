@@ -78,16 +78,6 @@ export default function EditProductModal({
 				category,
 				description,
 			});
-
-			// اگر می‌خواهی تیک‌ها هم خودکار فعال شوند، این را باز کن:
-			// setEnabled({
-			//   name: true,
-			//   brand: true,
-			//   price: true,
-			//   stock: true,
-			//   category: true,
-			//   description: true,
-			// });
 		}
 	}, [openEdditModal, name, brand, price, stock, category, description, reset]);
 
@@ -145,7 +135,7 @@ export default function EditProductModal({
 			toast.error(message);
 		}
 	};
-
+	//چک کردن اینکه هنوز یک مقدار true وجود دارد
 	const isAnyEnabled = Object.values(enabled).some(Boolean);
 
 	if (!openEdditModal) return null;

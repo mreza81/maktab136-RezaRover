@@ -1,4 +1,3 @@
-"use client";
 import { Suspense } from "react";
 import ActiveLink from "./ActiveLink";
 import MobileMenu from "./mobileMenu";

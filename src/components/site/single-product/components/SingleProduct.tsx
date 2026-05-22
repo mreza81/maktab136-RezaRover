@@ -10,7 +10,6 @@ async function SingleProduct({ params }: { params: { id: string } }) {
 	const id = param.id;
 	const res = await singleProductService(id);
 	const product: ProductType = res.data;
-	console.log(product);
 
 	return (
 		<div className="w-full">

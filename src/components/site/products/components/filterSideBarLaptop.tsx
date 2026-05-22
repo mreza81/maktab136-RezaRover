@@ -203,60 +203,6 @@ export default function FilterSidebar() {
 					</div>
 				</div>
 			</div>
-
-			{/* بازه قیمت */}
-			{/* <div className="py-3">
-				<button
-					onClick={() => toggleSection("price")}
-					className="flex w-full items-center justify-between"
-				>
-					<span className="text-sm font-semibold text-gray-800">بازه قیمت</span>
-
-					<ChevronDown
-						size={18}
-						className={`text-gray-500 transition-transform duration-300 ${
-							openSections.price ? "rotate-180" : ""
-						}`}
-					/>
-				</button>
-
-				<div
-					className={`grid transition-all duration-300 ${
-						openSections.price
-							? "grid-rows-[1fr] opacity-100 mt-3"
-							: "grid-rows-[0fr] opacity-0 mt-0"
-					}`}
-				>
-					<div className="overflow-hidden">
-						<div className="space-y-2">
-							{priceRanges.map((item) => (
-								<label
-									key={item.value}
-									className="flex cursor-pointer items-center justify-between rounded-xl px-2 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
-								>
-									<div className="flex items-center gap-2">
-										<input
-											type="radio"
-											name="price"
-											checked={selectedPrice === item.value}
-											className="h-4 w-4 accent-primary"
-											onChange={() => setSelectedPrice(item.value)}
-										/>
-										<span>{item.label}</span>
-									</div>
-
-									{selectedPrice === item.value && (
-										<span className="text-xs text-primary">فعال</span>
-									)}
-								</label>
-							))}
-						</div>
-					</div>
-				</div>
-			</div> */}
-
-			{/* Footer */}
-			{/* <div className="mt-4 border-t border-gray-100 pt-4"></div> */}
 		</aside>
 	);
 }
