@@ -35,21 +35,17 @@ async function Products({ searchParams }: ProductsPageProps) {
 			<div className="w-full h-20 lg:h-25 bg-secondry "></div>
 			<div className="select-and-breadcrump-parent w-full px-6  flex justify-between items-center mt-5 ">
 				<div className="">
-					<Suspense fallback={null}>
-						<Breadcrumb />
-					</Suspense>
+					<Breadcrumb />
 				</div>
 				<div>
 					<SortSelect />
 				</div>
 			</div>
 			<div className="flex flex-col lg:flex-row ">
-				<Suspense fallback={null}>
-					<FilterAndSortDivMobile />
-				</Suspense>
-				<Suspense fallback={null}>
-					<FilterSidebar />
-				</Suspense>
+				<FilterAndSortDivMobile />
+
+				<FilterSidebar />
+
 				<div className=" w-full my-5  px-5  lg:my-10   ">
 					<Suspense
 						fallback={
@@ -63,9 +59,7 @@ async function Products({ searchParams }: ProductsPageProps) {
 						<ProductList searchParams={searchParams} />
 					</Suspense>
 					<div className="pagination-div w-full">
-						<Suspense fallback={null}>
-							<Pagination totalPages={totalPages} currentPage={currentPage} />
-						</Suspense>
+						<Pagination totalPages={totalPages} currentPage={currentPage} />
 					</div>
 				</div>
 			</div>

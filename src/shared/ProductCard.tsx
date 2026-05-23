@@ -20,7 +20,7 @@ function ProductCard({ item, type }: ProductCartType) {
 	return (
 		<div
 			className={` bg-white border border-black/5 rounded-3xl   shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col gap-4 
-				${isSwiper ? "min-h-90 lg:min-h-115 w-full p-4 lg:p-5 " : "lg:min-h-70 w-full  px-4 py-2 "}`}
+				${isSwiper ? "min-h-90 lg:min-h-115 w-full p-4 lg:p-5 " : "lg:min-h-70 w-full  px-4 py-2"}`}
 		>
 			<div className="group w-full flex justify-center">
 				<img
