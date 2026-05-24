@@ -2,12 +2,13 @@ import { Suspense } from "react";
 import ActiveLink from "./ActiveLink";
 import MobileMenu from "./mobileMenu";
 import Search from "./search";
+import SignupModal from "./signupModal";
 
 function Header() {
 	return (
-		<header className="relative z-50 max-w-full md:mx-10 lg:mx-10 xl:mx-27">
+		<header className="relative z-50 max-w-full md:mx-10 lg:mx-10 xl:mx-27 ">
 			<div className="absolute top-0 left-0 right-0 h-24 ">
-				<div className="w-full flex items-center justify-between pt-3 px-4 sm:px-6 lg:px-12 xl:px-16  ">
+				<div className="w-full flex items-center justify-between pt-3 px-4 sm:px-6 lg:px-12 xl:px-16 ">
 					<div className="flex items-center gap-6 lg:gap-6 xl:gap-8 ">
 						<MobileMenu />
 
@@ -39,12 +40,8 @@ function Header() {
 						/>
 					</div>
 
-					<div className="flex items-center mr-6">
-						<img
-							src="/assets/images/account-user-person-round (1).png"
-							alt="account"
-							className="w-12 h-12 xl:w-14 xl:h-14 cursor-pointer hover:scale-110 transition duration-300"
-						/>
+					<div className="flex items-center mr-6 ">
+						<SignupModal />
 					</div>
 				</div>
 			</div>
