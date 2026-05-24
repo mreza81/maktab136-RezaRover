@@ -2,10 +2,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { getProfileService } from "../services/getProfile.service";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function SignupModal() {
 	const [openModal, setOpenModal] = useState(false);
@@ -85,40 +85,39 @@ function SignupModal() {
 						</div>
 					</motion.div>
 				)}
-				<AnimatePresence>
-					{openModal && token == undefined && (
-						<motion.div
-							className="absolute top-17 lg:top-22 left-10 lg:left-5 md:left-5 flex flex-col justify-center items-start gap-4 bg-white  p-3 rounded-md xl:w-50 xl:gap-6"
-							initial={{ opacity: 0, y: -10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: -10 }}
+
+				{openModal && token == undefined && (
+					<motion.div
+						className="absolute top-17 lg:top-22 left-10 lg:left-5 md:left-5 flex flex-col justify-center items-start gap-4 bg-white  p-3 rounded-md xl:w-50 xl:gap-6"
+						initial={{ opacity: 0, y: -10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -10 }}
+					>
+						<div
+							className="flex justify-start items-center gap-3 "
+							onClick={() => setOpenModal(false)}
 						>
-							<div
-								className="flex justify-start items-center gap-3 "
-								onClick={() => setOpenModal(false)}
-							>
-								<X
-									size={20}
-									className="text-red-500 hover:text-black cursor-pointer xl:w-7 xl:h-7"
-								/>
-							</div>
-							<div
-								className="flex justify-start items-center gap-3 cursor-pointer "
-								onClick={() => {
-									router.push("/login");
-									setOpenModal(false);
-								}}
-							>
-								<img
-									src="/assets/images/bx-log-in.svg"
-									alt="user"
-									className="w-5 h-5 xl:w-7 xl:h-7 "
-								/>
-								<p className="font-bold xl:text-xl">ورود</p>
-							</div>
-						</motion.div>
-					)}
-				</AnimatePresence>
+							<X
+								size={20}
+								className="text-red-500 hover:text-black cursor-pointer xl:w-7 xl:h-7"
+							/>
+						</div>
+						<div
+							className="flex justify-start items-center gap-3 cursor-pointer "
+							onClick={() => {
+								router.push("/login");
+								setOpenModal(false);
+							}}
+						>
+							<img
+								src="/assets/images/bx-log-in.svg"
+								alt="user"
+								className="w-5 h-5 xl:w-7 xl:h-7 "
+							/>
+							<p className="font-bold xl:text-xl">ورود</p>
+						</div>
+					</motion.div>
+				)}
 			</AnimatePresence>
 		</div>
 	);
