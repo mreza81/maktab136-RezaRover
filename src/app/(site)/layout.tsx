@@ -9,13 +9,9 @@ export default function homeLayout({
 }>) {
 	return (
 		<div>
-			<main>
-				<Suspense fallback={null}>
-					<Header />
-				</Suspense>
-				{children}
-				<Footer />
-			</main>
+			<Header></Header>
+			<main>{children}</main>
+			<Footer />
 		</div>
 	);
 }

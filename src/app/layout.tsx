@@ -5,6 +5,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ReactQueryProvider } from "./providers";
+
 export const metadata: Metadata = {
 	title: "رضاروور | وارد کننده خودروهای خارجی",
 	description: "رضاروور بزرگترین وارد کننده خودروهای خارجی",

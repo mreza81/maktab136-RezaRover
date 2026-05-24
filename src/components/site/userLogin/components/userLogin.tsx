@@ -4,11 +4,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { handleAdminLogin } from "../services/auth.services";
 
 import { loginScheema, LoginType } from "@/scheema/login";
+import { handleUserLogin } from "../services/userLogin.serices";
+import Link from "next/link";
 
-function AdminLoginComponent() {
+function UserLoginComponent() {
 	const [passwordInputType, setPasswordInputType] = useState("password");
 	const router = useRouter();
 	const {
@@ -20,11 +21,11 @@ function AdminLoginComponent() {
 	});
 	const submit = async (data: LoginType) => {
 		try {
-			const res = await handleAdminLogin(data);
+			const res = await handleUserLogin(data);
 			if (res) {
-				toast.success("ورود ادمین با موفقیت انجام شد 🎉 ");
+				toast.success("ورود کاربر با موفقیت انجام شد 🎉 ");
 
-				router.push("/admin/MhdDgh1381/dashboard");
+				router.push("/");
 			}
 		} catch (error: any) {
 			toast.error(error.message);
@@ -32,20 +33,13 @@ function AdminLoginComponent() {
 	};
 
 	return (
-		<div className="admin-login-bg min-h-screen flex justify-center items-center  p-4">
+		<div className="admin-login-bg min-h-screen flex justify-center items-center  p-4 pt-30 lg:pt-0">
 			<form
 				className=" bg-white/30 backdrop-blur-lg border border-white/20 w-full md:w-1/2 xl:w-1/3 rounded-2xl shadow-xl p-8 flex flex-col gap-10"
 				onSubmit={handleSubmit(submit)}
 			>
-				<div className="mx-auto flex flex-col items-center justify-center gap-0">
-					<img
-						src={"/assets/images/935d21a7-0654-4363-a829-60c639fa0ce9.png"}
-						className="w-30 "
-						alt="rezarover"
-					/>
-				</div>
 				<h1 className="text-2xl font-semibold text-white text-center">
-					ورود ادمین
+					ورود کاربر
 				</h1>
 				<div className="relative w-full flex flex-col irems-start gap-1">
 					<input
@@ -97,9 +91,15 @@ function AdminLoginComponent() {
 				>
 					ورود
 				</button>
+				<div className="w-full flex justify-start items-center gap-2">
+					<span className="">آیا حساب کاربری ندارید؟</span>
+					<Link href={"/register"} className="text-primary text-sm">
+						ساخت حساب کاربری
+					</Link>
+				</div>
 			</form>
 		</div>
 	);
 }
 
-export default AdminLoginComponent;
+export default UserLoginComponent;

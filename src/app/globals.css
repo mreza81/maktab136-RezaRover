@@ -58,7 +58,12 @@ body {
 .hevebg {
 	background-image: url("../../public/assets/images/chalenjer.webp");
 }
-.login-bg {
+.admin-login-bg {
+	background-image: url("/assets/images/nody-دانلود-عکس-مرسدس-بنز-با-بهترین-کیفیت-1721250146.webp");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.signup-bg {
 	background-image: url("/assets/images/nody-دانلود-عکس-مرسدس-بنز-با-بهترین-کیفیت-1721250146.webp");
 	background-repeat: no-repeat;
 	background-size: cover;

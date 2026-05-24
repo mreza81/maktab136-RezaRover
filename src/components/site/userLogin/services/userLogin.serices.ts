@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Cookies from "js-cookie";
 
-export async function handleAdminLogin(user: User) {
+export async function handleUserLogin(user: User) {
 	try {
 		const res = await axios.post(`${BASE_URL}/api/auth/login`, user);
 
@@ -16,6 +16,7 @@ export async function handleAdminLogin(user: User) {
 		Cookies.set("refresh-token", data.data.refreshToken, {
 			expires: 7,
 		});
+
 		Cookies.set("role", data.data.user.role, {
 			expires: 7,
 		});
