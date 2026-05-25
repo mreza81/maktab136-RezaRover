@@ -1,10 +1,15 @@
 "use client";
 import { ProductType } from "@/types/productTypeAndOrders";
+import Cookies from "js-cookie";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { addToCart, Data } from "../services/addToCart.service";
 
 function ChooseBox({ product }: { product: ProductType }) {
 	const [count, setCount] = useState(1);
-
+	const router = useRouter();
 	const increase = () => {
 		if (count < product.stock) {
 			setCount(count + 1);
@@ -17,9 +22,40 @@ function ChooseBox({ product }: { product: ProductType }) {
 		}
 	};
 
+	const handleAddToCart = async () => {
+		const token = Cookies.get("access-token");
+
+		if (!token) {
+			toast.warning("برای انتخاب محصول باید احرازهویت کنید");
+			router.push("/register");
+			return;
+		}
+		try {
+			const data: Data = {
+				productId: product._id,
+				quantity: count,
+			};
+
+			const res = await addToCart(data);
+			toast.success(
+				<div>
+					<div style={{ marginBottom: 8 }}>
+						محصول با موفقیت به سبد خرید اضافه شد.
+					</div>
+
+					<div style={{ display: "flex", gap: 12 }}>
+						<Link href="/cart" style={{ textDecoration: "underline" }}>
+							مشاهده سبد خرید
+						</Link>
+					</div>
+				</div>,
+			);
+		} catch (error: any) {
+			throw new Error(error);
+		}
+	};
 	return (
 		<div className="w-full min-w-65 rounded-xl bg-[#F5F3FF] p-6 md:px-7 shadow-sm border border-purple-200 flex flex-col gap-6">
-			{/* لوگو + قیمت */}
 			<div className="flex flex-col items-center justify-between gap-4">
 				<img
 					src="/assets/images/5a1465fa-9e6b-4f2d-9751-bf48e4568742.png"
@@ -35,7 +71,6 @@ function ChooseBox({ product }: { product: ProductType }) {
 				</div>
 			</div>
 
-			{/* آخرین بروزرسانی */}
 			<div className="flex justify-between items-center">
 				<span className="text-lg font-semibold text-gray-900">
 					آخرین بروزرسانی
@@ -45,7 +80,6 @@ function ChooseBox({ product }: { product: ProductType }) {
 				</span>
 			</div>
 
-			{/* تعداد موجودی */}
 			<div className="flex flex-col gap-2">
 				<div className="flex justify-between items-center">
 					<span className="text-lg font-semibold text-gray-900">موجودی</span>
@@ -55,15 +89,13 @@ function ChooseBox({ product }: { product: ProductType }) {
 				</div>
 			</div>
 
-			{/* کنترل تعداد */}
 			<div>
 				<div className="flex items-center justify-between bg-white border border-purple-200 rounded-lg px-4 py-2">
-					{/* دکمه افزایش */}
 					<button
 						onClick={increase}
 						disabled={count === product.stock}
 						className={`
-              w-8 h-8 flex items-center justify-center rounded-md text-lg
+              w-8 h-8 flex items-center justify-center rounded-md text-lg cursor-pointer
               ${
 								count === product.stock
 									? "bg-purple-300 text-white cursor-not-allowed"
@@ -74,15 +106,13 @@ function ChooseBox({ product }: { product: ProductType }) {
 						+
 					</button>
 
-					{/* مقدار */}
 					<span className="font-bold text-gray-900 text-lg">{count}</span>
 
-					{/* دکمه کاهش */}
 					<button
 						onClick={decrease}
 						disabled={count === 1}
 						className={`
-              w-8 h-8 flex items-center justify-center rounded-md text-lg
+              w-8 h-8 flex items-center justify-center rounded-md text-lg cursor-pointer
               ${
 								count === 1
 									? "bg-purple-300 text-white cursor-not-allowed"
@@ -95,8 +125,10 @@ function ChooseBox({ product }: { product: ProductType }) {
 				</div>
 			</div>
 
-			{/* دکمه سفارش */}
-			<button className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl text-lg font-bold shadow-md">
+			<button
+				className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl text-lg font-bold shadow-md cursor-pointer"
+				onClick={() => handleAddToCart()}
+			>
 				ثبت سفارش
 			</button>
 		</div>
