@@ -1,4 +1,4 @@
-import axiosInstance from "@/utils/interceptor/interceptor";
+import axiosInstance from "@/utils/interceptor/clientAxios";
 
 export async function deleteProduct(productId: string) {
 	try {

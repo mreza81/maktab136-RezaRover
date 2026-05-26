@@ -23,11 +23,12 @@ function ChooseBox({ product }: { product: ProductType }) {
 	};
 
 	const handleAddToCart = async () => {
-		const token = Cookies.get("access-token");
+		const accesstoken = Cookies.get("access-token");
+		const refreshtoken = Cookies.get("refresh-token");
 
-		if (!token) {
+		if (!accesstoken && !refreshtoken) {
 			toast.warning("برای انتخاب محصول باید احرازهویت کنید");
-			router.push("/register");
+
 			return;
 		}
 		try {
@@ -44,7 +45,7 @@ function ChooseBox({ product }: { product: ProductType }) {
 					</div>
 
 					<div style={{ display: "flex", gap: 12 }}>
-						<Link href="/cart" style={{ textDecoration: "underline" }}>
+						<Link href="/cart" className="text-secondry cursor-pointer">
 							مشاهده سبد خرید
 						</Link>
 					</div>

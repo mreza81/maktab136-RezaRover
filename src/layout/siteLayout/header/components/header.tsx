@@ -3,6 +3,7 @@ import ActiveLink from "./ActiveLink";
 import MobileMenu from "./mobileMenu";
 import Search from "./search";
 import SignupModal from "./signupModal";
+import Link from "next/link";
 
 function Header() {
 	return (
@@ -33,11 +34,13 @@ function Header() {
 					</div>
 
 					<div className="flex items-center mr-6">
-						<img
-							src="/assets/images/shopping-cart.svg"
-							alt="shop"
-							className="hidden lg:block lg:w-10 lg:h-10 xl:w-11 xl:h-11 cursor-pointer hover:scale-110 transition duration-300"
-						/>
+						<Link href={"/cart"}>
+							<img
+								src="/assets/images/shopping-cart.svg"
+								alt="shop"
+								className="hidden lg:block lg:w-10 lg:h-10 xl:w-11 xl:h-11 cursor-pointer hover:scale-110 transition duration-300"
+							/>
+						</Link>
 					</div>
 
 					<div className="flex items-center mr-6 ">

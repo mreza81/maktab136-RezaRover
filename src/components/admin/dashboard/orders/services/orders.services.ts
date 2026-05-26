@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/api/BASE-URL/BASE-URL";
-import axiosInstance from "@/utils/interceptor/interceptor";
+import axiosInstance from "@/utils/interceptor/clientAxios";
 
 export async function getOrders(page: number, limit: number, status: string) {
 	try {

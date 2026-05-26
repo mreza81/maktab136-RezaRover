@@ -1,4 +1,5 @@
-import axiosInstance from "@/utils/interceptor/interceptor";
+import axiosInstance from "@/utils/interceptor/clientAxios";
+
 export type Data = {
 	productId: string;
 	quantity: number;
