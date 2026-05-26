@@ -1,4 +1,3 @@
-import axiosInstance from "@/utils/interceptor/interceptor";
 import axios from "axios";
 import { BASE_URL } from "../BASE-URL/BASE-URL";
 

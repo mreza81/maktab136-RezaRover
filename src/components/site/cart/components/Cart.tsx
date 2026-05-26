@@ -2,6 +2,7 @@ import { ChevronLeft, Info, ShoppingBag, Sparkles, Trash2 } from "lucide-react";
 import { getCart } from "../services/getCart.services";
 import ProductInCart from "./ProductInCart";
 import Stepper from "./Stepper";
+import ClearAllButton from "./ClearAll";
 
 async function Cart() {
 	const res = async () => {
@@ -11,6 +12,7 @@ async function Cart() {
 
 	const data = await res();
 	const cartItems = data?.items || [];
+	const disabledButton = cartItems.length == 0;
 
 	return (
 		<div className="bg-gray-50">
@@ -38,12 +40,7 @@ async function Cart() {
 									</div>
 								</div>
 
-								{cartItems.length > 0 && (
-									<button className="flex items-center gap-1.5 text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-all text-sm font-medium">
-										<Trash2 size={18} />
-										<span>حذف همه</span>
-									</button>
-								)}
+								{cartItems.length > 0 && <ClearAllButton />}
 							</div>
 
 							{/* Product Items */}
@@ -85,11 +82,14 @@ async function Cart() {
 										<p className="text-xl font-black text-[#7c3aed]">
 											{data.totalPrice.toLocaleString("fa-IR")}
 										</p>
-										<span className="text-[10px] text-gray-400">تومان</span>
+										<span className="text-[10px] text-gray-400">دلار</span>
 									</div>
 								</div>
 
-								<button className="w-full bg-[#7c3aed] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#6d28d9] transition-all transform active:scale-[0.98] shadow-lg shadow-purple-100 cursor-pointer">
+								<button
+									className={`w-full bg-[#7c3aed] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#6d28d9] transition-all transform active:scale-[0.98] shadow-lg shadow-purple-100 
+									${disabledButton ? `opacity-20 disabled ` : `enabled cursor-pointer`}`}
+								>
 									تایید و تکمیل سفارش
 								</button>
 

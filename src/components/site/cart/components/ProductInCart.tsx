@@ -13,7 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateCart } from "../services/updateCart.service";
-import { deletFromCart } from "../services/deletCart.service";
+import { deletFromCart } from "../services/deletItemInCart.service";
 import { toast } from "react-toastify";
 
 function ProductInCart({ item, key }: { item: any; key: string }) {
