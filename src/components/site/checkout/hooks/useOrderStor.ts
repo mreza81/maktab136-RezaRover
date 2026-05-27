@@ -2,22 +2,32 @@ import { createOrderScheemaType } from "@/scheema/createOrder";
 import { create } from "zustand";
 
 interface OrderState {
-	formData: createOrderScheemaType;
+	// نام این بخش را به shippingAddress تغییر دادیم
+	shippingAddress: {
+		name: string;
+		phone: string;
+		address: string;
+	};
 	paymentMethod: string;
-	setFormData: (data: Partial<createOrderScheemaType>) => void;
+	setShippingAddress: (
+		data: Partial<{ name: string; phone: string; address: string }>,
+	) => void;
 	setPaymentMethod: (method: string) => void;
 }
+
 export const useOrderStore = create<OrderState>((set) => ({
-	formData: {
+	shippingAddress: {
 		name: "",
-		callNumber: "",
+		phone: "",
 		address: "",
-		// سایر فیلدهایی که در اسکیما دارید را اینجا مقداردهی اولیه کنید
 	},
 	paymentMethod: "cash",
-	setFormData: (data) =>
+
+	// آپدیت کردن بخشی از آدرس
+	setShippingAddress: (data) =>
 		set((state) => ({
-			formData: { ...state.formData, ...data },
+			shippingAddress: { ...state.shippingAddress, ...data },
 		})),
+
 	setPaymentMethod: (method) => set({ paymentMethod: method }),
 }));

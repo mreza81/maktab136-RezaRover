@@ -4,6 +4,7 @@ import ClearAllButton from "./ClearAll";
 import ProductInCart from "./ProductInCart";
 import Stepper from "./Stepper";
 import Link from "next/link";
+import SubmitBtn from "./submitBtn";
 
 async function Cart() {
 	const res = async () => {
@@ -13,7 +14,6 @@ async function Cart() {
 
 	const data = await res();
 	const cartItems = data?.items || [];
-	const disabledButton = cartItems.length == 0;
 
 	return (
 		<div className="bg-gray-50">
@@ -68,7 +68,7 @@ async function Cart() {
 										<span className="font-medium text-gray-800">
 											{data.totalPrice.toLocaleString("fa-IR")}
 										</span>
-										<span className="text-[10px]">تومان</span>
+										<span className="text-[10px]">دلار</span>
 									</div>
 								</div>
 
@@ -86,15 +86,8 @@ async function Cart() {
 										<span className="text-[10px] text-gray-400">دلار</span>
 									</div>
 								</div>
-								<Link href="/checkout">
-									<button
-										className={`w-full bg-[#7c3aed] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#6d28d9] transition-all transform active:scale-[0.98] shadow-lg shadow-purple-100 
-									${disabledButton ? `opacity-20 disabled ` : `enabled cursor-pointer`}`}
-									>
-										تایید و تکمیل سفارش
-									</button>
-								</Link>
 
+								<SubmitBtn cartItems={cartItems} />
 								<div className="flex gap-3 p-3 bg-purple-50 rounded-xl border border-purple-100">
 									<Info size={20} className="text-[#7c3aed] shrink-0" />
 									<p className="text-[11px] text-purple-900 leading-5">

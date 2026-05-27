@@ -5,31 +5,40 @@ import {
 } from "@/scheema/createOrder";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronDown, MapPin, Phone, User } from "lucide-react";
-import Link from "next/link";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useOrderStore } from "../hooks/useOrderStor";
 import { getCart } from "../services/getCart.service";
 import Stepper from "./Stepper";
 
 function Checkout() {
-	// دسترسی به اکشن‌ها و وضعیت‌های Zustand
-	const setFormData = useOrderStore((state) => state.setFormData);
+	const storedFormData = useOrderStore((state) => state.shippingAddress);
+	const setShippingAddress = useOrderStore((state) => state.setShippingAddress);
 	const { paymentMethod, setPaymentMethod } = useOrderStore();
 	const [totalPrice, setTotalPrice] = useState(0);
 
-	// تنظیم react-hook-form با zod
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm<createOrderScheemaType>({
 		resolver: zodResolver(createOrderScheema),
+		values: {
+			shippingAddress: storedFormData, // اینجا قبلاً به درستی تعریف شده
+			paymentMethod: paymentMethod,
+		} as any,
 	});
 
 	// هندلر ثبت فرم
 	const onSubmit = (data: createOrderScheemaType) => {
-		setFormData(data);
+		setShippingAddress(data.shippingAddress);
+		console.log(data);
+		console.log(paymentMethod);
+
+		router.push("/payment");
 	};
 
 	useEffect(() => {
@@ -37,9 +46,15 @@ function Checkout() {
 			const res = await getCart();
 
 			setTotalPrice(res.totalPrice);
+			if (res.items.length == 0) {
+				router.push("/products");
+				toast.warning("سبد خرید شما خالی است");
+			}
 		};
 		getCartPrice();
 	}, []);
+
+	const router = useRouter();
 
 	return (
 		<div className="bg-gray-50 min-h-screen">
@@ -76,14 +91,14 @@ function Checkout() {
 											<User size={14} /> نام و نام خانوادگی
 										</label>
 										<input
-											{...register("name")}
+											{...register("shippingAddress.name")}
 											type="text"
-											className={`w-full p-3.5 bg-gray-50 border ${errors.name ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none transition-all text-gray-800`}
+											className={`w-full p-3.5 bg-gray-50 border ${errors.shippingAddress?.name ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none transition-all text-gray-800`}
 											placeholder="مثلا: علی علوی"
 										/>
-										{errors.name && (
+										{errors.shippingAddress?.name && (
 											<p className="text-red-500 text-xs mt-1">
-												{errors.name.message}
+												{errors.shippingAddress.name?.message}
 											</p>
 										)}
 									</div>
@@ -94,14 +109,14 @@ function Checkout() {
 											<Phone size={14} /> شماره تماس
 										</label>
 										<input
-											{...register("callNumber")}
+											{...register("shippingAddress.phone")}
 											type="text"
-											className={`w-full p-3.5 bg-gray-50 border ${errors.callNumber ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none text-left text-gray-800`}
+											className={`w-full p-3.5 bg-gray-50 border ${errors.shippingAddress?.phone ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none text-left text-gray-800`}
 											placeholder="09120000000"
 										/>
-										{errors.callNumber && (
+										{errors.shippingAddress?.phone && (
 											<p className="text-red-500 text-xs mt-1">
-												{errors.callNumber.message}
+												{errors.shippingAddress.phone.message}
 											</p>
 										)}
 									</div>
@@ -112,14 +127,14 @@ function Checkout() {
 											<MapPin size={14} /> آدرس دقیق پستی
 										</label>
 										<textarea
-											{...register("address")}
+											{...register("shippingAddress.address")}
 											rows={3}
-											className={`w-full p-3.5 bg-gray-50 border ${errors.address ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none text-gray-800`}
+											className={`w-full p-3.5 bg-gray-50 border ${errors.shippingAddress?.address ? "border-red-500" : "border-gray-200"} rounded-1.5xl focus:border-purple-500 outline-none text-gray-800`}
 											placeholder="استان، شهر، محله، خیابان، پلاک و واحد"
 										/>
-										{errors.address && (
+										{errors.shippingAddress?.address && (
 											<p className="text-red-500 text-xs mt-1">
-												{errors.address.message}
+												{errors.shippingAddress.address.message}
 											</p>
 										)}
 									</div>
@@ -179,7 +194,7 @@ function Checkout() {
 									<div className="flex justify-between text-gray-500">
 										<span>قیمت کالاها</span>
 										<span className="font-medium text-gray-800 underline decoration-gray-200 underline-offset-8">
-											{totalPrice}
+											{`${totalPrice.toLocaleString("fa-IR")}دلار`}
 										</span>
 									</div>
 									<div className="flex justify-between text-gray-500">
@@ -192,7 +207,7 @@ function Checkout() {
 										</span>
 										<div className="text-left">
 											<span className="text-2xl font-black text-purple-600">
-												{totalPrice}
+												{totalPrice.toLocaleString("fa-ir")}
 											</span>
 											<span className="text-xs text-gray-400 mr-1 font-bold">
 												دلار
@@ -201,15 +216,14 @@ function Checkout() {
 									</div>
 
 									{/* دکمه ثبت فرم در دسکتاپ */}
-									<Link href={"/payment"}>
-										<button
-											type="submit"
-											disabled={isSubmitting}
-											className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-purple-100 mt-4 disabled:bg-gray-300 disabled:shadow-none cursor-pointer"
-										>
-											{isSubmitting ? "در حال پردازش..." : "تایید و ثبت نهایی"}
-										</button>
-									</Link>
+
+									<button
+										type="submit"
+										disabled={isSubmitting}
+										className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-purple-100 mt-4 disabled:bg-gray-300 disabled:shadow-none cursor-pointer"
+									>
+										{isSubmitting ? "در حال پردازش..." : "تایید و ثبت نهایی"}
+									</button>
 								</div>
 							</div>
 						</div>
