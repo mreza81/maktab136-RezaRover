@@ -45,7 +45,7 @@ function ProductInCart({ item, key }: { item: any; key: string }) {
 					<img
 						src={`${BASE_URL}${item.product.images?.[0]}`}
 						alt={item.product.name}
-						className="w-50 h-40 object-fill group-hover:scale-105 transition-transform"
+						className="w-50 h-30 object-contain group-hover:scale-105 transition-transform"
 					/>
 				</div>
 

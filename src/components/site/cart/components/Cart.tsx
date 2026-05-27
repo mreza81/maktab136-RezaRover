@@ -1,8 +1,9 @@
-import { ChevronLeft, Info, ShoppingBag, Sparkles, Trash2 } from "lucide-react";
+import { ChevronLeft, Info, ShoppingBag, Sparkles } from "lucide-react";
 import { getCart } from "../services/getCart.services";
+import ClearAllButton from "./ClearAll";
 import ProductInCart from "./ProductInCart";
 import Stepper from "./Stepper";
-import ClearAllButton from "./ClearAll";
+import Link from "next/link";
 
 async function Cart() {
 	const res = async () => {
@@ -85,13 +86,14 @@ async function Cart() {
 										<span className="text-[10px] text-gray-400">دلار</span>
 									</div>
 								</div>
-
-								<button
-									className={`w-full bg-[#7c3aed] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#6d28d9] transition-all transform active:scale-[0.98] shadow-lg shadow-purple-100 
+								<Link href="/checkout">
+									<button
+										className={`w-full bg-[#7c3aed] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#6d28d9] transition-all transform active:scale-[0.98] shadow-lg shadow-purple-100 
 									${disabledButton ? `opacity-20 disabled ` : `enabled cursor-pointer`}`}
-								>
-									تایید و تکمیل سفارش
-								</button>
+									>
+										تایید و تکمیل سفارش
+									</button>
+								</Link>
 
 								<div className="flex gap-3 p-3 bg-purple-50 rounded-xl border border-purple-100">
 									<Info size={20} className="text-[#7c3aed] shrink-0" />
