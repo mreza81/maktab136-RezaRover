@@ -1,5 +1,11 @@
+import MyOrders from "@/components/site/myOrders/components/myOrders";
+
 function page() {
-	return <div></div>;
+	return (
+		<div>
+			<MyOrders />
+		</div>
+	);
 }
 
 export default page;

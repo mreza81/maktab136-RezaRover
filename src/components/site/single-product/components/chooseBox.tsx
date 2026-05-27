@@ -94,11 +94,11 @@ function ChooseBox({ product }: { product: ProductType }) {
 				<div className="flex items-center justify-between bg-white border border-purple-200 rounded-lg px-4 py-2">
 					<button
 						onClick={increase}
-						disabled={count === product.stock}
+						disabled={count === product.stock || product.stock == 0}
 						className={`
               w-8 h-8 flex items-center justify-center rounded-md text-lg cursor-pointer
               ${
-								count === product.stock
+								count === product.stock || product.stock == 0
 									? "bg-purple-300 text-white cursor-not-allowed"
 									: "bg-purple-600 text-white hover:bg-purple-700"
 							}
@@ -127,7 +127,8 @@ function ChooseBox({ product }: { product: ProductType }) {
 			</div>
 
 			<button
-				className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl text-lg font-bold shadow-md cursor-pointer"
+				disabled={product.stock == 0}
+				className={`bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl text-lg font-bold shadow-md ${product.stock == 0 ? `opacity-20` : `cursor-pointer`}`}
 				onClick={() => handleAddToCart()}
 			>
 				ثبت سفارش

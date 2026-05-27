@@ -28,9 +28,7 @@ function Stepper() {
 						<div className="w-14 h-14 rounded-2xl bg-purple-600 text-white flex items-center justify-center border border-gray-100 transition-all group-hover:scale-105">
 							<Truck size={24} />
 						</div>
-						<span className="text-sm font-medium text-purple-600 ">
-							سفارشات
-						</span>
+						<span className="text-sm font-medium text-purple-600 ">سفارش</span>
 					</div>
 					{/* خط رابط */}
 					<div className="relative w-16 md:w-32 h-[2px] bg-gray-100 mt-[-24px]">

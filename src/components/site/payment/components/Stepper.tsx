@@ -30,7 +30,7 @@ function Stepper() {
 								<Truck size={24} />
 							</div>
 							<span className="text-sm font-medium text-purple-600 ">
-								سفارشات
+								سفارش
 							</span>
 						</div>
 					</Link>
