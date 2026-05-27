@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getProfileService } from "../services/getProfile.service";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function SignupModal() {
 	const [openModal, setOpenModal] = useState(false);
@@ -58,14 +59,19 @@ function SignupModal() {
 								{userData?.data.name || "درحال بارگذاری"}
 							</p>
 						</div>
-						<div className="flex justify-start items-center gap-3 cursor-pointer">
-							<img
-								src="/assets/images/bx-border-all.svg"
-								alt="order"
-								className="w-5 h-5 xl:w-7 xl:h-7 "
-							/>
-							<p className="xl:text-xl">سفارشات</p>
-						</div>
+						<Link href="myOrders">
+							<div
+								className="flex justify-start items-center gap-3 cursor-pointer"
+								onClick={() => setOpenModal(false)}
+							>
+								<img
+									src="/assets/images/bx-border-all.svg"
+									alt="order"
+									className="w-5 h-5 xl:w-7 xl:h-7 "
+								/>
+								<p className="xl:text-xl">سفارشات</p>
+							</div>
+						</Link>
 						<div
 							className="flex justify-start items-center gap-3 cursor-pointer"
 							onClick={() => {

@@ -19,6 +19,6 @@ export async function registerService(user: RegisterType) {
 		});
 		return res.data;
 	} catch (error: any) {
-		throw new Error(error);
+		throw error.response?.data || error.message;
 	}
 }
