@@ -3,12 +3,14 @@ import { ProductType } from "@/types/productTypeAndOrders";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { addToCart, Data } from "../services/addToCart.service";
+import { getCartItems } from "../services/getCartItems.service";
 
 function ChooseBox({ product }: { product: ProductType }) {
 	const [count, setCount] = useState(1);
+	const [cartItems, setCartItems] = useState<any[]>([]);
 	const router = useRouter();
 	const increase = () => {
 		if (count < product.stock) {
@@ -22,6 +24,10 @@ function ChooseBox({ product }: { product: ProductType }) {
 		}
 	};
 
+	const existingItem = cartItems?.find(
+		(item) => item?.product?._id === product._id,
+	);
+
 	const handleAddToCart = async () => {
 		const accesstoken = Cookies.get("access-token");
 		const refreshtoken = Cookies.get("refresh-token");
@@ -32,29 +38,55 @@ function ChooseBox({ product }: { product: ProductType }) {
 			return;
 		}
 		try {
-			const data: Data = {
-				productId: product._id,
-				quantity: count,
-			};
+			if (existingItem) {
+				console.log("این محصول قبلاً داخل سبد بوده");
+			} else {
+				const data: Data = {
+					productId: product._id,
+					quantity: count,
+				};
 
-			const res = await addToCart(data);
-			toast.success(
-				<div>
-					<div style={{ marginBottom: 8 }}>
-						محصول با موفقیت به سبد خرید اضافه شد.
-					</div>
+				const res = await addToCart(data);
+				toast.success(
+					<div>
+						<div style={{ marginBottom: 8 }}>
+							محصول با موفقیت به سبد خرید اضافه شد.
+						</div>
 
-					<div style={{ display: "flex", gap: 12 }}>
-						<Link href="/cart" className="text-secondry cursor-pointer">
-							مشاهده سبد خرید
-						</Link>
-					</div>
-				</div>,
-			);
+						<div style={{ display: "flex", gap: 12 }}>
+							<Link href="/cart" className="text-secondry cursor-pointer">
+								مشاهده سبد خرید
+							</Link>
+						</div>
+					</div>,
+				);
+			}
 		} catch (error: any) {
 			throw new Error(error);
 		}
 	};
+	useEffect(() => {
+		const fetchCartItems = async () => {
+			try {
+				const data = await getCartItems();
+				setCartItems(data?.data?.items || []);
+				console.log(data.data.items);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchCartItems();
+	}, []);
+
+	useEffect(() => {
+		if (existingItem?.quantity != null) {
+			setCount(existingItem.quantity);
+		} else {
+			setCount(1);
+		}
+	}, [existingItem?.quantity, product._id]);
+
 	return (
 		<div className="w-full min-w-65 rounded-xl bg-[#F5F3FF] p-6 md:px-7 shadow-sm border border-purple-200 flex flex-col gap-6">
 			<div className="flex flex-col items-center justify-between gap-4">

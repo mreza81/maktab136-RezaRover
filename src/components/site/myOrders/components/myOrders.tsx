@@ -18,10 +18,10 @@ async function MyOrders() {
 		switch (status) {
 			case "pending":
 				return "در انتظار بررسی";
-			case "paid":
-				return "پرداخت شده";
-			case "shipped":
-				return "ارسال شده";
+			case "confirmed":
+				return "تایید شده";
+			case "shipping":
+				return "درحال ارسال";
 			case "delivered":
 				return "تحویل داده شده";
 			case "cancelled":

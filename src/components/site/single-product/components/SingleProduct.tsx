@@ -4,6 +4,7 @@ import { singleProductService } from "../services/singleProduct.services";
 import Images from "./images";
 import ChooseBox from "./chooseBox";
 import ProductTabs from "./tabComponent";
+import { getCart } from "../../cart/services/getCart.services";
 
 async function SingleProduct({ params }: { params: { id: string } }) {
 	const param = await params;

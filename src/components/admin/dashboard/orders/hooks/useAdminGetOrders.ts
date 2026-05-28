@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOrders } from "../services/orders.services";
+import { getOrders } from "../services/getOrders.services";
 
 export function useAdminGetOrders(page: number, limit: number, status: string) {
 	const { data, isLoading, error } = useQuery({

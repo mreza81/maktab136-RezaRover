@@ -9,7 +9,7 @@ export async function addToCart(data: Data) {
 	try {
 		const res = await axiosInstance.post("/api/cart/add", data);
 		const resData = res.data;
-		console.log(data);
+
 		return resData;
 	} catch (error: any) {
 		console.log("Server Response Error:", error.response?.data);

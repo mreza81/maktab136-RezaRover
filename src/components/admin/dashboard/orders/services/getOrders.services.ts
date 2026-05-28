@@ -4,7 +4,7 @@ import axiosInstance from "@/utils/interceptor/clientAxios";
 export async function getOrders(page: number, limit: number, status: string) {
 	try {
 		const res = axiosInstance.get(
-			`${BASE_URL}/api/orders/admin/all?page=${page}&limit=${limit}10&status=${status}`,
+			`${BASE_URL}/api/orders/admin/all?page=${page}&limit=${limit}&status=${status}`,
 		);
 		const data = (await res).data;
 		console.log(data.data);
