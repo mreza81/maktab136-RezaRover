@@ -11,7 +11,6 @@ function SubmitBtn(cartItems: any) {
 									${disabledButton ? `opacity-20 disabled  ` : `enabled cursor-pointer`}`}
 			disabled={disabledButton}
 			onClick={() => {
-				console.log(cartItems);
 				router.push("/checkout");
 			}}
 		>

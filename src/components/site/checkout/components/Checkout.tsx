@@ -35,8 +35,6 @@ function Checkout() {
 	// هندلر ثبت فرم
 	const onSubmit = (data: createOrderScheemaType) => {
 		setShippingAddress(data.shippingAddress);
-		console.log(data);
-		console.log(paymentMethod);
 
 		router.push("/payment");
 	};

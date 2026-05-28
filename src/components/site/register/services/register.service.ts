@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 export async function registerService(user: RegisterType) {
 	try {
 		const res = await axios.post(`${BASE_URL}/api/auth/register`, user);
-		console.log(res.data);
+
 		const data = res.data;
 		Cookies.set("access-token", data.data.token, {
 			expires: 1,

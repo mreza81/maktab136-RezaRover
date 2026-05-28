@@ -32,7 +32,7 @@ export default function ProductTabs({ product }: { product: any }) {
 			</div>
 
 			{/* محتوا = max-height + scroll */}
-			<div className="text-gray-800 leading-7 max-h-95 overflow-y-auto pr-2">
+			<div className="text-gray-800 leading-7 max-h-95 overflow-y-auto pr-2 vertical-scroll-rtl">
 				{tab === "desc" ? (
 					<p>{product?.description}</p>
 				) : (

@@ -9,7 +9,6 @@ async function MyOrders() {
 	try {
 		const res = await getMyOrders();
 		orders = res?.data || [];
-		console.log(orders);
 	} catch (error) {
 		orders = [];
 	}
@@ -130,10 +129,6 @@ async function MyOrders() {
 											? "نقدی"
 											: order.paymentMethod}
 									</div>
-
-									<button className="bg-purple-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors w-full sm:w-auto">
-										مشاهده جزئیات
-									</button>
 								</div>
 							</div>
 						))}

@@ -12,7 +12,6 @@ export async function addToCart(data: Data) {
 
 		return resData;
 	} catch (error: any) {
-		console.log("Server Response Error:", error.response?.data);
 		throw error;
 	}
 }

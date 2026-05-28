@@ -7,7 +7,6 @@ export async function getOrders(page: number, limit: number, status: string) {
 			`${BASE_URL}/api/orders/admin/all?page=${page}&limit=${limit}&status=${status}`,
 		);
 		const data = (await res).data;
-		console.log(data.data);
 
 		return data;
 	} catch (e: any) {

@@ -38,7 +38,6 @@ function Payment() {
 				router.push("/products");
 				toast.warning("سبد خرید شما خالی است");
 			}
-			console.log(data);
 		};
 		getCartPrice();
 	}, []);

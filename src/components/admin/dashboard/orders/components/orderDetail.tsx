@@ -21,6 +21,7 @@ export default function OrderDetailsModal({
 		try {
 			const res = await updateOrderStatus(order._id, { status: orderStatus });
 			queryClient.invalidateQueries({ queryKey: ["orders"] });
+			toast.success("🎉بروزرسانی وضعیت سفارش با موفقیت انجام شد");
 			setOpenOrderModal(false);
 			return res;
 		} catch {}
@@ -129,7 +130,7 @@ export default function OrderDetailsModal({
 				</div>
 
 				{/* بخش مدیریت وضعیت و مبالغ نهایی */}
-				<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-end border-t border-white/10 pt-6">
+				<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start border-t border-white/10 pt-6">
 					<div className="space-y-3">
 						<label className="block text-sm font-medium text-gray-300">
 							تغییر وضعیت سفارش
