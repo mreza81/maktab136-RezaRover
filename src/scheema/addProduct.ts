@@ -12,7 +12,7 @@ export const addProductScheema = z.object({
 		}, "توضیحات نمی‌تواند خالی باشد"),
 	price: z.number().min(1, "قیمت باید بزرگتر از صفر باشد"),
 	category: z.string().nonempty("دسته بندی الزامی است"),
-	stock: z.number().min(1, "تعداد باید حداقل 1 باشد"),
+	stock: z.number().min(0, "مقدار نمیتواند عدد منفی باشد"),
 	brand: z.string().nonempty("برند الزامی است"),
 	images: z.array(z.instanceof(File)).min(1, "افزودن حداقل یک عکس الزامی است"),
 });

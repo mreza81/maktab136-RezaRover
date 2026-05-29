@@ -5,12 +5,16 @@ import Images from "./images";
 import ChooseBox from "./chooseBox";
 import ProductTabs from "./tabComponent";
 import { getCart } from "../../cart/services/getCart.services";
+import { getProducts } from "@/api/getProducts/getProducts.service";
+import LikedProductsSwiper from "./likedProductsSwiper";
 
 async function SingleProduct({ params }: { params: { id: string } }) {
 	const param = await params;
 	const id = param.id;
 	const res = await singleProductService(id);
 	const product: ProductType = res.data;
+	const likedProductsRes = await getProducts("", "", product.category, 1, 20);
+	const likedProductsData = likedProductsRes.data;
 
 	return (
 		<div className="w-full">
@@ -105,28 +109,7 @@ async function SingleProduct({ params }: { params: { id: string } }) {
 
 				{/* ستون 2 و 3 : محصولات مشابه */}
 				<div className="col-span-1 lg:col-span-2">
-					<div className="w-full rounded-xl bg-white shadow-sm border border-gray-200 p-6 h-full">
-						<h3 className="text-xl font-bold text-gray-900 mb-4">
-							محصولات مشابه
-						</h3>
-
-						<div
-							className="
-          grid 
-          grid-cols-2          /* موبایل */
-          sm:grid-cols-3       
-          md:grid-cols-3       
-          lg:grid-cols-3
-          gap-6
-        "
-						>
-							{/* کارت‌های نمونه — بعداً دیتای واقعی */}
-							<div className="h-32 bg-gray-100 rounded-lg"></div>
-							<div className="h-32 bg-gray-100 rounded-lg"></div>
-							<div className="h-32 bg-gray-100 rounded-lg"></div>
-							<div className="h-32 bg-gray-100 rounded-lg"></div>
-						</div>
-					</div>
+					<LikedProductsSwiper likedProductsData={likedProductsData} />
 				</div>
 			</div>
 		</div>

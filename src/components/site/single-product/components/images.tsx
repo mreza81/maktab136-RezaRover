@@ -21,7 +21,7 @@ function Images({ product }: { product: ProductType }) {
 			<div className="w-full mt-3 grid  gap-3 px-2 md:px-0 ">
 				<Swiper
 					modules={[Autoplay]} // اضافه کردن ماژول پیجینیشن
-					loop={true} // لوپ بی‌نهایت
+					// لوپ بی‌نهایت
 					slidesPerGroup={1}
 					speed={900}
 					spaceBetween={18}

@@ -51,11 +51,11 @@ export default function EditModal({
 	const submit = async (data: EditProductScheemaType) => {
 		let hasError = false;
 		// ۲. چک کردن دستی: اگر تیک خورده ولی خالی است، خطا بده
-		if (enabled.price && (!data.price || data.price <= 0)) {
+		if (enabled.price && (!data.price || data.price < 0)) {
 			setError("price", { message: "قیمت معتبر وارد کنید" });
 			hasError = true;
 		}
-		if (enabled.stock && !data.stock) {
+		if (enabled.stock && (data.stock == null || data.stock < 0)) {
 			setError("stock", { message: "مقدار معتبر  وارد کنید" });
 			hasError = true;
 		}

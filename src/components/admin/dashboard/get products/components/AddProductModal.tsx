@@ -4,10 +4,15 @@ import { addProductScheema, AddProductScheemaType } from "@/scheema/addProduct";
 import ProductEditor from "@/shared/TextEditor";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { handleAddProduct } from "../services/addProduct.service";
+
+type PreviewImage = {
+	file: File;
+	preview: string;
+};
 
 export default function AddProductModalUI({
 	openAddModal,
@@ -22,7 +27,8 @@ export default function AddProductModalUI({
 		control,
 		setValue,
 		getValues,
-		formState: { errors },
+		reset,
+		formState: { errors, isSubmitting },
 	} = useForm<AddProductScheemaType>({
 		resolver: zodResolver(addProductScheema),
 		defaultValues: {
@@ -37,13 +43,96 @@ export default function AddProductModalUI({
 	});
 
 	const queryClient = useQueryClient();
+	const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+	const [uploadedImages, setUploadedImages] = useState<PreviewImage[]>([]);
+
+	const cleanupPreviews = (images: PreviewImage[]) => {
+		images.forEach((item) => {
+			if (item.preview) {
+				URL.revokeObjectURL(item.preview);
+			}
+		});
+	};
+
+	const closeModal = () => {
+		cleanupPreviews(uploadedImages);
+		setUploadedImages([]);
+		reset();
+		if (fileInputRef.current) {
+			fileInputRef.current.value = "";
+		}
+		setOpenAddModal(false);
+	};
+
+	useEffect(() => {
+		if (!openAddModal) {
+			cleanupPreviews(uploadedImages);
+			setUploadedImages([]);
+			reset();
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [openAddModal]);
+
+	useEffect(() => {
+		return () => {
+			cleanupPreviews(uploadedImages);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+		if (!files || files.length === 0) return;
+
+		const newFilesArray = Array.from(files);
+		const previousFiles = getValues("images") || [];
+		const updatedFiles = [...previousFiles, ...newFilesArray];
+
+		setValue("images", updatedFiles, {
+			shouldValidate: true,
+			shouldDirty: true,
+		});
+
+		const newPreviewItems: PreviewImage[] = newFilesArray.map((file) => ({
+			file,
+			preview: URL.createObjectURL(file),
+		}));
+
+		setUploadedImages((prev) => [...prev, ...newPreviewItems]);
+
+		// برای اینکه کاربر بتواند دوباره همان فایل را هم انتخاب کند
+		e.target.value = "";
+	};
+
+	const handleRemoveImage = (index: number) => {
+		const currentFiles = getValues("images") || [];
+		const updatedFiles = currentFiles.filter((_, i) => i !== index);
+
+		const removedImage = uploadedImages[index];
+		if (removedImage?.preview) {
+			URL.revokeObjectURL(removedImage.preview);
+		}
+
+		setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+
+		setValue("images", updatedFiles, {
+			shouldValidate: true,
+			shouldDirty: true,
+		});
+
+		if (fileInputRef.current) {
+			fileInputRef.current.value = "";
+		}
+	};
 
 	const submit = async (data: AddProductScheemaType) => {
 		try {
-			// ایجاد شیء FormData برای ارسال فایل و متن با هم
 			const formData = new FormData();
 
-			// اضافه کردن فیلدهای متنی
 			formData.append("name", data.name);
 			formData.append("description", data.description);
 			formData.append("price", String(data.price));
@@ -51,121 +140,76 @@ export default function AddProductModalUI({
 			formData.append("category", data.category);
 			formData.append("brand", data.brand);
 
-			// اضافه کردن عکس‌ها
 			if (data.images && data.images.length > 0) {
 				data.images.forEach((file) => {
-					formData.append("images", file); // مطمئن شو بک‌انر هم همین نام images را می‌خواند
+					formData.append("images", file);
 				});
 			}
 
-			// ارسال formData به جای data
 			const res = await handleAddProduct(formData);
 
 			if (res) {
 				toast.success("محصول با موفقیت اضافه شد");
 				queryClient.invalidateQueries({ queryKey: ["products"] });
-				setOpenAddModal(false); // بستن مودال بعد از موفقیت
+				closeModal();
 			}
 		} catch (error: any) {
-			// حل مشکل خطای Cannot read properties of undefined (reading 'data')
 			const message =
-				error.response?.data?.message || error.message || "خطایی رخ داد";
+				error?.response?.data?.message || error?.message || "خطایی رخ داد";
 			toast.error(message);
 		}
 	};
-	const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-	const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = e.target.files;
-		if (!files) return;
-
-		const newFilesArray = Array.from(files); // عکس‌های جدیدی که کاربر انتخاب کرده
-
-		// 1. دریافت لیست عکس‌های قبلی که قبلاً در فرم ذخیره شده بودند
-		const previousFiles = getValues("images") || []; // استفاده از getValues برای خواندن مقادیر فعلی فرم
-
-		// 2. ترکیب لیست قبلی با لیست جدید
-		const updatedFiles = [...previousFiles, ...newFilesArray];
-
-		// 3. ذخیره لیست کامل (قبلی + جدید) در فرم
-		setValue("images", updatedFiles, {
-			shouldValidate: true,
-		});
-
-		// 4. آپدیت کردن پیش‌نمایش‌ها (که این قسمت در کد شما درست است)
-		const imageUrls = newFilesArray.map((file) => URL.createObjectURL(file));
-		setUploadedImages((prev) => [...prev, ...imageUrls]);
-
-		// 5. پاک کردن مقدار input file برای اینکه کاربر بتواند دوباره همین فایل‌ها را انتخاب کند (اگر لازم بود)
-		e.target.value = "";
-	};
-
-	const handleRemoveImage = (index: number) => {
-		if (!fileInputRef.current) return;
-
-		const files = Array.from(fileInputRef.current.files || []);
-
-		const updatedFiles = files.filter((_, i) => i !== index);
-
-		const dataTransfer = new DataTransfer();
-		updatedFiles.forEach((file) => dataTransfer.items.add(file));
-
-		fileInputRef.current.files = dataTransfer.files;
-
-		setUploadedImages((prev) => prev.filter((_, i) => i !== index));
-
-		setValue("images", updatedFiles, {
-			shouldValidate: true,
-		});
-	};
+	if (!openAddModal) return null;
 
 	return (
-		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-			<div className="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-lg bg-[#0d1b2a] p-6 shadow-xl text-white">
-				<h2 className="text-center text-lg font-bold mb-6">
-					افزودن محصول جدید
-				</h2>
+		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+			<div className="w-full max-w-xl h-[90vh] rounded-lg bg-[#0d1b2a] text-white shadow-xl flex flex-col overflow-hidden">
+				{/* Header */}
+				<div className="shrink-0 px-6 py-4 border-b border-white/10">
+					<h2 className="text-center text-lg font-bold">افزودن محصول جدید</h2>
+				</div>
 
-				<div className="space-y-10">
-					<div className="relative">
+				{/* Body */}
+				<div className="flex-1 overflow-y-auto px-6 py-4 space-y-6 vertical-scroll-rtl">
+					<div className="relative pb-5">
 						<label className="block mb-1 text-sm">نام محصول</label>
 						<input
-							type="name"
+							type="text"
 							{...register("name")}
 							className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 							placeholder="نام محصول"
 						/>
 						{errors.name && (
-							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 								{errors.name.message}
 							</p>
 						)}
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div className="relative">
+						<div className="relative pb-5">
 							<label className="block mb-1 text-sm">قیمت</label>
 							<input
 								type="number"
 								{...register("price", { valueAsNumber: true })}
-								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500 "
+								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="قیمت"
 								onInput={(e: React.FormEvent<HTMLInputElement>) => {
-									const input = e.currentTarget; // استفاده از currentTarget به جای target
+									const input = e.currentTarget;
 									if (input.value.length > 1 && input.value.startsWith("0")) {
 										input.value = input.value.replace(/^0+/, "");
 									}
 								}}
 							/>
 							{errors.price && (
-								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 									{errors.price.message}
 								</p>
 							)}
 						</div>
 
-						<div className="relative">
+						<div className="relative pb-5">
 							<label className="block mb-1 text-sm">موجودی</label>
 							<input
 								type="number"
@@ -173,14 +217,14 @@ export default function AddProductModalUI({
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="موجودی"
 								onInput={(e: React.FormEvent<HTMLInputElement>) => {
-									const input = e.currentTarget; // استفاده از currentTarget به جای target
+									const input = e.currentTarget;
 									if (input.value.length > 1 && input.value.startsWith("0")) {
 										input.value = input.value.replace(/^0+/, "");
 									}
 								}}
 							/>
 							{errors.stock && (
-								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 									{errors.stock.message}
 								</p>
 							)}
@@ -188,27 +232,26 @@ export default function AddProductModalUI({
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div className="relative">
+						<div className="relative pb-5">
 							<label className="block mb-1 text-sm">برند</label>
 							<input
-								type="brand"
+								type="text"
 								{...register("brand")}
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 								placeholder="برند"
 							/>
 							{errors.brand && (
-								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 									{errors.brand.message}
 								</p>
 							)}
 						</div>
 
-						<div className="relative">
+						<div className="relative pb-5">
 							<label className="block mb-1 text-sm">دسته بندی</label>
-
 							<select
 								{...register("category")}
-								defaultValue="" // پیشفرض خالی
+								defaultValue=""
 								className="w-full bg-[#1b263b] px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
 							>
 								<option value="" disabled>
@@ -219,18 +262,16 @@ export default function AddProductModalUI({
 								<option value="کوپه">کوپه</option>
 								<option value="شاسی بلند">شاسی بلند</option>
 							</select>
-
 							{errors.category && (
-								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+								<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 									{errors.category.message}
 								</p>
 							)}
 						</div>
 					</div>
 
-					<div className="relative">
+					<div className="relative pb-5">
 						<label className="block mb-1 text-sm">توضیحات</label>
-
 						<Controller
 							name="description"
 							control={control}
@@ -247,83 +288,83 @@ export default function AddProductModalUI({
 							)}
 						/>
 						{errors.description && (
-							<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
+							<p className="text-red-400 text-xs mt-1 absolute bottom-0">
 								{errors.description.message}
 							</p>
 						)}
 					</div>
 
-					<div>
-						<div className="relative">
+					<div className="pb-2">
+						<div className="relative pb-5">
 							<input
 								type="file"
 								multiple
+								accept="image/*"
 								ref={fileInputRef}
 								onChange={handleImageChange}
-								className=" w-full
-    text-sm
-    text-gray-300
-    bg-[#1b263b]
-    border border-gray-600
-    rounded-lg
-    cursor-pointer
-    file:mr-4
-    file:py-2
-    file:px-4
-    file:rounded-md
-    file:border-0
-    file:text-sm
-    file:font-medium
-    file:bg-blue-600
-    file:text-white
-    hover:file:bg-blue-700"
+								className="w-full text-sm text-gray-300 bg-[#1b263b] border border-gray-600 rounded-lg cursor-pointer
+								file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0
+								file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700"
 							/>
-
 							{errors.images && (
-								<p className="text-red-400 text-xs mt-1 absolute bottom-[-18]">
-									{errors.images.message}
+								<p className="text-red-400 text-xs mt-1 absolute bottom-0">
+									{errors.images.message as string}
 								</p>
 							)}
 						</div>
 
-						<div className="flex flex-wrap gap-3 mt-3">
-							{uploadedImages.map((img, index) => (
-								<div
-									key={index}
-									className="w-20 h-20 rounded-md overflow-hidden border border-gray-600 relative"
-								>
-									<img
-										src={img}
-										alt="preview"
-										className="w-full h-full object-cover"
-									/>
-									<button
-										type="button"
-										onClick={() => handleRemoveImage(index)}
-										className="absolute top-0 right-0 bg-red-600 text-white text-xs px-1 rounded-bl"
-									>
-										✕
-									</button>
+						<div className="mt-2 rounded-lg border border-white/10 bg-[#1b263b] p-3 h-36 overflow-y-auto vertical-scroll-rtl ">
+							{uploadedImages.length > 0 ? (
+								<div className="flex flex-wrap gap-3">
+									{uploadedImages.map((item, index) => (
+										<div
+											key={`${item.file.name}-${index}`}
+											className="w-20 h-20 rounded-md overflow-hidden border border-gray-600 relative shrink-0"
+										>
+											<img
+												src={item.preview}
+												alt={`preview-${index}`}
+												className="w-full h-full object-cover"
+											/>
+											<button
+												type="button"
+												onClick={() => handleRemoveImage(index)}
+												className="absolute top-0 right-0 bg-red-600 text-white text-xs px-1 rounded-bl"
+											>
+												✕
+											</button>
+										</div>
+									))}
 								</div>
-							))}
+							) : (
+								<div className="h-full flex items-center justify-center text-sm text-gray-400">
+									هنوز عکسی انتخاب نشده
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 
-				<div className="flex justify-between mt-6">
-					<button
-						className="px-4 py-2 bg-gray-500 rounded-md"
-						onClick={() => setOpenAddModal(false)}
-					>
-						انصراف
-					</button>
+				{/* Footer */}
+				<div className="shrink-0 border-t border-white/10 px-6 py-4 bg-[#0d1b2a]">
+					<div className="flex justify-between gap-3">
+						<button
+							type="button"
+							className="px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-600 transition"
+							onClick={closeModal}
+						>
+							انصراف
+						</button>
 
-					<button
-						className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md"
-						onClick={handleSubmit(submit)}
-					>
-						افزودن محصول
-					</button>
+						<button
+							type="button"
+							className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+							onClick={handleSubmit(submit)}
+							disabled={isSubmitting}
+						>
+							{isSubmitting ? "در حال ثبت..." : "افزودن محصول"}
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
