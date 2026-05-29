@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
 	const token = req.cookies.get("access-token")?.value;
+	const refreshToken = req.cookies.get("refresh-token")?.value;
 	const role = req.cookies.get("role")?.value;
 	const { pathname } = req.nextUrl;
 
@@ -22,6 +23,12 @@ export function middleware(req: NextRequest) {
 		}
 		if (role !== "admin") {
 			return new NextResponse("Not Found", { status: 404 });
+		}
+	}
+	if (pathname.startsWith("/cart")) {
+		if (!token && !refreshToken) {
+			const loginUrl = new URL("/login", req.url);
+			return NextResponse.redirect(loginUrl);
 		}
 	}
 

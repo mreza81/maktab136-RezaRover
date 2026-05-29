@@ -34,7 +34,7 @@ function ChooseBox({ product }: { product: ProductType }) {
 	const handleAddToCart = async () => {
 		if (!accesstoken && !refreshtoken) {
 			toast.warning("برای انتخاب محصول باید احرازهویت کنید");
-
+			router.push("/login");
 			return;
 		} else {
 			try {
