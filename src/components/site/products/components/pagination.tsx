@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react"; // useEffect و useState رو اضافه کردیم
 
 type PaginationProps = {
 	currentPage: number;
@@ -13,21 +14,41 @@ export default function Pagination({
 	totalPages,
 }: PaginationProps) {
 	const router = useRouter();
+	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
+	// State برای نگهداری مقدار فعلی select
+	const [currentLimit, setCurrentLimit] = useState<string>(
+		searchParams.get("limit") || "10",
+	);
+
+	// useEffect برای سینک کردن state با URL در ابتدای رندر یا بعد از تغییر URL
+	useEffect(() => {
+		const urlLimit = searchParams.get("limit") || "10";
+		if (urlLimit !== currentLimit) {
+			setCurrentLimit(urlLimit);
+		}
+	}, [searchParams, currentLimit]); // وابستگی‌ها برای اجرای صحیح
+
+	// هندلر برای تغییر select
 	const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const newLimit = e.target.value;
 		const params = new URLSearchParams(searchParams.toString());
-		params.set("limit", e.target.value);
-		params.set("page", "1");
-		router.push(`?${params.toString()}`);
+		params.set("limit", newLimit);
+		params.set("page", "1"); // وقتی limit عوض میشه، صفحه رو به اول برمی‌گردونیم
+		router.push(`${pathname}?${params.toString()}`);
+		setCurrentLimit(newLimit); // آپدیت state لوکال همزمان با تغییر URL
 	};
 
+	// هندلر برای رفتن به صفحه دلخواه
 	const goToPage = (page: number) => {
 		const params = new URLSearchParams(searchParams.toString());
 		params.set("page", page.toString());
-		router.push(`?${params.toString()}`);
+		// توجه: اینجا page رو تغییر میدیم، limit دست نمیخوره
+		router.push(`${pathname}?${params.toString()}`);
 	};
 
+	// منطق تولید اعداد صفحه (مثل قبل)
 	const getPageNumbers = () => {
 		const delta = 1;
 		const range: (number | string)[] = [];
@@ -53,8 +74,8 @@ export default function Pagination({
 				<span className="font-medium">نمایش در هر صفحه:</span>
 				<select
 					onChange={handleLimitChange}
-					defaultValue={searchParams.get("limit") || "10"}
-					className="border-violet-200 border rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-violet-500 transition"
+					value={currentLimit} // از state لوکال استفاده می‌کنیم
+					className="border-violet-200 border rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-violet-500 transition disabled"
 				>
 					<option value="10">۱۰</option>
 					<option value="30">۳۰</option>
@@ -76,6 +97,7 @@ export default function Pagination({
 				{getPageNumbers().map((page, index) => (
 					<button
 						key={index}
+						// فقط اگر صفحه عدد بود، goToPage رو صدا بزن
 						onClick={() => typeof page === "number" && goToPage(page)}
 						className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium transition ${
 							page === currentPage

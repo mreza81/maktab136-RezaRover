@@ -9,7 +9,8 @@ function ClearAllButton() {
 	const [openModal, setOpenModal] = useState(false);
 	const router = useRouter();
 	const handleClearAll = async () => {
-		const res = await deletCart();
+		await deletCart();
+
 		toast.success("🎉سبد خرید با موفقیت حذف شد");
 		router.refresh();
 	};

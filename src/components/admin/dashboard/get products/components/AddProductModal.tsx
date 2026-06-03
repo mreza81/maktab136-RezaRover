@@ -350,7 +350,7 @@ export default function AddProductModalUI({
 					<div className="flex justify-between gap-3">
 						<button
 							type="button"
-							className="px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-600 transition"
+							className="px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-600 transition cursor-pointer"
 							onClick={closeModal}
 						>
 							انصراف
@@ -358,7 +358,7 @@ export default function AddProductModalUI({
 
 						<button
 							type="button"
-							className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+							className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
 							onClick={handleSubmit(submit)}
 							disabled={isSubmitting}
 						>

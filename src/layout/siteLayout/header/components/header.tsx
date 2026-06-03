@@ -23,7 +23,9 @@ function Header() {
 							<ActiveLink href="/">صفحه اصلی</ActiveLink>
 							<ActiveLink href="/products"> محصولات</ActiveLink>
 							<ActiveLink href="/about-us">درباره ما</ActiveLink>
-							<ActiveLink href="/contact-us">ارتباط با ما</ActiveLink>
+							<div className="pointer-events-none cursor-not-allowed disabled">
+								<ActiveLink href="/contact-us">ارتباط با ما</ActiveLink>
+							</div>
 						</nav>
 					</div>
 

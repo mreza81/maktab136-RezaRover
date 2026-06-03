@@ -170,12 +170,12 @@ export default function OrderDetailsModal({
 				<div className="flex justify-end gap-4 mt-8">
 					<button
 						onClick={() => setOpenOrderModal(false)}
-						className="px-6 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg transition-all"
+						className="px-6 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg transition-all cursor-pointer"
 					>
 						انصراف
 					</button>
 					<button
-						className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold shadow-lg shadow-green-900/20 transition-all"
+						className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold shadow-lg shadow-green-900/20 transition-all cursor-pointer"
 						onClick={handleUpdateOrderStatus}
 					>
 						بروزرسانی وضعیت سفارش

@@ -35,9 +35,9 @@ function Orders() {
 							className="rounded-xl object-cover shadow-lg border  "
 						/>
 					</div>
-					<div className="hidden md:flex  bg-tertialy w-82 h-12 rounded-xl  md:justify-start md:items-center gap-4   xl:h-15 xl:w-85 px-3">
+					<div className="hidden md:flex  bg-tertialy w-82 h-12 rounded-xl  md:justify-start md:items-center gap-4   xl:h-15 xl:w-85 px-3 disabled cursor-none">
 						<input
-							className="  p-2 text-white w-65 h-12 rounded-r-xl outline-none"
+							className="  p-2 text-white w-65 h-12 rounded-r-xl outline-none disabled"
 							placeholder="محصول مورد نظر را جست و جو کنید"
 							onChange={(e) => setSearch(e.target.value)}
 						/>

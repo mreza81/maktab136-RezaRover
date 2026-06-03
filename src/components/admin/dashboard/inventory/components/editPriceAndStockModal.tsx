@@ -164,14 +164,14 @@ export default function EditModal({
 					{/* buttons */}
 					<div className="flex justify-between pt-4">
 						<button
-							className="px-4 py-2 bg-gray-600 rounded-md"
+							className="px-4 py-2 bg-gray-600 rounded-md cursor-pointer"
 							onClick={() => setOpenEdditModal(false)}
 						>
 							بستن
 						</button>
 
 						<button
-							className="px-4 py-2 bg-blue-600 rounded-md disabled:opacity-30"
+							className="px-4 py-2 bg-blue-600 rounded-md disabled:opacity-30 cursor-pointer"
 							disabled={!enabled.price && !enabled.stock}
 							onClick={handleSubmit(submit)}
 						>

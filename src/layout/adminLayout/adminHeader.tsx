@@ -36,7 +36,7 @@ function AdminHeader() {
 						alt="home"
 						width={70}
 						height={70}
-						className="hidden xl:block hover:corsor-pointer"
+						className="hidden xl:block cursor-pointer"
 						onClick={() => router.replace("/")}
 					/>
 
@@ -147,6 +147,7 @@ function AdminHeader() {
 						width={55}
 						height={55}
 						onClick={() => setOpenLogOutModal(true)}
+						className="cursor-pointer"
 					/>
 				</div>
 			</div>
