@@ -88,5 +88,6 @@
 
 1.  **کلون کردن مخزن:**
 ```bash
-git clone <URL مخزن گیت‌هاب یا مسیر لوکال شما>
-cd car-commerce
+git clone <REPO URLا>
+npm install
+npm run dev
