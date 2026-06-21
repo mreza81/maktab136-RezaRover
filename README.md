@@ -9,12 +9,12 @@
 *(لطفاً مسیرهای تصاویر واقعی پروژه خود را در اینجا جایگزین کنید. تصاویر مربوط به پنل ادمین را نیز اضافه کنید.)*
 
 <p align="center">
-  <img src="public/assets/images/car-listing-mobile.png" width="300" alt="لیست خودروها - موبایل">
-  <img src="public/assets/images/car-detail-desktop.png" width="400" alt="جزئیات خودرو - دسکتاپ">
-  <img src="public/assets/images/image-upload-form.png" width="350" alt="فرم بارگذاری عکس خودرو">
-  <img src="public/assets/images/user-dashboard.png" width="400" alt="داشبورد کاربر">
-  <img src="public/assets/images/admin-dashboard.png" width="400" alt="داشبورد ادمین">
-  <img src="public/assets/images/admin-car-management.png" width="400" alt="مدیریت خودرو در پنل ادمین">
+  <img src="/assets/images/Screenshot (736).png" width="300" alt="">
+  <img src="/assets/images/Screenshot (737).png" width="400" alt="">
+  <img src="/assets/images/Screenshot (738).png" width="350" alt="">
+  <img src="/assets/images/Screenshot (740).png" width="400" alt="">
+  <img src="/assets/images/Screenshot (741).png" width="400" alt="داشبورد ادمین">
+  <img src="/assets/images/Screenshot (742).png" width="400" alt="">
 </p>
 
 ---
