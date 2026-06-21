@@ -4,7 +4,7 @@ import { singleProductService } from "../services/singleProduct.services";
 import Images from "./images";
 import ChooseBox from "./chooseBox";
 import ProductTabs from "./tabComponent";
-import { getCart } from "../../cart/services/getCart.services";
+
 import { getProducts } from "@/api/getProducts/getProducts.service";
 import LikedProductsSwiper from "./likedProductsSwiper";
 

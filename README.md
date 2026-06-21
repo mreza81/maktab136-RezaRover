@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Car-Commerce: پلتفرم مدرن فروش آنلاین خودرو (با پنل ادمین)
 
-## Getting Started
+**Car-Commerce** یک برنامه جامع تجارت الکترونیک برای فروش خودرو است که با استفاده از **Next.js**، **React**، **TypeScript** و **TailwindCSS** توسعه یافته است. این پلتفرم با تمرکز بر **طراحی ریسپانسیو**، تجربه‌ای روان و کاربرپسند را در تمامی دستگاه‌ها (موبایل، تبلت و دسکتاپ) ارائه می‌دهد و شامل یک **پنل ادمین قدرتمند** برای مدیریت کامل سیستم است. این پروژه از استراتژی‌های رندرینگ **Next.js** برای بهینه‌سازی عملکرد و تجربه کاربری بهره می‌برد.
 
-First, run the development server:
+---
 
+## 🖼️ گالری تصاویر پروژه (نمونه)
+
+*(لطفاً مسیرهای تصاویر واقعی پروژه خود را در اینجا جایگزین کنید. تصاویر مربوط به پنل ادمین را نیز اضافه کنید.)*
+
+<p align="center">
+  <img src="public/assets/images/car-listing-mobile.png" width="300" alt="لیست خودروها - موبایل">
+  <img src="public/assets/images/car-detail-desktop.png" width="400" alt="جزئیات خودرو - دسکتاپ">
+  <img src="public/assets/images/image-upload-form.png" width="350" alt="فرم بارگذاری عکس خودرو">
+  <img src="public/assets/images/user-dashboard.png" width="400" alt="داشبورد کاربر">
+  <img src="public/assets/images/admin-dashboard.png" width="400" alt="داشبورد ادمین">
+  <img src="public/assets/images/admin-car-management.png" width="400" alt="مدیریت خودرو در پنل ادمین">
+</p>
+
+---
+
+## 📖 درباره پروژه
+
+**Car-Commerce** یک راه‌حل کامل برای نمایش، جستجو، و خرید و فروش خودرو به صورت آنلاین است. این پروژه با بهره‌گیری از تکنولوژی‌های مدرن وب، رابط کاربری جذاب و قابلیت‌های کاربردی را فراهم می‌کند. از ویژگی‌های کلیدی آن می‌توان به مدیریت آگهی‌ها، جستجوی پیشرفته، و امکان بارگذاری تصاویر توسط فروشندگان اشاره کرد. **پنل ادمین** نیز امکان مدیریت کاربران، خودروها، دسته‌بندی‌ها و سایر جنبه‌های سایت را به مدیران می‌دهد.
+
+---
+
+## 🚀 قابلیت‌ها
+
+-   **طراحی کاملاً ریسپانسیو:** بهینه‌سازی شده برای موبایل، تبلت و دسکتاپ.
+-   **نمایش لیست خودروها:** با قابلیت فیلتر و جستجوی پیشرفته (بر اساس برند، مدل، سال، قیمت و ...).
+-   **صفحه جزئیات خودرو:** نمایش کامل اطلاعات، مشخصات فنی، گالری تصاویر و اطلاعات تماس فروشنده.
+-   **مدیریت آگهی‌ها (کاربران):** امکان افزودن، ویرایش و حذف خودرو توسط کاربران ثبت‌نام شده.
+-   **بارگذاری تصاویر:** قابلیت آپلود چندین عکس برای هر خودرو توسط فروشنده.
+-   **جستجوی پیشرفته و فیلترینگ:** امکان یافتن خودرو بر اساس معیارهای مختلف.
+-   **سیستم ثبت‌نام و ورود کاربر:** مدیریت حساب کاربری.
+
+### 🌟 پنل ادمین (Admin Panel)
+
+-   **داشبورد مدیریتی:** نمایش آمار کلی سایت (تعداد کاربران، خودروها، فروش‌ها و ...).
+-   **مدیریت کاربران:** مشاهده لیست کاربران، ویرایش اطلاعات، مسدود کردن و حذف کاربران.
+-   **مدیریت خودروها:** مشاهده، ویرایش، تایید/رد کردن و حذف تمامی خودروهای ثبت شده در سایت.
+-   **مدیریت دسته‌بندی‌ها و برندها:** افزودن، ویرایش و حذف دسته‌بندی‌ها و برندهای خودرو.
+-   **مدیریت سفارشات (در صورت وجود):** پیگیری و مدیریت سفارشات خرید.
+-   **تنظیمات سایت:** [در صورت وجود، قابلیت‌های مدیریتی دیگر را ذکر کنید]
+-   **امنیت:** دسترسی به پنل ادمین فقط برای کاربران با نقش مدیر (Admin) امکان‌پذیر است.
+
+---
+
+## ⚡ استراتژی‌های رندرینگ در Next.js
+
+این پروژه از رویکردهای مختلف رندرینگ Next.js برای بهینه‌سازی عملکرد و تجربه کاربری بهره می‌برد:
+
+-   **Server-Side Rendering (SSR):** برای صفحاتی که نیاز به داده‌های به‌روز و اختصاصی برای هر درخواست دارند (مانند صفحه جزئیات خودرو یا نتایج جستجوی پویا)، از SSR استفاده شده است. این کار باعث می‌شود محتوای صفحه قبل از ارسال به مرورگر کاربر، روی سرور تولید شود و برای موتورهای جستجو نیز بهینه باشد.
+    *   *مثال:* صفحات مربوط به نمایش جزئیات خودرو (`/cars/[id]`)
+-   **Client-Side Rendering (CSR):** برای بخش‌هایی از برنامه که نیازی به داده‌های فوری در زمان بارگذاری اولیه ندارند یا به شدت تعاملی هستند (مانند داشبورد کاربر یا بخش‌هایی از پنل ادمین که با تعاملات کاربر به‌روز می‌شوند)، از CSR استفاده شده است. در این حالت، محتوای اولیه توسط یک قالب HTML بارگذاری شده و سپس داده‌ها توسط جاوا اسکریپت در مرورگر بارگیری و نمایش داده می‌شوند.
+    *   *مثال:* فرم بارگذاری عکس، برخی بخش‌های تعاملی داشبورد کاربر.
+-   **Static Site Generation (SSG):** [در صورت استفاده] برای صفحاتی که محتوای آن‌ها به ندرت تغییر می‌کند (مانند صفحه اصلی، درباره ما، یا لیست برخی خودروها که به صورت دوره‌ای به‌روز می‌شوند)، از SSG استفاده شده است. این روش سریع‌ترین زمان بارگذاری را فراهم می‌کند زیرا صفحات از قبل ساخته شده و به صورت ایستا سرو می‌شوند.
+    *   *مثال:* صفحه اصلی سایت (`/`) یا صفحاتی که با `getStaticProps` ساخته شده‌اند.
+-   **Incremental Static Regeneration (ISR):** [در صورت استفاده] ترکیبی از SSG و به‌روزرسانی دوره‌ای که به صفحات ایستا اجازه می‌دهد بدون نیاز به بازسازی کامل سایت، در فواصل زمانی مشخص به‌روز شوند.
+
+انتخاب استراتژی مناسب برای هر صفحه به نیازهای آن صفحه از نظر داده، سئو و عملکرد بستگی دارد.
+
+---
+
+## 📱-💻 واکنش‌گرایی (Responsiveness)
+
+این پروژه به گونه‌ای طراحی شده است که در انواع دستگاه‌ها، از موبایل‌های کوچک گرفته تا نمایشگرهای بزرگ دسکتاپ، به خوبی نمایش داده شود. چیدمان عناصر به صورت داینامیک با تغییر اندازه صفحه تطبیق پیدا می‌کند. پنل ادمین نیز از این قاعده مستثنی نیست.
+
+---
+
+## 🛠️ تکنولوژی‌های مورد استفاده
+
+-   **فریمورک:** Next.js (با React)
+-   **زبان:** TypeScript
+-   **استایل‌دهی:** TailwindCSS
+-   **مدیریت وضعیت (اختیاری):** [نام کتابخانه مدیریت وضعیت مانند Zustand، Redux Toolkit، یا Context API را ذکر کنید]
+-   **احراز هویت:** [مانند NextAuth.js، Auth0، یا راهکار سفارشی خودتان]
+-   **API Backend (در صورت جدا بودن):** [مثلاً Node.js/Express، Django، یا استفاده از APIهای داخلی Next.js]
+-   **پیکربندی:** [مانند ESLint, Prettier - اگر استفاده کرده‌اید]
+-   **سایر:** HTML / CSS
+
+---
+
+## ⚙️ نصب و راه‌اندازی (Setup)
+
+این پروژه در لوکال شما اجرا می‌شود. برای راه‌اندازی، مراحل زیر را دنبال کنید:
+
+1.  **کلون کردن مخزن:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone <URL مخزن گیت‌هاب یا مسیر لوکال شما>
+cd car-commerce
